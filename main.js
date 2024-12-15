@@ -69,7 +69,7 @@ light2.position.set( -1000, -100, -1000 ).normalize();
 scene.add( light2 );
 
 const box = new THREE.BoxGeometry(1, 1, 1);
-const sphere = new THREE.SphereGeometry(1, 32, 32);
+const sphere = new THREE.SphereGeometry(1, 8, 8);
 const cylinder = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
 const torus = new THREE.TorusGeometry(1, 0.4, 16, 100);
 const capsule = new THREE.CapsuleGeometry(1, 1, 32, 32);
@@ -84,6 +84,10 @@ data.locations.forEach((location, index) => {
     let obj;
     if(location.shape === "sphere") {
         obj = new THREE.Mesh(sphere, material);
+        const wireframe = new THREE.EdgesGeometry(sphere);
+        const linemat = new THREE.LineBasicMaterial({color: colors[location.color]});
+        const line = new THREE.LineSegments(wireframe, linemat);
+        obj.add(line);
     } else if(location.shape === "cylinder") {
         obj = new THREE.Mesh(cylinder, material);
     } else if(location.shape === "torus") {

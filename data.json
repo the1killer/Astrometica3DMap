@@ -130,19 +130,6 @@
             "shape": "sphere"
         },
         {
-            "name": "Toxic Cloud",
-            "type": "Cloud",
-            "signal": "FALSE",
-            "x": -72947,
-            "y": -125135,
-            "z": -10569,
-            "scannables": "",
-            "logs": "",
-            "crates": "",
-            "color": "green",
-            "shape": "capsule"
-        },
-        {
             "name": "Theta-9 Gate",
             "type": "Gate",
             "signal": "FALSE",
@@ -222,6 +209,57 @@
             "crates": "",
             "color": "blue",
             "shape": "sphere"
+        },
+        {
+            "name": "Hook Tool Dome",
+            "type": "Dome",
+            "signal": "FALSE",
+            "x": -154541,
+            "y": 2372,
+            "z": 22267,
+            "scannables": "hook tool, smelter",
+            "logs": "",
+            "crates": "",
+            "color": "blue",
+            "shape": "sphere"
+        },
+        {
+            "name": "Hook Tool Cargo Dome",
+            "type": "Dome",
+            "signal": "FALSE",
+            "x": -161748,
+            "y": 999,
+            "z": 20470,
+            "scannables": "",
+            "logs": "",
+            "crates": "",
+            "color": "blue",
+            "shape": "sphere"
+        },
+        {
+            "name": "Toxic Cloud",
+            "type": "Cloud",
+            "signal": "FALSE",
+            "x": -72947,
+            "y": -125135,
+            "z": -10569,
+            "scannables": "",
+            "logs": "",
+            "crates": "",
+            "color": "green",
+            "shape": "capsule"
+        },{
+            "name": "Large Toxic Cloud",
+            "type": "Cloud",
+            "signal": "FALSE",
+            "x": -202084,
+            "y": 359294,
+            "z": -16133,
+            "scannables": "",
+            "logs": "",
+            "crates": "",
+            "color": "green",
+            "shape": "capsule"
         }
     ]
 }
