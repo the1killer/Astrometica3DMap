@@ -63,7 +63,10 @@
             "logs": "",
             "crates": "",
             "color": "cyan",
-            "shape": "cylinder"
+            "shape": "cylinder",
+            "rotate": {
+                "x": 2
+            }
         },
         {
             "name": "Theta-9 Station",
@@ -76,7 +79,10 @@
             "logs": "",
             "crates": "",
             "color": "cyan",
-            "shape": "cylinder"
+            "shape": "cylinder",
+            "rotate": {
+                "x": 2
+            }
         },
         {
             "name": "Vehicle Manufacturer Cave",
@@ -89,7 +95,10 @@
             "logs": "",
             "crates": "",
             "color": "red",
-            "shape": "cylinder"
+            "shape": "cylinder",
+            "rotate": {
+                "x": 2
+            }
         },
         {
             "name": "Vertical Station",

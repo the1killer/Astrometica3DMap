@@ -86,12 +86,10 @@ data.locations.forEach((location, index) => {
         obj = new THREE.Mesh(sphere, material);
     } else if(location.shape === "cylinder") {
         obj = new THREE.Mesh(cylinder, material);
-        obj.rotation.x = Math.PI/2;
     } else if(location.shape === "torus") {
         obj = new THREE.Mesh(torus, material);
     } else if(location.shape === "capsule") {
         obj = new THREE.Mesh(capsule, material);
-        // obj.rotation.x = Math.PI/2;
     } else {
         obj = new THREE.Mesh(box, material);
     }
