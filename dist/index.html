@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Astrometica three.js map</title>
+		<style>
+			body { 
+                margin: 0; 
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .noselect {
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            #info {
+                position: absolute;
+                top: 0px;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+                text-align: center;
+                z-index: 100;
+                color: white;
+            }
+            #attribution {
+                font-size: 12px;
+                position: absolute;
+                bottom: 0px;
+                right: 0px;
+                padding: 10px;
+                box-sizing: border-box;
+                text-align: center;
+                z-index: 100;
+                color: white;
+                background-color: rgba(255, 255, 255, 0.2);
+                padding: 5px;
+                border-top-left-radius: 5px;;
+            }
+            #helpbutton {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: rgba(255, 255, 255, 0.2);
+                color: white;
+                padding: 5px;
+                width: 15px;
+                height: 15px;
+                border-radius: 15px;
+                cursor: pointer;
+                z-index: 100;
+                text-align: center;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            #helppopup {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: rgba(0, 0, 0, 0.9);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+                padding: 10px;
+                border-radius: 15px;
+                z-index: 100;
+            }
+            #helptext {
+                text-align: left;
+                margin-top: -15px;
+            }
+            #helpclose {
+                position: absolute;
+                top: 4px;
+                right: 4px;
+                padding: 5px;
+                cursor: pointer;
+            }
+            #toptitle {
+                font-size: 20px;
+                font-weight: bold;
+                background-color: rgba(255, 255, 255, 0.2);
+                padding: 5px;
+                border-radius: 5px;
+            }
+            a {
+                color: #08f;
+            }
+            #locationscontainer {
+                position: absolute;
+                top: 50px;
+                left: 10px;
+                background-color: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 10px;
+                border-radius: 15px;
+                z-index: 100;
+            }
+            #locationTitle {
+                cursor: pointer;
+            }
+            #locationslist {
+                font-size: 14px;
+                padding-inline-start: 20px;
+            }
+            #locationslist li {
+                /* list-style-type: none; */
+                cursor: pointer;
+            }
+            #coordinates {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+                font-size: 12px;
+            }
+		</style>
+
+        <script type="importmap">
+			{
+				"imports": {
+					"three": "../build/three.module.js",
+					"three/addons/": "./jsm/"
+				}
+			}
+		</script>
+		<script type="module" crossorigin src="/assets/index-Cnx6sk-X.js"></script>
+	</head>
+	<body>
+        <div id="info" class="noselect">
+			<span id="toptitle"><a href="https://astrometica.com/" target="_blank" rel="noopener">Astrometica</a> 3D map</span>
+		</div>
+        <div id="helpbutton" class="noselect" onclick="document.getElementById('helppopup').style.display='block';">?</div>
+        <div id="helppopup" style="display: none;" class="noselect">
+            <div id="helpclose" onclick="document.getElementById('helppopup').style.display='none';">X</div>
+            <div id="helptext">
+                <h2>Controls</h2>
+                <p>• Left Click and drag to pan the camera.<br/>
+                • Right Click and drag to rotate the camera.<br/>
+                • Scroll to zoom in and out.</p>
+                <p>Everything is still a work in progress. Make suggestions on github.</p>
+            </div>
+        </div>
+        <div id="attribution" class="noselect">v0.01 by <a href="https://github.com/the1killer/" target="_blank" rel="noopener">The1Killer</a></div>
+        <div id="locationscontainer">
+            <span id="locationTitle">Locations <span class="expander">&#9660;</span></span>
+            <ul id="locationslist"></ul>
+        </div>
+        <div id="coordinates">X: 0, Y: 0, Z: 0</div>
+	</body>
+</html>

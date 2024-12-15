@@ -11,11 +11,11 @@ This project is a 3D visualization using Three.js, featuring orbit controls.
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/your-repo-name.git
+    git clone https://github.com/the1killer/Astrometica3DMap
     ```
 2. Navigate to the project directory:
     ```sh
-    cd your-repo-name
+    cd Astrometica3DMap
     ```
 3. Install the dependencies:
     ```sh
