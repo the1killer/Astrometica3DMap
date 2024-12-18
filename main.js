@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 // import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 import gsap from 'gsap';
@@ -55,7 +55,12 @@ const colors = {
     "red": 0xff0000,
     "white": 0xffffff,
     "black": 0x000000,
-    "gray": 0x808080
+    "gray": 0x808080,
+    "iron": 0x7aa7ae,
+    "copper": 0xff0000,
+    "gold": 0xffff00,
+    "silver": 0xc0c0c0,
+    "quartz": 0x4bd28b,
 };
 
 scene.background = new THREE.Color(0x101010);
@@ -64,75 +69,129 @@ const light = new THREE.DirectionalLight( colors.white, 4 );
     light.position.set( 450, 300, -100 ).normalize();
     scene.add( light );
 
-const light2 = new THREE.DirectionalLight( colors.white, 0.2 );
-light2.position.set( -1000, -100, -1000 ).normalize();
+const light2 = new THREE.DirectionalLight( colors.white, 1 );
+light2.position.set( -2000, -100, -2000 ).normalize();
 scene.add( light2 );
 
-const box = new THREE.BoxGeometry(1, 1, 1);
-const sphere = new THREE.SphereGeometry(1, 8, 8);
-const cylinder = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
-const torus = new THREE.TorusGeometry(1, 0.4, 16, 100);
-const capsule = new THREE.CapsuleGeometry(1, 1, 32, 32);
-// Create objects for each location
-const locationList = document.getElementById('locationslist');
-data.locations.forEach((location, index) => {
-    const material = new THREE.MeshLambertMaterial({ color: colors[location.color] });
-    if(location.type == "cloud") {
-        material.transparent = true;
-        material.opacity = 0.5;
-    }
-    let obj;
-    if(location.shape === "sphere") {
-        obj = new THREE.Mesh(sphere, material);
-        const wireframe = new THREE.EdgesGeometry(sphere);
-        const linemat = new THREE.LineBasicMaterial({color: colors[location.color]});
-        const line = new THREE.LineSegments(wireframe, linemat);
-        obj.add(line);
-    } else if(location.shape === "cylinder") {
-        obj = new THREE.Mesh(cylinder, material);
-    } else if(location.shape === "torus") {
-        obj = new THREE.Mesh(torus, material);
-    } else if(location.shape === "capsule") {
-        obj = new THREE.Mesh(capsule, material);
-    } else {
-        obj = new THREE.Mesh(box, material);
-    }
+const light3 = new THREE.DirectionalLight( colors.white, 1 );
+light2.position.set( -200, 0, 150 ).normalize();
+scene.add( light2 );
 
-    if(location.rotate != undefined) {
-        if(location.rotate.x) {
-            obj.rotation.x = Math.PI/location.rotate.x;
-        }
-        if(location.rotate.y) {
-            obj.rotation.y = Math.PI/location.rotate.y;
-        }
-        if(location.rotate.z) {
-            obj.rotation.z = Math.PI/location.rotate.z;
-        }
-    }
 
-    obj.position.set(location.x/1000, location.z/1000, location.y/1000); //y and z are swapped from game coordinates
-    scene.add(obj);
-    location.object = obj;
+function loadLocations() {
+    const box = new THREE.BoxGeometry(1, 1, 1);
+    const sphere = new THREE.SphereGeometry(1, 8, 8);
+    const cylinder = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
+    const torus = new THREE.TorusGeometry(1, 0.4, 16, 100);
+    const capsule = new THREE.CapsuleGeometry(1, 1, 32, 32);
+    // Create objects for each location
+    const locationList = document.getElementById('locationslist');
+    data.locations.forEach((location, index) => {
+        const material = new THREE.MeshLambertMaterial({ color: colors[location.color] });
+        if(location.type == "cloud") {
+            material.transparent = true;
+            material.opacity = 0.5;
+        }
+        let obj;
+        if(location.shape === "sphere") {
+            obj = new THREE.Mesh(sphere, material);
+            const wireframe = new THREE.EdgesGeometry(sphere);
+            const linemat = new THREE.LineBasicMaterial({color: colors[location.color]});
+            const line = new THREE.LineSegments(wireframe, linemat);
+            obj.add(line);
+        } else if(location.shape === "cylinder") {
+            obj = new THREE.Mesh(cylinder, material);
+        } else if(location.shape === "torus") {
+            obj = new THREE.Mesh(torus, material);
+        } else if(location.shape === "capsule") {
+            obj = new THREE.Mesh(capsule, material);
+        } else {
+            obj = new THREE.Mesh(box, material);
+        }
 
-    if(location.type === "cloud") {
-        obj.shape.matrix.makeScale(new THREE.Vector3(100, 100, 100));
-    }
-    
-    // Add location to list
-    const li = document.createElement('li');
-    li.innerHTML = `<a>${location.name}</a>`;
-    li.addEventListener('click', () => {
-        locationListItemClick(location);
+        if(location.rotate != undefined) {
+            if(location.rotate.x) {
+                obj.rotation.x = Math.PI/location.rotate.x;
+            }
+            if(location.rotate.y) {
+                obj.rotation.y = Math.PI/location.rotate.y;
+            }
+            if(location.rotate.z) {
+                obj.rotation.z = Math.PI/location.rotate.z;
+            }
+        }
+
+        obj.position.set(location.x/1000, location.z/1000, location.y/1000); //y and z are swapped from game coordinates
+        scene.add(obj);
+        location.object = obj;
+
+        if(location.type === "cloud") {
+            obj.shape.matrix.makeScale(new THREE.Vector3(100, 100, 100));
+        }
+        
+        // Add location to list
+        const li = document.createElement('li');
+        li.innerHTML = `<a>${location.name}</a>`;
+        li.addEventListener('click', () => {
+            locationListItemClick(location);
+        });
+        locationList.appendChild(li);
+
+        // Add text to location
+        const text = makeTextSprite(location.name, { fontsize: 32, textColor: { r:255, g:255, b:255, a:1.0 } });
+        text.position.set((location.x/1000), (location.z/1000) + 0.1, (location.y/1000));
+        scene.add(text);
+        
     });
-    locationList.appendChild(li);
+}
 
-    // Add text to location
-    const text = makeTextSprite(location.name, { fontsize: 32, textColor: { r:255, g:255, b:255, a:1.0 } });
-    text.position.set((location.x/1000), (location.z/1000) + 0.1, (location.y/1000));
-    scene.add(text);
-    
-});
+loadLocations();
 
+function loadDeposits() {
+    const loader = new GLTFLoader();
+    loader.load('models/deposit.glb', function ( gltf ) {
+        gltf.scene.traverse( function ( child ) {
+            console.log(child);
+            if ( child.isMesh ) {
+                child.geometry.center(); // center here
+                child.position.set(0,0,0);
+            }
+        });
+        console.log("Loaded deposit model");
+
+        const obj = gltf.scene.clone();
+        obj.position.set(data.locations[0].object.position.x, data.locations[0].object.position.y, data.locations[0].object.position.z+10);
+            
+
+        Object.keys(data.deposits).forEach((dcategory, cindex) => {
+            data.deposits[dcategory].forEach((deposit, index) => {
+                const obj = gltf.scene.clone();
+                obj.position.set(deposit.x/1000, deposit.z/1000, deposit.y/1000); //y and z are swapped from game coordinates
+                obj.scale.set(20,20,20);
+
+                // Apply tint to obj
+                const tintColor = new THREE.Color(colors[dcategory]); // Red tint
+                obj.traverse((child) => {
+                    if (child.isMesh) {
+                        var mat = child.material.clone();
+                        mat.color.set(tintColor);
+                        child.material = mat;
+                    }
+                });
+
+                scene.add( obj );
+                var text = makeTextSprite(ucfirst(dcategory) + " Deposit", { fontsize: 24, textColor: { r:255, g:255, b:255, a:1.0 } });
+                text.position.set((obj.position.x), (obj.position.y) + 0.1, (obj.position.z));
+                text.parent = obj;
+                scene.add(text);
+            });
+        });
+    },undefined, function ( error ) {
+        console.error( error );
+    });
+}
+
+loadDeposits();
 
 if(document.location.hash) {
     const q = new URLSearchParams(document.location.hash.slice(2));
@@ -153,6 +212,7 @@ updateCoordinatesDisplay();
 
 window.camera = camera;
 window.controls = controls;
+window.scene = scene;
 
 // controls.addEventListener('change', throttle(() => onCameraMove(), 1000));
 controls.addEventListener('change', debounce(() => onCameraMove(), 250));
@@ -281,4 +341,8 @@ function getVectorDifference(vector1, vector2) {
         y: vector1.y - vector2.y,
         z: vector1.z - vector2.z
     };
+}
+
+function ucfirst(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
