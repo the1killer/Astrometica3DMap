@@ -56,9 +56,9 @@ const colors = {
     "white": 0xffffff,
     "black": 0x000000,
     "gray": 0x808080,
-    "iron": 0x7aa7ae,
-    "copper": 0xff0000,
-    "gold": 0xffff00,
+    "iron": 0x4AA0DC,
+    "copper": 0x884D40,
+    "gold": 0xE7C933,
     "silver": 0xc0c0c0,
     "quartz": 0x4bd28b,
 };
@@ -80,15 +80,16 @@ scene.add( light2 );
 
 function loadLocations() {
     const box = new THREE.BoxGeometry(1, 1, 1);
-    const sphere = new THREE.SphereGeometry(1, 8, 8);
+    const sphere = new THREE.SphereGeometry(2, 8, 8);
     const cylinder = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
     const torus = new THREE.TorusGeometry(1, 0.4, 16, 100);
     const capsule = new THREE.CapsuleGeometry(1, 1, 32, 32);
     // Create objects for each location
     const locationList = document.getElementById('locationslist');
     data.locations.forEach((location, index) => {
-        const material = new THREE.MeshLambertMaterial({ color: colors[location.color] });
+        var material = new THREE.MeshLambertMaterial({ color: colors[location.color] });
         if(location.type == "cloud") {
+            material=material.clone();
             material.transparent = true;
             material.opacity = 0.5;
         }
@@ -121,13 +122,20 @@ function loadLocations() {
             }
         }
 
+        if(location.scale != undefined) {
+            // var geo = obj.geometry.clone();
+            // geo.scale.matrix.makeScale(location.scale.x, location.scale.y, location.scale.z);
+            // obj.geometry = geo;
+            obj.scale.set(location.scale.x, location.scale.y, location.scale.z);
+        }
+
         obj.position.set(location.x/1000, location.z/1000, location.y/1000); //y and z are swapped from game coordinates
-        scene.add(obj);
+        // scene.add(obj);
         location.object = obj;
 
-        if(location.type === "cloud") {
-            obj.shape.matrix.makeScale(new THREE.Vector3(100, 100, 100));
-        }
+        // if(location.type === "cloud") {
+        //     obj.shape.matrix.makeScale(new THREE.Vector3(100, 100, 100));
+        // }
         
         // Add location to list
         const li = document.createElement('li');
@@ -135,12 +143,32 @@ function loadLocations() {
         li.addEventListener('click', () => {
             locationListItemClick(location);
         });
+        const btn = document.createElement('img');
+        btn.classList.add('eye');
+        btn.src = "images/eye.png";
+        li.appendChild(btn);
         locationList.appendChild(li);
 
         // Add text to location
         const text = makeTextSprite(location.name, { fontsize: 32, textColor: { r:255, g:255, b:255, a:1.0 } });
         text.position.set((location.x/1000), (location.z/1000) + 0.1, (location.y/1000));
-        scene.add(text);
+        if(location.scale != undefined) {
+            var bbox = new THREE.Box3().setFromObject(obj);
+            text.position.set((location.x/1000), bbox.max.y, (location.y/1000));
+        }
+        // scene.add(text);
+        const group = new THREE.Group();
+        group.name = location.name;
+        group.add(obj);
+        group.add(text);
+        scene.add(group);
+
+        btn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            toggleGroupVisibility(group);
+            btn.classList.toggle('eyeinverted');
+        });
         
     });
 }
@@ -148,46 +176,69 @@ function loadLocations() {
 loadLocations();
 
 function loadDeposits() {
-    const loader = new GLTFLoader();
-    loader.load('models/deposit.glb', function ( gltf ) {
-        gltf.scene.traverse( function ( child ) {
-            console.log(child);
-            if ( child.isMesh ) {
-                child.geometry.center(); // center here
-                child.position.set(0,0,0);
-            }
-        });
-        console.log("Loaded deposit model");
+    const geo = new THREE.IcosahedronGeometry(1, 0);
+    const depositList = document.getElementById('depositslist');        
 
-        const obj = gltf.scene.clone();
-        obj.position.set(data.locations[0].object.position.x, data.locations[0].object.position.y, data.locations[0].object.position.z+10);
-            
+    Object.keys(data.deposits).forEach((dcategory, cindex) => {
+        data.deposits[dcategory].forEach((deposit, index) => {
+            // const obj = gltf.scene.clone();
+            const obj = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: colors[dcategory] }));
+            obj.position.set(deposit.x/1000, deposit.z/1000, deposit.y/1000); //y and z are swapped from game coordinates
+            // obj.scale.set(20,20,20);
 
-        Object.keys(data.deposits).forEach((dcategory, cindex) => {
-            data.deposits[dcategory].forEach((deposit, index) => {
-                const obj = gltf.scene.clone();
-                obj.position.set(deposit.x/1000, deposit.z/1000, deposit.y/1000); //y and z are swapped from game coordinates
-                obj.scale.set(20,20,20);
-
-                // Apply tint to obj
-                const tintColor = new THREE.Color(colors[dcategory]); // Red tint
-                obj.traverse((child) => {
-                    if (child.isMesh) {
-                        var mat = child.material.clone();
-                        mat.color.set(tintColor);
-                        child.material = mat;
-                    }
-                });
-
-                scene.add( obj );
-                var text = makeTextSprite(ucfirst(dcategory) + " Deposit", { fontsize: 24, textColor: { r:255, g:255, b:255, a:1.0 } });
-                text.position.set((obj.position.x), (obj.position.y) + 0.1, (obj.position.z));
-                text.parent = obj;
-                scene.add(text);
+            // Apply tint to obj
+            const tintColor = new THREE.Color(colors[dcategory]); // Red tint
+            obj.traverse((child) => {
+                if (child.isMesh) {
+                    var mat = child.material.clone();
+                    mat.color.set(tintColor);
+                    child.material = mat;
+                }
             });
+
+            // scene.add( obj );
+            var text = makeTextSprite(ucfirst(dcategory) + " Deposit", { fontsize: 24, textColor: { r:125, g:125, b:125, a:0.8 } });
+            text.position.set((obj.position.x), (obj.position.y) + 0.1, (obj.position.z));
+            text.parent = obj;
+            // scene.add(text);
+            
+            const group = new THREE.Group();
+            group.name = deposit.id;
+            group.add(obj);
+            group.add(text);
+            scene.add(group);
+            deposit.object = group;
+
         });
-    },undefined, function ( error ) {
-        console.error( error );
+        const li = document.createElement('li');
+        li.innerHTML = `<a>${ucfirst(dcategory)} (${data.deposits[dcategory].length})</a>`;
+        li.addEventListener('click', () => {
+            var idx = 0;
+            if(li.dataset.idx != undefined) {
+                idx = parseInt(li.dataset.idx);
+            }
+            depositListItemClick(data.deposits[dcategory][idx]);
+            idx+=1;
+            if(idx >= data.deposits[dcategory].length) {
+                idx = 0;
+            }
+            li.dataset.idx = idx;
+        });
+
+        const btn = document.createElement('img');
+        btn.classList.add('eye');
+        btn.src = "images/eye.png";
+        li.appendChild(btn);
+
+        btn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            data.deposits[dcategory].forEach((deposit) => {
+                toggleGroupVisibility(deposit.object);
+            });
+            btn.classList.toggle('eyeinverted');
+        });
+        depositList.appendChild(li);
     });
 }
 
@@ -214,8 +265,15 @@ window.camera = camera;
 window.controls = controls;
 window.scene = scene;
 
-// controls.addEventListener('change', throttle(() => onCameraMove(), 1000));
 controls.addEventListener('change', debounce(() => onCameraMove(), 250));
+document.getElementById('locationTitle').addEventListener('click', () => {
+    toggleHTMLVisibility(document.getElementById('locationslist'));
+    document.querySelector('#locationTitle > .expander').style.transform = document.getElementById('locationslist').style.display != "none" ? "rotate(0deg)" : "rotate(180deg)";
+});
+document.getElementById('depositsTitle').addEventListener('click', () => {
+    toggleHTMLVisibility(document.getElementById('depositslist'));
+    document.querySelector('#depositsTitle > .expander').style.transform = document.getElementById('depositslist').style.display != "none" ? "rotate(0deg)" : "rotate(180deg)";
+});
 
 
 function onCameraMove() {
@@ -335,6 +393,37 @@ function locationListItemClick(location) {
     );
 }
 
+function depositListItemClick(deposit) {
+    var diff = getVectorDifference(camera.position, controls.target);
+    controls.enabled = false;
+    var ease = "sine.inOut";
+    gsap.to( camera.position, 
+        { 
+            x: deposit.object.children[0].position.x + diff.x, 
+            y: deposit.object.children[0].position.y + diff.y,
+            z: deposit.object.children[0].position.z + diff.z,
+            ease: ease,
+            onUpdate: () => {
+                camera.lookAt(deposit.object.children[0].position);
+            },
+            onComplete: () => {
+
+            }
+        }
+    );
+    gsap.to( controls.target,
+        {
+            x: deposit.object.children[0].position.x,
+            y: deposit.object.children[0].position.y,
+            z: deposit.object.children[0].position.z,
+            ease: ease,
+            onComplete: () => {
+                controls.enabled = true;
+            }
+        }
+    );
+}
+
 function getVectorDifference(vector1, vector2) {
     return {
         x: vector1.x - vector2.x,
@@ -345,4 +434,16 @@ function getVectorDifference(vector1, vector2) {
 
 function ucfirst(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function toggleHTMLVisibility(element) {
+    if (element.style.display === "none") {
+        element.style.display = "block";
+    } else {
+        element.style.display = "none";
+    }
+}
+
+function toggleGroupVisibility(group) {
+    group.visible = !group.visible;
 }
