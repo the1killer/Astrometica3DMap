@@ -89,7 +89,7 @@
             a {
                 color: #08f;
             }
-            #locationscontainer {
+            #leftpanel {
                 position: absolute;
                 top: 50px;
                 left: 10px;
@@ -99,16 +99,19 @@
                 border-radius: 15px;
                 z-index: 100;
             }
-            #locationTitle {
+            #locationTitle, #depositsTitle {
                 cursor: pointer;
             }
-            #locationslist {
+            #locationslist, #depositslist {
                 font-size: 14px;
                 padding-inline-start: 20px;
             }
-            #locationslist li {
+            #locationslist li, #depositslist li {
                 /* list-style-type: none; */
                 cursor: pointer;
+            }
+            .expander {
+                display: inline-block;
             }
             #coordinates {
                 position: absolute;
@@ -120,6 +123,15 @@
                 border-radius: 5px;
                 font-size: 12px;
             }
+            .eye {
+                display: inline-block;
+                float: right;
+                max-height: 15px;
+                margin-left: 5px;
+            }
+            .eyeinverted {
+                filter: sepia(13%) saturate(3207%) hue-rotate(180deg) brightness(100%) contrast(80%);
+            }
 		</style>
 
         <script type="importmap">
@@ -130,7 +142,7 @@
 				}
 			}
 		</script>
-		<script type="module" crossorigin src="./assets/index-Cnx6sk-X.js"></script>
+		<script type="module" crossorigin src="./assets/index-CrB9IkyU.js"></script>
 	</head>
 	<body>
         <div id="info" class="noselect">
@@ -144,13 +156,22 @@
                 <p>• Left Click and drag to pan the camera.<br/>
                 • Right Click and drag to rotate the camera.<br/>
                 • Scroll to zoom in and out.</p>
-                <p>Everything is still a work in progress. Make suggestions on github.</p>
+                <br/>
+                <h2>NOTE:</h2>
+                <p>
+                    • This map is not official and is not affiliated with Astrometica.<br/>
+                    • The map is based on the game's data files and may not be 100% accurate.<br/>
+                    • The objects on the map are not to scale, distances between objects are close to scale.<br/>
+                </p>
+                <p>Everything is still a work in progress. Make suggestions on <a href="https://github.com/the1killer/Astrometica3DMap">github</a>.</p>
             </div>
         </div>
-        <div id="attribution" class="noselect">v0.01 by <a href="https://github.com/the1killer/" target="_blank" rel="noopener">The1Killer</a></div>
-        <div id="locationscontainer">
-            <span id="locationTitle">Locations <span class="expander">&#9660;</span></span>
+        <div id="attribution" class="noselect">v0.02 by <a href="https://github.com/the1killer/" target="_blank" rel="noopener">The1Killer</a></div>
+        <div id="leftpanel" class="noselect">
+            <div id="locationTitle">Locations <div class="expander">&#9660;</div></div>
             <ul id="locationslist"></ul>
+            <div id="depositsTitle">Deposits <div class="expander">&#9660;</div></div>
+            <ul id="depositslist"></ul>
         </div>
         <div id="coordinates">X: 0, Y: 0, Z: 0</div>
 	</body>
