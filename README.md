@@ -1,6 +1,8 @@
-# Three.js Project
+# Astrometica 3D Map
 
 This project is a 3D visualization using Three.js, featuring orbit controls.
+
+View map online: https://the1killer.github.io/Astrometica3DMap/
 
 ## Prerequisites
 
