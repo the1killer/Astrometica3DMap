@@ -296,6 +296,24 @@
                 "y": 25,
                 "z": 25
             }
+        },
+        {
+            "name": "Green Planet",
+            "type": "Planet",
+            "signal": "FALSE",
+            "x": 4206903,
+            "y": 8358226,
+            "z": 413425,
+            "scannables": "",
+            "logs": "",
+            "crates": "",
+            "color": "green",
+            "shape": "sphere",
+            "scale":{
+                "x": 50,
+                "y": 50,
+                "z": 50
+            }
         }
     ],
     "deposits": {

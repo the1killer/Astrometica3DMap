@@ -96,10 +96,12 @@ function loadLocations() {
         let obj;
         if(location.shape === "sphere") {
             obj = new THREE.Mesh(sphere, material);
-            const wireframe = new THREE.EdgesGeometry(sphere);
-            const linemat = new THREE.LineBasicMaterial({color: colors[location.color]});
-            const line = new THREE.LineSegments(wireframe, linemat);
-            obj.add(line);
+            if(location.type == "dome") {
+                const wireframe = new THREE.EdgesGeometry(sphere);
+                const linemat = new THREE.LineBasicMaterial({color: colors[location.color]});
+                const line = new THREE.LineSegments(wireframe, linemat);
+                obj.add(line);
+            }
         } else if(location.shape === "cylinder") {
             obj = new THREE.Mesh(cylinder, material);
         } else if(location.shape === "torus") {
