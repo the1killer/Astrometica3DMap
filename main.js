@@ -35,7 +35,7 @@ function updateCoordinatesDisplay() {
 }
 
 function animate() {
-    requestAnimationFrame( animate );
+    // requestAnimationFrame( animate );
     controls.update();
     updateAxesHelperPosition();
 	renderer.render( scene, camera );
@@ -77,21 +77,28 @@ const light3 = new THREE.DirectionalLight( colors.white, 1 );
 light2.position.set( -200, 0, 150 ).normalize();
 scene.add( light2 );
 
-
 function loadLocations() {
     const box = new THREE.BoxGeometry(1, 1, 1);
     const sphere = new THREE.SphereGeometry(2, 8, 8);
     const cylinder = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
     const torus = new THREE.TorusGeometry(1, 0.4, 16, 100);
     const capsule = new THREE.CapsuleGeometry(1, 1, 32, 32);
+    const plane = new THREE.PlaneGeometry(2, 2);
+    const cloudTexture = new THREE.TextureLoader().load('textures/toxiccloud.png', (texture) => {
+        console.log(texture);
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set( 2, 4 );
+    });
+    // cloudTexture.colorSpace = THREE.LinearSRGBColorSpace;
+
     // Create objects for each location
     const locationList = document.getElementById('locationslist');
     data.locations.forEach((location, index) => {
         var material = new THREE.MeshLambertMaterial({ color: colors[location.color] });
-        if(location.type == "cloud") {
-            material=material.clone();
-            material.transparent = true;
-            material.opacity = 0.5;
+        if(location.type == "Cloud") {
+            material = new THREE.MeshBasicMaterial({color: colors[location.color], transparent: true, opacity: 0.5, map: cloudTexture, alphaMap: cloudTexture, alphaTest: 0.1, side: THREE.DoubleSide});
+            material.needsUpdate = true;
         }
         let obj;
         if(location.shape === "sphere") {
@@ -108,6 +115,10 @@ function loadLocations() {
             obj = new THREE.Mesh(torus, material);
         } else if(location.shape === "capsule") {
             obj = new THREE.Mesh(capsule, material);
+        }else if(location.shape === "plane") {
+            // obj = new THREE.Mesh(plane, material);
+            obj = new THREE.Mesh(sphere,material);
+            obj.renderOrder = 1;
         } else {
             obj = new THREE.Mesh(box, material);
         }
@@ -310,14 +321,15 @@ function makeTextSprite( message, parameters )
         var metrics = context.measureText( message );
         var textWidth = metrics.width;
 
-        context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+        context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + 0 + ")";
         context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
         context.fillStyle = "rgba("+textColor.r+", "+textColor.g+", "+textColor.b+", 1.0)";
         context.fillText( message, borderThickness, fontsize + borderThickness);
 
-        var texture = new THREE.Texture(canvas) 
+        var texture = new THREE.Texture(canvas)
         texture.needsUpdate = true;
-        var spriteMaterial = new THREE.SpriteMaterial( { map: texture } );
+        var spriteMaterial = new THREE.SpriteMaterial( { map: texture, transparent: true, alphaMap: texture, alphaTest: 0.1 } );
+        spriteMaterial.needsUpdate = true;
         var sprite = new THREE.Sprite( spriteMaterial );
         sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
         return sprite;  
