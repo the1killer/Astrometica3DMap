@@ -83,14 +83,19 @@ function loadLocations() {
     const cylinder = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
     const torus = new THREE.TorusGeometry(1, 0.4, 16, 100);
     const capsule = new THREE.CapsuleGeometry(1, 1, 32, 32);
-    const plane = new THREE.PlaneGeometry(2, 2);
+
     const cloudTexture = new THREE.TextureLoader().load('textures/toxiccloud.png', (texture) => {
-        console.log(texture);
+        texture.name = "cloudTexture";
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set( 2, 4 );
+        // texture.repeat.set( 2, 2 );
     });
-    // cloudTexture.colorSpace = THREE.LinearSRGBColorSpace;
+
+    const grey128Texture = new THREE.TextureLoader().load('textures/128grey.jpg', (texture) => {
+        texture.name = "greyTransparentTexture";
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+    });
 
     // Create objects for each location
     const locationList = document.getElementById('locationslist');
@@ -100,6 +105,7 @@ function loadLocations() {
             material = new THREE.MeshBasicMaterial({color: colors[location.color], transparent: true, opacity: 0.5, map: cloudTexture, alphaMap: cloudTexture, alphaTest: 0.1, side: THREE.DoubleSide});
             material.needsUpdate = true;
         }
+
         let obj;
         if(location.shape === "sphere") {
             obj = new THREE.Mesh(sphere, material);
@@ -115,12 +121,12 @@ function loadLocations() {
             obj = new THREE.Mesh(torus, material);
         } else if(location.shape === "capsule") {
             obj = new THREE.Mesh(capsule, material);
-        }else if(location.shape === "plane") {
-            // obj = new THREE.Mesh(plane, material);
-            obj = new THREE.Mesh(sphere,material);
-            obj.renderOrder = 1;
         } else {
             obj = new THREE.Mesh(box, material);
+        }
+
+        if (location.type === "Cloud") {
+            obj.renderOrder = 1;
         }
 
         if(location.rotate != undefined) {
@@ -172,9 +178,50 @@ function loadLocations() {
         // scene.add(text);
         const group = new THREE.Group();
         group.name = location.name;
+        location.group = group;
         group.add(obj);
         group.add(text);
         scene.add(group);
+
+        if(location.children != undefined) {
+            location.children.forEach((child) => {
+                var material = new THREE.MeshLambertMaterial({ color: colors[child.color] });
+                if(child.transparent) {
+                    material = new THREE.MeshBasicMaterial({color: colors[child.color], transparent: true, opacity: 0.5, map: grey128Texture, alphaMap: grey128Texture, alphaTest: 0.1, side: THREE.DoubleSide});
+                    material.needsUpdate = true;
+                }
+                var geo = box;
+                if(child.shape === "sphere") {
+                    geo = sphere;
+                } else if(child.shape === "cylinder") {
+                    geo = cylinder;
+                } else if(child.shape === "torus") {
+                    geo = torus;
+                } else if(child.shape === "capsule") {
+                    geo = capsule;
+                }
+                var childObj = new THREE.Mesh(geo, material);
+                childObj.position.set(child.x/1000, child.z/1000, child.y/1000); //y and z are swapped from game coordinates
+                if(child.scale != undefined) {
+                    childObj.scale.set(child.scale.x, child.scale.y, child.scale.z);
+                }
+                if(child.rotate != undefined) {
+                    if(child.rotate.x) {
+                        childObj.rotation.x = Math.PI/child.rotate.x;
+                    }
+                    if(child.rotate.y) {
+                        childObj.rotation.y = Math.PI/child.rotate.y;
+                    }
+                    if(child.rotate.z) {
+                        childObj.rotation.z = Math.PI/child.rotate.z;
+                    }
+                }
+                if(child.transparent) {
+                    childObj.renderOrder = 1;
+                }
+                group.add(childObj);
+            });
+        }
 
         btn.addEventListener('click', (event) => {
             event.stopPropagation();

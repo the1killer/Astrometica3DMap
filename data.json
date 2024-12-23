@@ -108,7 +108,26 @@
             "shape": "cylinder",
             "rotate": {
                 "x": 2
-            }
+            },
+            "children":[
+                {
+                    "type": "Habitat",
+                    "shape":"cylinder",
+                    "color":"cyan",
+                    "x": -294000,
+                    "y": -112600,
+                    "z": 44956,
+                    "scale": {
+                        "x": 1,
+                        "y": 4,
+                        "z": 1
+                    },
+                    "rotate": {
+                        "x": 2,
+                        "z": 2
+                    }
+                }
+            ]
         },
         {
             "name": "Vehicle Manufacturer Cave",
@@ -124,7 +143,141 @@
             "shape": "cylinder",
             "rotate": {
                 "x": 2
-            }
+            },
+            "children":[
+                {
+                    "type": "Cave",
+                    "shape":"box",
+                    "color":"red",
+                    "x": -260395,
+                    "y": -127283,
+                    "z": 34958,
+                    "scale": {
+                        "x": 8,
+                        "y": 5,
+                        "z": 8
+                    },
+                    "transparent": true
+                },
+                {
+                    "type": "Cave",
+                    "shape":"box",
+                    "color":"red",
+                    "x": -262000,
+                    "y": -129000,
+                    "z": 28000,
+                    "scale": {
+                        "x": 3,
+                        "y": 3,
+                        "z": 5
+                    },
+                    "transparent": true
+                },
+                {
+                    "type": "Cave",
+                    "shape":"box",
+                    "color":"red",
+                    "x": -260395,
+                    "y": -135200,
+                    "z": 33000,
+                    "scale": {
+                        "x": 15,
+                        "y": 8,
+                        "z": 8
+                    },
+                    "transparent": true
+                },
+                {
+                    "type": "Cave",
+                    "shape":"box",
+                    "color":"red",
+                    "x": -270000,
+                    "y": -133000,
+                    "z": 33000,
+                    "scale": {
+                        "x": 5,
+                        "y": 3,
+                        "z": 3
+                    },
+                    "transparent": true
+                },
+                {
+                    "type": "Cave",
+                    "shape":"box",
+                    "color":"red",
+                    "x": -270000,
+                    "y": -137500,
+                    "z": 33000,
+                    "scale": {
+                        "x": 5,
+                        "y": 3,
+                        "z": 3
+                    },
+                    "transparent": true
+                },
+                {
+                    "type": "Cave",
+                    "shape":"box",
+                    "color":"red",
+                    "x": -279000,
+                    "y": -135200,
+                    "z": 33000,
+                    "scale": {
+                        "x": 13,
+                        "y": 8,
+                        "z": 8
+                    },
+                    "transparent": true
+                }
+            ]
+        },
+        {
+            "name": "Vehicle Docking Station",
+            "type": "Derelict",
+            "Signal": "FALSE",
+            "x": -279239,
+            "y": -136033,
+            "z": 32471,
+            "scannables": "",
+            "logs": "",
+            "crates": "",
+            "color": "red",
+            "shape": "cylinder",
+            "rotate": {
+                "x": 2,
+                "z": 2
+            },
+            "children":[
+                {
+                    "type": "Derelict",
+                    "shape":"cylinder",
+                    "color":"red",
+                    "x": -280500,
+                    "y": -136000,
+                    "z": 32000,
+                    "rotate": {
+                        "x": 1,
+                        "z": 1
+                    }
+                },
+                {
+                    "type": "Derelict",
+                    "shape":"cylinder",
+                    "color":"red",
+                    "x": -280500,
+                    "y": -135000,
+                    "z": 30750,
+                    "rotate": {
+                        "x": 2,
+                        "z": 1
+                    },
+                    "scale": {
+                        "x": 1,
+                        "y": 1.5,
+                        "z": 1
+                    }
+                }
+            ]
         },
         {
             "name": "Vertical Station",
@@ -156,7 +309,21 @@
             "shape": "cylinder",
             "rotate": {
                 "x": 2
-            }
+            },
+            "children":[
+                {
+                    "type": "Derelict",
+                    "shape":"cylinder",
+                    "color":"red",
+                    "x": -78000,
+                    "y": -119000,
+                    "z": 848,
+                    "rotate": {
+                        "x": 2,
+                        "z": 2
+                    }
+                }
+            ]
         },
         {
             "name": "Sulfur Dome",
@@ -284,12 +451,12 @@
             "signal": "FALSE",
             "x": -72947,
             "y": -125135,
-            "z": -10569,
+            "z": -10069,
             "scannables": "",
             "logs": "",
             "crates": "",
             "color": "green",
-            "shape": "plane",
+            "shape": "capsule",
             "scale":{
                 "x": 15,
                 "y": 15,
