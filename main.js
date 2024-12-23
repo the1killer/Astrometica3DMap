@@ -35,7 +35,7 @@ function updateCoordinatesDisplay() {
 }
 
 function animate() {
-    requestAnimationFrame( animate );
+    // requestAnimationFrame( animate );
     controls.update();
     updateAxesHelperPosition();
 	renderer.render( scene, camera );
@@ -77,22 +77,35 @@ const light3 = new THREE.DirectionalLight( colors.white, 1 );
 light2.position.set( -200, 0, 150 ).normalize();
 scene.add( light2 );
 
-
 function loadLocations() {
     const box = new THREE.BoxGeometry(1, 1, 1);
     const sphere = new THREE.SphereGeometry(2, 8, 8);
     const cylinder = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
     const torus = new THREE.TorusGeometry(1, 0.4, 16, 100);
     const capsule = new THREE.CapsuleGeometry(1, 1, 32, 32);
+
+    const cloudTexture = new THREE.TextureLoader().load('textures/toxiccloud.png', (texture) => {
+        texture.name = "cloudTexture";
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        // texture.repeat.set( 2, 2 );
+    });
+
+    const grey128Texture = new THREE.TextureLoader().load('textures/128grey.jpg', (texture) => {
+        texture.name = "greyTransparentTexture";
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+    });
+
     // Create objects for each location
     const locationList = document.getElementById('locationslist');
     data.locations.forEach((location, index) => {
         var material = new THREE.MeshLambertMaterial({ color: colors[location.color] });
-        if(location.type == "cloud") {
-            material=material.clone();
-            material.transparent = true;
-            material.opacity = 0.5;
+        if(location.type == "Cloud") {
+            material = new THREE.MeshBasicMaterial({color: colors[location.color], transparent: true, opacity: 0.5, map: cloudTexture, alphaMap: cloudTexture, alphaTest: 0.1, side: THREE.DoubleSide});
+            material.needsUpdate = true;
         }
+
         let obj;
         if(location.shape === "sphere") {
             obj = new THREE.Mesh(sphere, material);
@@ -110,6 +123,10 @@ function loadLocations() {
             obj = new THREE.Mesh(capsule, material);
         } else {
             obj = new THREE.Mesh(box, material);
+        }
+
+        if (location.type === "Cloud") {
+            obj.renderOrder = 1;
         }
 
         if(location.rotate != undefined) {
@@ -161,9 +178,50 @@ function loadLocations() {
         // scene.add(text);
         const group = new THREE.Group();
         group.name = location.name;
+        location.group = group;
         group.add(obj);
         group.add(text);
         scene.add(group);
+
+        if(location.children != undefined) {
+            location.children.forEach((child) => {
+                var material = new THREE.MeshLambertMaterial({ color: colors[child.color] });
+                if(child.transparent) {
+                    material = new THREE.MeshBasicMaterial({color: colors[child.color], transparent: true, opacity: 0.5, map: grey128Texture, alphaMap: grey128Texture, alphaTest: 0.1, side: THREE.DoubleSide});
+                    material.needsUpdate = true;
+                }
+                var geo = box;
+                if(child.shape === "sphere") {
+                    geo = sphere;
+                } else if(child.shape === "cylinder") {
+                    geo = cylinder;
+                } else if(child.shape === "torus") {
+                    geo = torus;
+                } else if(child.shape === "capsule") {
+                    geo = capsule;
+                }
+                var childObj = new THREE.Mesh(geo, material);
+                childObj.position.set(child.x/1000, child.z/1000, child.y/1000); //y and z are swapped from game coordinates
+                if(child.scale != undefined) {
+                    childObj.scale.set(child.scale.x, child.scale.y, child.scale.z);
+                }
+                if(child.rotate != undefined) {
+                    if(child.rotate.x) {
+                        childObj.rotation.x = Math.PI/child.rotate.x;
+                    }
+                    if(child.rotate.y) {
+                        childObj.rotation.y = Math.PI/child.rotate.y;
+                    }
+                    if(child.rotate.z) {
+                        childObj.rotation.z = Math.PI/child.rotate.z;
+                    }
+                }
+                if(child.transparent) {
+                    childObj.renderOrder = 1;
+                }
+                group.add(childObj);
+            });
+        }
 
         btn.addEventListener('click', (event) => {
             event.stopPropagation();
@@ -310,14 +368,15 @@ function makeTextSprite( message, parameters )
         var metrics = context.measureText( message );
         var textWidth = metrics.width;
 
-        context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+        context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + 0 + ")";
         context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
         context.fillStyle = "rgba("+textColor.r+", "+textColor.g+", "+textColor.b+", 1.0)";
         context.fillText( message, borderThickness, fontsize + borderThickness);
 
-        var texture = new THREE.Texture(canvas) 
+        var texture = new THREE.Texture(canvas)
         texture.needsUpdate = true;
-        var spriteMaterial = new THREE.SpriteMaterial( { map: texture } );
+        var spriteMaterial = new THREE.SpriteMaterial( { map: texture, transparent: true, alphaMap: texture, alphaTest: 0.1 } );
+        spriteMaterial.needsUpdate = true;
         var sprite = new THREE.Sprite( spriteMaterial );
         sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
         return sprite;  

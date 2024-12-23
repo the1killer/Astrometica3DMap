@@ -28,9 +28,9 @@ View map online: https://the1killer.github.io/Astrometica3DMap/
 
 1. Start the development server:
     ```sh
-    npm start
+    npx vite
     ```
-2. Open your browser and navigate to `http://localhost:3000`.
+2. Open your browser and navigate to `http://localhost:5173`.
 
 ## Usage
 
