@@ -109,7 +109,7 @@ function loadLocations() {
         let obj;
         if(location.shape === "sphere") {
             obj = new THREE.Mesh(sphere, material);
-            if(location.type == "dome") {
+            if(location.type == "Dome") {
                 const wireframe = new THREE.EdgesGeometry(sphere);
                 const linemat = new THREE.LineBasicMaterial({color: colors[location.color]});
                 const line = new THREE.LineSegments(wireframe, linemat);
