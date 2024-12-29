@@ -374,13 +374,17 @@ function makeTextSprite( message, parameters )
         if ( parameters === undefined ) parameters = {};
         var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
         var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 18;
-        var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
+        var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 2;
         var borderColor = parameters.hasOwnProperty("borderColor") ?parameters["borderColor"] : { r:0, g:0, b:0, a:1.0 };
         var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?parameters["backgroundColor"] : { r:0, g:0, b:255, a:1.0 };
         var textColor = parameters.hasOwnProperty("textColor") ?parameters["textColor"] : { r:0, g:0, b:0, a:1.0 };
 
         var sprite = new SpriteText(message,1);
+        sprite.material.depthWrite = false; //make sprite background transparent
         sprite.color = "#"+ new THREE.Color(textColor.r, textColor.g, textColor.b).getHexString();
+        sprite.strokeColor = "#"+ new THREE.Color(borderColor.r, borderColor.g, borderColor.b).getHexString();
+        sprite.strokeWidth = borderThickness;
+        // sprite.borderThickness = borderThickness;
         sprite.fontFace = fontface;
         sprite.transparent = true;
         sprite.backgroundColor = "rgba(220,220,220,0)";
