@@ -56,7 +56,7 @@
                 font-weight: bold;
                 cursor: pointer;
             }
-            #helppopup {
+            .popup {
                 position: absolute;
                 top: 50%;
                 left: 50%;
@@ -72,7 +72,7 @@
                 text-align: left;
                 margin-top: -15px;
             }
-            #helpclose {
+            .popupClose {
                 position: absolute;
                 top: 4px;
                 right: 4px;
@@ -99,14 +99,14 @@
                 border-radius: 15px;
                 z-index: 100;
             }
-            #locationTitle, #depositsTitle {
+            #locationTitle, #depositsTitle, #customMarkersTitle {
                 cursor: pointer;
             }
-            #locationslist, #depositslist {
+            #locationslist, #depositslist, #customMarkers, #customMarkersList {
                 font-size: 14px;
                 padding-inline-start: 20px;
             }
-            #locationslist li, #depositslist li {
+            #locationslist li, #depositslist li, #customMarkersList li {
                 /* list-style-type: none; */
                 cursor: pointer;
             }
@@ -132,6 +132,13 @@
             .eyeinverted {
                 filter: sepia(13%) saturate(3207%) hue-rotate(180deg) brightness(100%) contrast(80%);
             }
+            #createMarkerPopupContent {
+                /* text-align: left; */
+                padding: 10px;
+            }
+            #createMarkerTable > tbody > tr > td:first-child {
+                text-align: right;
+            }
 		</style>
         <script type="importmap">
 			{
@@ -147,8 +154,8 @@
 			<span id="toptitle"><a href="https://astrometica.com/" target="_blank" rel="noopener">Astrometica</a> 3D map</span>
 		</div>
         <div id="helpbutton" class="noselect" onclick="document.getElementById('helppopup').style.display='block';">?</div>
-        <div id="helppopup" style="display: none;" class="noselect">
-            <div id="helpclose" onclick="document.getElementById('helppopup').style.display='none';">X</div>
+        <div id="helppopup" class="popup" style="display: none;" class="noselect">
+            <div id="helpclose" class="popupClose" onclick="document.getElementById('helppopup').style.display='none';">X</div>
             <div id="helptext">
                 <h2>Controls</h2>
                 <p>• Left Click and drag to pan the camera.<br/>
@@ -164,14 +171,53 @@
                 <p>Everything is still a work in progress. Make suggestions on <a href="https://github.com/the1killer/Astrometica3DMap">github</a>.</p>
             </div>
         </div>
-        <div id="attribution" class="noselect">v0.02 by <a href="https://github.com/the1killer/" target="_blank" rel="noopener">The1Killer</a></div>
+        <div id="attribution" class="noselect">v0.04 by <a href="https://github.com/the1killer/" target="_blank" rel="noopener">The1Killer</a></div>
         <div id="leftpanel" class="noselect">
             <div id="locationTitle">Locations <div class="expander">&#9660;</div></div>
             <ul id="locationslist"></ul>
             <div id="depositsTitle">Deposits <div class="expander">&#9660;</div></div>
             <ul id="depositslist"></ul>
+            <div id="customMarkersTitle">Custom Markers <div class="expander">&#9660;</div></div>
+            <ul id="customMarkersList" class="noselect"></ul>
+            <div id="customMarkers" class="noselect">
+                <button id="addMarkerButton">Create Marker at Current</button><br/>
+                <br/>
+                <input id="markerData" placeholder="Paste marker data here..." onclick="this.select()" /><br/>
+                <button id="exportMarkers">Export Markers</button>
+                <button id="importMarkers">Import Markers</button>
+            </div>
         </div>
         <div id="coordinates">X: 0, Y: 0, Z: 0</div>
+        <div id="createMarkerPopup" class="popup" style="display: none;">
+            <div id="createMarkerClose" class="popupClose" onclick="document.getElementById('createMarkerPopup').style.display='none';">X</div>
+            <div id="createMarkerPopupTitle"><strong>Create Marker</strong></div>
+            <div id="createMarkerPopupContent">
+                <input id="editMarkerId" type="hidden" />
+                <table id="createMarkerTable">
+                    <tr>
+                        <td>Name:</td>
+                        <td><input id="createMarkerName" placeholder="Name" /></td>
+                    </tr>
+                    <tr>
+                        <td>Color:</td>
+                        <td><input id="createMarkerColor" placeholder="Color" value="#FFFFFF"/></td>
+                    </tr>
+                    <tr>
+                        <td>X:</td>
+                        <td><input id="createMarkerX" placeholder="X" /></td>
+                    </tr>
+                    <tr>
+                        <td>Y:</td>
+                        <td><input id="createMarkerY" placeholder="Y" /></td>
+                    </tr>
+                    <tr>
+                        <td>Z:</td>
+                        <td><input id="createMarkerZ" placeholder="Z" /></td>
+                    </tr>
+                </table>
+                <button id="createMarkerButton">Create Marker</button>
+            </div>
+        </div>
         <script type="module" src="main.js"></script>
 	</body>
 </html>

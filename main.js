@@ -4,12 +4,15 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+import SpriteText from 'three-spritetext';
 import gsap from 'gsap';
 
 const renderer = new THREE.WebGLRenderer({alpha: true, antialias: true,});
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
+
+let markers = [];
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
@@ -170,10 +173,14 @@ function loadLocations() {
 
         // Add text to location
         const text = makeTextSprite(location.name, { fontsize: 32, textColor: { r:255, g:255, b:255, a:1.0 } });
-        text.position.set((location.x/1000), (location.z/1000) + 0.1, (location.y/1000));
+        var verticalOffset = 2;
+        if(location.type == "Dome") {
+            verticalOffset = 3;
+        }
+        text.position.set((location.x/1000), (location.z/1000) + verticalOffset, (location.y/1000));
         if(location.scale != undefined) {
             var bbox = new THREE.Box3().setFromObject(obj);
-            text.position.set((location.x/1000), bbox.max.y, (location.y/1000));
+            text.position.set((location.x/1000), bbox.max.y + verticalOffset, (location.y/1000));
         }
         // scene.add(text);
         const group = new THREE.Group();
@@ -258,7 +265,7 @@ function loadDeposits() {
 
             // scene.add( obj );
             var text = makeTextSprite(ucfirst(dcategory) + " Deposit", { fontsize: 24, textColor: { r:125, g:125, b:125, a:0.8 } });
-            text.position.set((obj.position.x), (obj.position.y) + 0.1, (obj.position.z));
+            text.position.set((obj.position.x), (obj.position.y) + 2, (obj.position.z));
             text.parent = obj;
             // scene.add(text);
             
@@ -325,6 +332,8 @@ window.camera = camera;
 window.controls = controls;
 window.scene = scene;
 
+loadMarkers();
+
 controls.addEventListener('change', debounce(() => onCameraMove(), 250));
 document.getElementById('locationTitle').addEventListener('click', () => {
     toggleHTMLVisibility(document.getElementById('locationslist'));
@@ -333,6 +342,14 @@ document.getElementById('locationTitle').addEventListener('click', () => {
 document.getElementById('depositsTitle').addEventListener('click', () => {
     toggleHTMLVisibility(document.getElementById('depositslist'));
     document.querySelector('#depositsTitle > .expander').style.transform = document.getElementById('depositslist').style.display != "none" ? "rotate(0deg)" : "rotate(180deg)";
+});
+document.getElementById('customMarkersTitle').addEventListener('click', () => {
+    toggleHTMLVisibility(document.getElementById('customMarkers'));
+    document.querySelector('#customMarkersTitle > .expander').style.transform = document.getElementById('customMarkers').style.display != "none" ? "rotate(0deg)" : "rotate(180deg)";
+});
+document.getElementById('coordinates').addEventListener('click', () => {
+    updateCoordinatesDisplay();
+    //copy to clipboard?
 });
 
 
@@ -362,23 +379,14 @@ function makeTextSprite( message, parameters )
         var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?parameters["backgroundColor"] : { r:0, g:0, b:255, a:1.0 };
         var textColor = parameters.hasOwnProperty("textColor") ?parameters["textColor"] : { r:0, g:0, b:0, a:1.0 };
 
-        var canvas = document.createElement('canvas');
-        var context = canvas.getContext('2d');
-        context.font = "Bold " + fontsize + "px " + fontface;
-        var metrics = context.measureText( message );
-        var textWidth = metrics.width;
-
-        context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + 0 + ")";
-        context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
-        context.fillStyle = "rgba("+textColor.r+", "+textColor.g+", "+textColor.b+", 1.0)";
-        context.fillText( message, borderThickness, fontsize + borderThickness);
-
-        var texture = new THREE.Texture(canvas)
-        texture.needsUpdate = true;
-        var spriteMaterial = new THREE.SpriteMaterial( { map: texture, transparent: true, alphaMap: texture, alphaTest: 0.1 } );
-        spriteMaterial.needsUpdate = true;
-        var sprite = new THREE.Sprite( spriteMaterial );
-        sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
+        var sprite = new SpriteText(message,1);
+        sprite.color = "#"+ new THREE.Color(textColor.r, textColor.g, textColor.b).getHexString();
+        sprite.fontFace = fontface;
+        sprite.transparent = true;
+        sprite.backgroundColor = "rgba(220,220,220,0)";
+        // sprite.color.setRGB( textColor.r, textColor.g, textColor.b );
+        sprite.backgroundColor = false;
+        // sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
         return sprite;  
 }
 
@@ -427,14 +435,18 @@ function locationListItemClick(location) {
     var diff = getVectorDifference(camera.position, controls.target);
     controls.enabled = false;
     var ease = "sine.inOut";
+    var objPosition = location.object.position;
+    if(location.object.type == "Group") {
+        objPosition = location.object.children[0].position;
+    }
     gsap.to( camera.position, 
         { 
-            x: location.object.position.x + diff.x, 
-            y: location.object.position.y + diff.y,
-            z: location.object.position.z + diff.z,
+            x: objPosition.x + diff.x, 
+            y: objPosition.y + diff.y,
+            z: objPosition.z + diff.z,
             ease: ease,
             onUpdate: () => {
-                camera.lookAt(location.object.position);
+                camera.lookAt(objPosition);
             },
             onComplete: () => {
 
@@ -443,9 +455,9 @@ function locationListItemClick(location) {
     );
     gsap.to( controls.target,
         {
-            x: location.object.position.x,
-            y: location.object.position.y,
-            z: location.object.position.z,
+            x: objPosition.x,
+            y: objPosition.y,
+            z: objPosition.z,
             ease: ease,
             onComplete: () => {
                 controls.enabled = true;
@@ -507,4 +519,161 @@ function toggleHTMLVisibility(element) {
 
 function toggleGroupVisibility(group) {
     group.visible = !group.visible;
+}
+
+function exportMarkers() {
+    const markerData = localStorage.getItem('markers');
+    document.getElementById('markerData').value = markerData;
+}
+
+function importMarkers() {
+    const markerData = document.getElementById('markerData').value;
+    try {
+        var imported = JSON.parse(markerData);
+        markers.push(...imported);
+        // Add code to update the map with the new markers
+        console.log('Markers imported:', markers);
+        drawMarkers();
+        saveMarkers();
+    } catch (e) {
+        alert('Invalid marker data');
+    }
+}
+
+function saveMarkers() {
+    var toStore = markers.map((marker) => {
+        return {
+            id: marker.id,
+            x: marker.x,
+            y: marker.y,
+            z: marker.z,
+            label: marker.label,
+            color: marker.color
+        };
+    });
+    localStorage.setItem('markers', JSON.stringify(toStore));
+}
+
+function loadMarkers() {
+    const markerData = localStorage.getItem('markers');
+    if(markerData) {
+        try {
+            markers = JSON.parse(markerData);
+            drawMarkers();
+        } catch (e) {
+            console.error('Error loading markers:', e);
+        }
+    }
+}
+
+document.getElementById('importMarkers').addEventListener('click', () => {
+    importMarkers();
+});
+
+document.getElementById('exportMarkers').addEventListener('click', () => {
+    exportMarkers();
+});
+
+document.getElementById('addMarkerButton').addEventListener('click', () => {
+    //round to 2 digits
+    const x = Math.round(controls.target.x * 100) / 100;
+    const y = Math.round(controls.target.y * 100) / 100;
+    const z = Math.round(controls.target.z * 100) / 100;
+    document.getElementById('createMarkerX').value = x;
+    document.getElementById('createMarkerY').value = y;
+    document.getElementById('createMarkerZ').value = z;
+
+    document.getElementById('createMarkerPopup').style.display = "block";
+});
+
+document.getElementById('createMarkerButton').addEventListener('click', () => {
+    const x = parseFloat(document.getElementById('createMarkerX').value);
+    const y = parseFloat(document.getElementById('createMarkerY').value);
+    const z = parseFloat(document.getElementById('createMarkerZ').value);
+    const label = document.getElementById('createMarkerName').value;
+    const color = document.getElementById('createMarkerColor').value;
+    document.getElementById('createMarkerPopup').style.display = "none";
+    addMarker(x, y, z, label, color);
+});
+
+// Example function to add a marker (to be expanded as needed)
+function addMarker(x, y, z, label, color) {
+    var id = Math.random().toString(36).substr(2, 9);
+    markers.push({ id, x, y, z, label, color });
+    drawMarkers();
+    saveMarkers();
+}
+
+function drawMarkers() {
+    const grey128Texture = new THREE.TextureLoader().load('textures/128grey.jpg', (texture) => {
+        texture.name = "greyTransparentTexture";
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+    });
+    const extrudeSettings = {
+        steps: 2,
+        depth: 0.01,
+        bevelEnabled: true,
+        bevelThickness: 0.1,
+        bevelSize: 0.1,
+        bevelOffset: 0,
+        bevelSegments: 1
+    };
+    markers.forEach(marker => {
+        // Add code to visually place the marker on the map
+        if(marker.object == undefined) {
+            var shape = new THREE.Shape();
+            shape.moveTo(-1, -0.5);
+            shape.bezierCurveTo(-1.75, -0.5, -1.75, 0.5, -1, 0.5);
+            // shape.lineTo(-1, 0.5);
+            shape.lineTo(0,0);
+            shape.lineTo(-1,-0.5);
+
+            const geo = new THREE.ExtrudeGeometry(shape,extrudeSettings);
+            geo.rotateZ((Math.PI/2)*3);
+            var color = colors.red;
+            if(marker.color != undefined) {
+                color = (new THREE.Color(marker.color))
+            }
+            // const obj = new THREE.Sprite(new THREE.SpriteMaterial({map: grey128Texture}));
+            // obj.geometry=new THREE.ShapeGeometry(shape);
+            // obj.geometry.rotateZ((Math.PI/2)*3);
+            
+            const obj = new THREE.Mesh(geo,new THREE.MeshLambertMaterial({color: color}));
+            obj.scale.set(0.5,0.5,0.5);
+
+            obj.position.set(marker.x, marker.y, marker.z); //y and z are swapped from game coordinates
+
+            // obj.scale.set(20,20,20);
+            //add text to marker
+            const text = makeTextSprite(marker.label, { fontsize: 24, textColor: { r:200, g:200, b:125, a:0.8 } });
+            text.position.set((obj.position.x), (obj.position.y) + 1.5, (obj.position.z));
+            var group = new THREE.Group();
+            group.name = marker.label;
+            group.add(obj);
+            group.add(text);
+            marker.object = group;
+            scene.add( group );
+        }
+        if(document.getElementById('marker-' + marker.id) == null) {
+            const li = document.createElement('li');
+            li.id = 'marker-' + marker.id;
+            li.innerHTML = `<a>${marker.label}</a>`;
+            li.addEventListener('click', () => {
+                locationListItemClick(marker);
+            });
+
+            const btn = document.createElement('img');
+            btn.classList.add('eye');
+            btn.src = "images/eye.png";
+            li.appendChild(btn);
+            document.getElementById('customMarkersList').appendChild(li);
+            btn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                toggleGroupVisibility(marker.object);
+                btn.classList.toggle('eyeinverted');
+            });
+        }
+    });
 }
