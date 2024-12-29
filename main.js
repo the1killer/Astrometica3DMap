@@ -80,25 +80,32 @@ const light3 = new THREE.DirectionalLight( colors.white, 1 );
 light2.position.set( -200, 0, 150 ).normalize();
 scene.add( light2 );
 
+
+const cloudTexture = new THREE.TextureLoader().load('textures/toxiccloud.png', (texture) => {
+    texture.name = "cloudTexture";
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    // texture.repeat.set( 2, 2 );
+});
+
+const grey128Texture = new THREE.TextureLoader().load('textures/128grey.jpg', (texture) => {
+    texture.name = "greyTransparentTexture";
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+});
+
+const grey200Texture = new THREE.TextureLoader().load('textures/200grey.jpg', (texture) => {
+    texture.name = "greyTransparentTexture";
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+});
+
 function loadLocations() {
     const box = new THREE.BoxGeometry(1, 1, 1);
     const sphere = new THREE.SphereGeometry(2, 8, 8);
     const cylinder = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
     const torus = new THREE.TorusGeometry(1, 0.4, 16, 100);
     const capsule = new THREE.CapsuleGeometry(1, 1, 32, 32);
-
-    const cloudTexture = new THREE.TextureLoader().load('textures/toxiccloud.png', (texture) => {
-        texture.name = "cloudTexture";
-        texture.wrapS = THREE.RepeatWrapping;
-        texture.wrapT = THREE.RepeatWrapping;
-        // texture.repeat.set( 2, 2 );
-    });
-
-    const grey128Texture = new THREE.TextureLoader().load('textures/128grey.jpg', (texture) => {
-        texture.name = "greyTransparentTexture";
-        texture.wrapS = THREE.RepeatWrapping;
-        texture.wrapT = THREE.RepeatWrapping;
-    });
 
     // Create objects for each location
     const locationList = document.getElementById('locationslist');
@@ -194,7 +201,7 @@ function loadLocations() {
             location.children.forEach((child) => {
                 var material = new THREE.MeshLambertMaterial({ color: colors[child.color] });
                 if(child.transparent) {
-                    material = new THREE.MeshBasicMaterial({color: colors[child.color], transparent: true, opacity: 0.5, map: grey128Texture, alphaMap: grey128Texture, alphaTest: 0.1, side: THREE.DoubleSide});
+                    material = new THREE.MeshBasicMaterial({color: colors[child.color], transparent: true, opacity: 0.5, map: grey200Texture, alphaMap: grey200Texture, alphaTest: 0.1, side: THREE.DoubleSide});
                     material.needsUpdate = true;
                 }
                 var geo = box;
@@ -609,11 +616,6 @@ function addMarker(x, y, z, label, color) {
 }
 
 function drawMarkers() {
-    const grey128Texture = new THREE.TextureLoader().load('textures/128grey.jpg', (texture) => {
-        texture.name = "greyTransparentTexture";
-        texture.wrapS = THREE.RepeatWrapping;
-        texture.wrapT = THREE.RepeatWrapping;
-    });
     const extrudeSettings = {
         steps: 2,
         depth: 0.01,
