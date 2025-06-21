@@ -100,16 +100,21 @@ const grey200Texture = new THREE.TextureLoader().load('textures/200grey.jpg', (t
     texture.wrapT = THREE.RepeatWrapping;
 });
 
-function loadLocations() {
+function loadLocations(zoneid = 0) {
     const box = new THREE.BoxGeometry(1, 1, 1);
     const sphere = new THREE.SphereGeometry(2, 8, 8);
     const cylinder = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
     const torus = new THREE.TorusGeometry(1, 0.4, 16, 100);
     const capsule = new THREE.CapsuleGeometry(1, 1, 32, 32);
 
+    if(zoneid >= data.zones.length || zoneid < 0) {
+        console.error("Invalid zone ID:", zoneid);
+        zoneid = 0; // Default to the first zone if invalid
+    }
+
     // Create objects for each location
     const locationList = document.getElementById('locationslist');
-    data.locations.forEach((location, index) => {
+    data.zones[zoneid].locations.forEach((location, index) => {
         var material = new THREE.MeshLambertMaterial({ color: colors[location.color] });
         if(location.type == "Cloud") {
             material = new THREE.MeshBasicMaterial({color: colors[location.color], transparent: true, opacity: 0.5, map: cloudTexture, alphaMap: cloudTexture, alphaTest: 0.1, side: THREE.DoubleSide});
@@ -247,14 +252,27 @@ function loadLocations() {
     });
 }
 
-loadLocations();
+var zid = 0;
+
+if(document.location.hash) {
+    const q = new URLSearchParams(document.location.hash.slice(2));
+    zid = parseInt(q.get('zid')) ?? 0;
+    if(isNaN(zid) || zid < 0 || zid >= data.zones.length) {
+        console.error("Invalid zone ID in URL hash:", zid);
+        zid = 0; // Default to the first zone if invalid
+    }
+}
+
+loadLocations(zid);
+
+window.zoneid = zid;
 
 function loadDeposits() {
     const geo = new THREE.IcosahedronGeometry(1, 0);
     const depositList = document.getElementById('depositslist');        
 
-    Object.keys(data.deposits).forEach((dcategory, cindex) => {
-        data.deposits[dcategory].forEach((deposit, index) => {
+    Object.keys(data.zones[zid].deposits).forEach((dcategory, cindex) => {
+        data.zones[zid].deposits[dcategory].forEach((deposit, index) => {
             // const obj = gltf.scene.clone();
             const obj = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: colors[dcategory] }));
             obj.position.set(deposit.x/1000, deposit.z/1000, deposit.y/1000); //y and z are swapped from game coordinates
@@ -285,15 +303,15 @@ function loadDeposits() {
 
         });
         const li = document.createElement('li');
-        li.innerHTML = `<a>${ucfirst(dcategory)} (${data.deposits[dcategory].length})</a>`;
+        li.innerHTML = `<a>${ucfirst(dcategory)} (${data.zones[zid].deposits[dcategory].length})</a>`;
         li.addEventListener('click', () => {
             var idx = 0;
             if(li.dataset.idx != undefined) {
                 idx = parseInt(li.dataset.idx);
             }
-            depositListItemClick(data.deposits[dcategory][idx]);
+            depositListItemClick(data.zones[zid].deposits[dcategory][idx]);
             idx+=1;
-            if(idx >= data.deposits[dcategory].length) {
+            if(idx >= data.zones[zid].deposits[dcategory].length) {
                 idx = 0;
             }
             li.dataset.idx = idx;
@@ -307,7 +325,7 @@ function loadDeposits() {
         btn.addEventListener('click', (event) => {
             event.stopPropagation();
             event.preventDefault();
-            data.deposits[dcategory].forEach((deposit) => {
+            data.zones[zid].deposits[dcategory].forEach((deposit) => {
                 toggleGroupVisibility(deposit.object);
             });
             btn.classList.toggle('eyeinverted');
@@ -327,7 +345,8 @@ if(document.location.hash) {
     controls.target.set(parseFloat(q.get('tx')), parseFloat(q.get('ty')), parseFloat(q.get('tz')));
     camera.lookAt(controls.target);
 } else {
-    controls.target.set(data.locations[0].object.position.x, data.locations[0].object.position.y, data.locations[0].object.position.z);
+    var start = data.zones[zid].locations[0].object.position;
+    controls.target.set(start.x, start.y, start.z);
     camera.position.set(-268.46001541128123, 89.91119916230053, 8.49005248328114);
 }
 
@@ -535,6 +554,7 @@ function toggleGroupVisibility(group) {
 function exportMarkers() {
     const markerData = localStorage.getItem('markers');
     document.getElementById('markerData').value = markerData;
+    document.getElementById('copyMarkerDataButton').click();
 }
 
 function importMarkers() {
@@ -570,9 +590,39 @@ function loadMarkers() {
     if(markerData) {
         try {
             markers = JSON.parse(markerData);
+            if(markers[0] && markers[0].zid == undefined) {
+                // Migrate old marker data format to new format
+                markers = migrateMarkerData();
+            }
             drawMarkers();
         } catch (e) {
             console.error('Error loading markers:', e);
+        }
+    }
+}
+
+function migrateMarkerData() {
+    // Check if the markers are stored in localStorage
+    const markerData = localStorage.getItem('markers');
+    if (markerData) {
+        try {
+            // Parse the existing marker data
+            const existingMarkers = JSON.parse(markerData);
+            // Migrate the markers to the new format
+            const migratedMarkers = existingMarkers.map(marker => ({
+                id: marker.id || Math.random().toString(36).substr(2, 9), // Generate a new ID if not present
+                zid: marker.zid || 0, // Default zone ID if not present
+                x: marker.x,
+                y: marker.y,
+                z: marker.z,
+                label: marker.label || 'Marker', // Default label if not present
+                color: marker.color || '#ff0000' // Default color if not present
+            }));
+            // Save the migrated markers back to localStorage
+            localStorage.setItem('markers', JSON.stringify(migratedMarkers));
+            return migratedMarkers;
+        } catch (e) {
+            console.error('Error migrating markers:', e);
         }
     }
 }
@@ -610,7 +660,8 @@ document.getElementById('createMarkerButton').addEventListener('click', () => {
 // Example function to add a marker (to be expanded as needed)
 function addMarker(x, y, z, label, color) {
     var id = Math.random().toString(36).substr(2, 9);
-    markers.push({ id, x, y, z, label, color });
+    var zid = window.zoneid || 0; // Use the current zone ID
+    markers.push({ id, x, y, z, label, color, zid });
     drawMarkers();
     saveMarkers();
 }
@@ -627,7 +678,7 @@ function drawMarkers() {
     };
     markers.forEach(marker => {
         // Add code to visually place the marker on the map
-        if(marker.object == undefined) {
+        if(marker.object == undefined && marker.zid == window.zoneid) {
             var shape = new THREE.Shape();
             shape.moveTo(-1, -0.5);
             shape.bezierCurveTo(-1.75, -0.5, -1.75, 0.5, -1, 0.5);
@@ -661,7 +712,8 @@ function drawMarkers() {
             marker.object = group;
             scene.add( group );
         }
-        if(document.getElementById('marker-' + marker.id) == null) {
+        if(document.getElementById('marker-' + marker.id) == null && marker.zid == window.zoneid) {
+            // Add marker to the list
             const li = document.createElement('li');
             li.id = 'marker-' + marker.id;
             li.innerHTML = `<a>${marker.label}</a>`;
@@ -683,3 +735,23 @@ function drawMarkers() {
         }
     });
 }
+
+document.getElementById('copyMarkerDataButton').addEventListener('click', () => {
+    const markerDataInput = document.getElementById('markerData');
+    markerDataInput.select();
+    markerDataInput.setSelectionRange(0, 99999); // For mobile devices
+    navigator.clipboard.writeText(markerDataInput.value)
+        .then(() => {
+            const btn = document.getElementById('copyMarkerDataButton');
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1200);
+        })
+        .catch(err => {
+            alert('Failed to copy marker data');
+        });
+});

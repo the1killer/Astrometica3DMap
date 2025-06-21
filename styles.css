@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#info {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 100;
+    color: white;
+}
+#attribution {
+    font-size: 12px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 100;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px;
+    border-top-left-radius: 5px;
+}
+#helpbutton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    z-index: 100;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    z-index: 100;
+}
+#helptext {
+    text-align: left;
+    margin-top: -15px;
+}
+.popupClose {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    padding: 5px;
+    cursor: pointer;
+}
+#toptitle {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px;
+    border-radius: 5px;
+}
+a {
+    color: #08f;
+}
+#leftpanel {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    z-index: 100;
+}
+#locationTitle, #depositsTitle, #customMarkersTitle {
+    cursor: pointer;
+}
+#locationslist, #depositslist, #customMarkers, #customMarkersList {
+    font-size: 14px;
+    padding-inline-start: 20px;
+}
+#locationslist li, #depositslist li, #customMarkersList li {
+    /* list-style-type: none; */
+    cursor: pointer;
+}
+.expander {
+    display: inline-block;
+}
+#coordinates {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+.eye {
+    display: inline-block;
+    float: right;
+    max-height: 15px;
+    margin-left: 5px;
+}
+.eyeinverted {
+    filter: sepia(13%) saturate(3207%) hue-rotate(180deg) brightness(100%) contrast(80%);
+}
+#createMarkerPopupContent {
+    /* text-align: left; */
+    padding: 10px;
+}
+#createMarkerTable>tbody>tr>td:first-child {
+    text-align: right;
+}
