@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Astrometica three.js map</title>
     <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
     <script type="importmap">
 			{
 				"imports": {
@@ -17,80 +18,106 @@
 
 <body>
     <div id="info" class="noselect">
-        <span id="toptitle"><a href="https://astrometica.com/" target="_blank" rel="noopener">Astrometica</a> 3D
-            map</span>
+        <span class="astro-panel" style="padding: 10px;">
+            <span id="toptitle"><a href="https://astrometica.com/" target="_blank" rel="noopener">Astrometica</a> 3D map</span>
+        </span>
     </div>
     <div id="helpbutton" class="noselect" onclick="document.getElementById('helppopup').style.display='block';">?</div>
-    <div id="helppopup" class="popup" style="display: none;" class="noselect">
-        <div id="helpclose" class="popupClose" onclick="document.getElementById('helppopup').style.display='none';">X
-        </div>
-        <div id="helptext">
-            <h2>Controls</h2>
-            <p>• Left Click and drag to pan the camera.<br />
-                • Right Click and drag to rotate the camera.<br />
-                • Scroll to zoom in and out.</p>
-            <br />
-            <h2>NOTE:</h2>
-            <p>
-                • This map is not official and is not affiliated with Astrometica.<br />
-                • The map is based on the game's data files and may not be 100% accurate.<br />
-                • The objects on the map are not to scale, distances between objects are close to scale.<br />
-            </p>
-            <p>Everything is still a work in progress. Make suggestions on <a
-                    href="https://github.com/the1killer/Astrometica3DMap">github</a>.</p>
+    <div id="helppopup" class="popupContainer" style="display: none;" class="noselect">
+        <div class="astro-panel">
+            <div id="helpclose" class="popupClose" onclick="document.getElementById('helppopup').style.display='none';">X
+            </div>
+            <div id="helptext">
+                <h2>Controls</h2>
+                <p>• Left Click and drag to pan the camera.<br />
+                    • Right Click and drag to rotate the camera.<br />
+                    • Scroll to zoom in and out.</p>
+                <br />
+                <h2>NOTE:</h2>
+                <p>
+                    • This map is not official and is not affiliated with Astrometica.<br />
+                    • The map is based on the game's data files and may not be 100% accurate.<br />
+                    • The objects on the map are not to scale, distances between objects are close to scale.<br />
+                </p>
+                <p>Everything is still a work in progress. Make suggestions on <a
+                        href="https://github.com/the1killer/Astrometica3DMap">github</a>.</p>
+            </div>
         </div>
     </div>
     <div id="attribution" class="noselect">v0.04 by <a href="https://github.com/the1killer/" target="_blank"
             rel="noopener">The1Killer</a></div>
-    <div id="leftpanel" class="noselect">
-        <div id="locationTitle">Locations <div class="expander">&#9660;</div>
-        </div>
-        <ul id="locationslist"></ul>
-        <div id="depositsTitle">Deposits <div class="expander">&#9660;</div>
-        </div>
-        <ul id="depositslist"></ul>
-        <div id="customMarkersTitle">Custom Markers <div class="expander">&#9660;</div>
-        </div>
-        <ul id="customMarkersList" class="noselect"></ul>
-        <div id="customMarkers" class="noselect">
-            <button id="addMarkerButton">Create Marker at Current</button><br />
-            <br />
-            <input id="markerData" placeholder="Paste marker data here..." onclick="this.select()" />
-            <button id="copyMarkerDataButton">Copy</button><br />
-            <button id="exportMarkers">Export Markers</button>
-            <button id="importMarkers">Import Markers</button>
+    <div id="leftpanel" class="noselect, astro-panel">
+        <div id="leftpanelContent">
+            <div id="locationTitle">Locations <div class="expander">&#9660;</div>
+            </div>
+            <ul id="locationslist"></ul>
+            <div id="depositsTitle">Deposits <div class="expander">&#9660;</div>
+            </div>
+            <ul id="depositslist"></ul>
+            <div id="customMarkersTitle">Custom Markers <div class="expander">&#9660;</div>
+            </div>
+            <ul id="customMarkersList" class="noselect"></ul>
+            <div id="customMarkers" class="noselect">
+                <div class="astro_border" style="margin:5px 5px 5px 0px;">
+                    <div class="astro_border_content astro_border_button" id="addMarkerButton">
+                        Create Marker at Current
+                </div></div>
+                <br />
+                <input id="markerData" placeholder="Paste marker data here..." onclick="this.select()" />
+                <div class="astro_border" style="margin:0px 0px 5px 0px;">
+                    <div class="astro_border_content astro_border_button" id="copyMarkerDataButton">
+                        Copy
+                </div></div><br />
+                <div class="astro_border" style="margin-bottom:5px; font-size:0.85em;">
+                    <div class="astro_border_content astro_border_button" id="exportMarkers">
+                        Export markers
+                </div></div>
+                <div class="astro_border" style="margin-bottom:5px; font-size:0.85em;">
+                    <div class="astro_border_content astro_border_button" id="importMarkers">
+                        Import markers
+                </div></div>
+            </div>
         </div>
     </div>
     <div id="coordinates">X: 0, Y: 0, Z: 0</div>
-    <div id="createMarkerPopup" class="popup" style="display: none;">
-        <div id="createMarkerClose" class="popupClose"
-            onclick="document.getElementById('createMarkerPopup').style.display='none';">X</div>
-        <div id="createMarkerPopupTitle"><strong>Create Marker</strong></div>
-        <div id="createMarkerPopupContent">
-            <input id="editMarkerId" type="hidden" />
-            <table id="createMarkerTable">
-                <tr>
-                    <td>Name:</td>
-                    <td><input id="createMarkerName" placeholder="Name" /></td>
-                </tr>
-                <tr>
-                    <td>Color:</td>
-                    <td><input id="createMarkerColor" placeholder="Color" value="#FFFFFF" /></td>
-                </tr>
-                <tr>
-                    <td>X:</td>
-                    <td><input id="createMarkerX" placeholder="X" /></td>
-                </tr>
-                <tr>
-                    <td>Y:</td>
-                    <td><input id="createMarkerY" placeholder="Y" /></td>
-                </tr>
-                <tr>
-                    <td>Z:</td>
-                    <td><input id="createMarkerZ" placeholder="Z" /></td>
-                </tr>
-            </table>
-            <button id="createMarkerButton">Create Marker</button>
+    <div id="createMarkerPopup" class="popupContainer" style="display: none;">
+        <div class="astro-panel">
+            <div id="createMarkerClose" class="popupClose"
+                onclick="document.getElementById('createMarkerPopup').style.display='none';">X</div>
+            <div id="createMarkerPopupTitle"><strong>Create New Marker</strong></div>
+            <div id="createMarkerPopupContent">
+                <input id="editMarkerId" type="hidden" />
+                <table id="createMarkerTable">
+                    <tr>
+                        <td>Name:</td>
+                        <td><input id="createMarkerName" placeholder="Name" /></td>
+                    </tr>
+                    <tr>
+                        <td>Color:</td>
+                        <td><input id="createMarkerColor" placeholder="Color" value="#FFFFFF" /></td>
+                    </tr>
+                    <tr>
+                        <td>X:</td>
+                        <td><input id="createMarkerX" placeholder="X" /></td>
+                    </tr>
+                    <tr>
+                        <td>Y:</td>
+                        <td><input id="createMarkerY" placeholder="Y" /></td>
+                    </tr>
+                    <tr>
+                        <td>Z:</td>
+                        <td><input id="createMarkerZ" placeholder="Z" /></td>
+                    </tr>
+                </table>
+                <div class="astro_border" style="margin:5px;">
+                    <div class="astro_border_content astro_border_button" id="createMarkerButton">
+                        Create Marker
+                </div></div>
+                <!-- <div class="astro_border" style="margin:5px;">
+                    <div class="astro_border_content astro_border_button">
+                        Delete marker
+                </div></div> -->
+            </div>
         </div>
     </div>
     <script type="module" src="main.js"></script>

@@ -1,6 +1,13 @@
+:root {
+    --astro-content-border-color: #017a82;
+    --astro-primary: #8cfffb;
+    --astro-bg-secondary: #18252a;
+    --astro-panel-color: #2CC4F6;
+}
+
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Orbitron", Arial, Helvetica, sans-serif;
 }
 .noselect {
     -webkit-touch-callout: none;
@@ -12,7 +19,7 @@ body {
 }
 #info {
     position: absolute;
-    top: 0px;
+    top: 10px;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -47,20 +54,23 @@ body {
     cursor: pointer;
     z-index: 100;
     text-align: center;
+    line-height: 14px;
     font-weight: bold;
     cursor: pointer;
 }
-.popup {
+.popupContainer {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 100;
+}
+.popup {
     background-color: rgba(0, 0, 0, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
     padding: 10px;
     border-radius: 15px;
-    z-index: 100;
 }
 #helptext {
     text-align: left;
@@ -76,9 +86,9 @@ body {
 #toptitle {
     font-size: 20px;
     font-weight: bold;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 5px;
-    border-radius: 5px;
+    /* background-color: rgba(255, 255, 255, 0.2); */
+    /* padding: 5px; */
+    /* border-radius: 5px; */
 }
 a {
     color: #08f;
@@ -89,9 +99,20 @@ a {
     left: 10px;
     background-color: rgba(0, 0, 0, 0.9);
     color: white;
-    padding: 10px;
+    padding: 10px 4px 10px 4px;
     border-radius: 15px;
     z-index: 100;
+}
+#leftpanelContent {
+    max-height: 85vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--astro-content-border-color) var(--astro-bg-secondary);
+    scroll-padding: 10px;
+    scrollbar-gutter: stable both-edges;
+}
+#customMarkers {
+    padding-inline-start: 10px !important;
 }
 #locationTitle, #depositsTitle, #customMarkersTitle {
     cursor: pointer;
@@ -104,8 +125,12 @@ a {
     /* list-style-type: none; */
     cursor: pointer;
 }
+#locationslist li::marker, #depositslist li::marker, #customMarkersList li::marker {
+    color: hsl(from var(--astro-content-border-color) h s calc(l + 19));
+}
 .expander {
     display: inline-block;
+    user-select: none;
 }
 #coordinates {
     position: absolute;
@@ -132,4 +157,107 @@ a {
 }
 #createMarkerTable>tbody>tr>td:first-child {
     text-align: right;
+}
+/* end region normal CSS */
+
+/*//////////////////////////////////////////
+Astro Border
+//////////////////////////////////////////*/
+.astro_border {
+    position: relative;
+    display: inline-block;
+    color: #6be0c4;
+    background-color: var(--astro-bg-secondary);
+    border-color: var(--astro-content-border-color);
+    font-size: 0.9em;
+}
+.astro_border_content {
+    padding: 5px;
+    border: 2px solid var(--astro-content-border-color);
+    clip-path: polygon(10px 0%, 100% 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 100%, 0% 10px);
+}
+.astro_border_content:hover {
+    /* background-color: var(--astro-bg-secondary); */
+    color: var(--astro-primary);
+    border-color: var(--astro-primary) !important;
+    cursor: pointer;
+}
+.astro_border_content>pre {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.astro_border_button>pre {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--astro-primary);
+}
+.astro_border_button>pre>a {
+    color: var(--astro-primary) !important;
+    background-image: none !important;
+}
+.astro_border::before,
+.astro_border::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.astro_border::before {
+    border-top: 6px double var(--astro-content-border-color);
+    top: -0.5px;
+    left: 2px;
+    transform: rotate(-45deg);
+    width: 14px;
+    height: 14px;
+    clip-path: polygon(70% 0%, 100% 20%, 100% 100%, 0 100%, 0 20%, 30% 0%);
+}
+.astro_border:hover::before, .astro_border:hover::after {
+    border-color: var(--astro-primary);
+}
+.astro_border::after {
+    right: 2px;
+    bottom: -0.5px;
+    transform: rotate(-45deg);
+    border-bottom: 6px double var(--astro-content-border-color);
+    width: 14px;
+    height: 14px;
+    clip-path: polygon(100% 0, 100% 80%, 70% 100%, 30% 100%, 0% 80%, 0 0);
+}
+/*//////////////////////////////////////////
+END Astro Border
+//////////////////////////////////////////*/
+
+.astro-panel {
+    border: 3px solid var(--astro-panel-color);
+    border-radius: 18px;
+    box-shadow: 0 0 12px 2px var(--astro-panel-color), 0 0 0 2px #0a1a2f inset;
+    background: rgba(10, 20, 47, 0.85);
+    position: relative;
+    padding: 18px 16px 16px 16px;
+    color: #8cfffb;
+    /* font-family: 'Orbitron', 'Arial', sans-serif; */
+    overflow: hidden;
+}
+
+.astro-panel::before,
+.astro-panel::after {
+    content: "";
+    position: absolute;
+    width: 32px;
+    height: 8px;
+    border-radius: 8px;
+    background: var(--astro-panel-color);
+    opacity: 0.7;
+}
+
+.astro-panel::before {
+    top: -4px;
+    left: 12px;
+}
+
+.astro-panel::after {
+    bottom: -4px;
+    right: 12px;
 }

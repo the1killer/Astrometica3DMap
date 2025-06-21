@@ -371,6 +371,7 @@ document.getElementById('depositsTitle').addEventListener('click', () => {
 });
 document.getElementById('customMarkersTitle').addEventListener('click', () => {
     toggleHTMLVisibility(document.getElementById('customMarkers'));
+    toggleHTMLVisibility(document.getElementById('customMarkersList'));
     document.querySelector('#customMarkersTitle > .expander').style.transform = document.getElementById('customMarkers').style.display != "none" ? "rotate(0deg)" : "rotate(180deg)";
 });
 document.getElementById('coordinates').addEventListener('click', () => {
