@@ -4,12 +4,15 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+import SpriteText from 'three-spritetext';
 import gsap from 'gsap';
 
 const renderer = new THREE.WebGLRenderer({alpha: true, antialias: true,});
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
+
+let markers = [];
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
@@ -19,6 +22,7 @@ controls.mouseButtons = {
     MIDDLE: THREE.MOUSE.DOLLY,
     RIGHT: THREE.MOUSE.ROTATE
 };
+
 const axesHelper = new THREE.AxesHelper( 1.5 );
 scene.add( axesHelper )
 // const controls = new FirstPersonControls( camera, renderer.domElement );
@@ -65,41 +69,65 @@ const colors = {
 
 scene.background = new THREE.Color(0x101010);
 
-const light = new THREE.DirectionalLight( colors.white, 4 );
-    light.position.set( 450, 300, -100 ).normalize();
-    scene.add( light );
+function setupGlobalLights() {
+    const ambientLight = new THREE.AmbientLight( colors.white, 0.5 );
+    scene.add( ambientLight );
 
-const light2 = new THREE.DirectionalLight( colors.white, 1 );
-light2.position.set( -2000, -100, -2000 ).normalize();
-scene.add( light2 );
+    const directionalLight = new THREE.DirectionalLight( colors.white, 1 );
+    directionalLight.position.set( 0, 1, 0 ).normalize();
+    scene.add( directionalLight );
 
-const light3 = new THREE.DirectionalLight( colors.white, 1 );
-light2.position.set( -200, 0, 150 ).normalize();
-scene.add( light2 );
+    const hemisphereLight = new THREE.HemisphereLight( colors.white, colors.black, 0.5 );
+    scene.add( hemisphereLight );
+}
+setupGlobalLights();
+// const light = new THREE.DirectionalLight( colors.white, 4 );
+//     light.position.set( 450, 300, -100 ).normalize();
+//     scene.add( light );
 
-function loadLocations() {
+// const light2 = new THREE.DirectionalLight( colors.white, 1 );
+// light2.position.set( -2000, -100, -2000 ).normalize();
+// scene.add( light2 );
+
+// const light3 = new THREE.DirectionalLight( colors.white, 1 );
+// light2.position.set( -200, 0, 150 ).normalize();
+// scene.add( light2 );
+
+
+const cloudTexture = new THREE.TextureLoader().load('textures/toxiccloud.png', (texture) => {
+    texture.name = "cloudTexture";
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    // texture.repeat.set( 2, 2 );
+});
+
+const grey128Texture = new THREE.TextureLoader().load('textures/128grey.jpg', (texture) => {
+    texture.name = "greyTransparentTexture";
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+});
+
+const grey200Texture = new THREE.TextureLoader().load('textures/200grey.jpg', (texture) => {
+    texture.name = "greyTransparentTexture";
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+});
+
+function loadLocations(zoneid = 0) {
     const box = new THREE.BoxGeometry(1, 1, 1);
     const sphere = new THREE.SphereGeometry(2, 8, 8);
     const cylinder = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
     const torus = new THREE.TorusGeometry(1, 0.4, 16, 100);
     const capsule = new THREE.CapsuleGeometry(1, 1, 32, 32);
 
-    const cloudTexture = new THREE.TextureLoader().load('textures/toxiccloud.png', (texture) => {
-        texture.name = "cloudTexture";
-        texture.wrapS = THREE.RepeatWrapping;
-        texture.wrapT = THREE.RepeatWrapping;
-        // texture.repeat.set( 2, 2 );
-    });
-
-    const grey128Texture = new THREE.TextureLoader().load('textures/128grey.jpg', (texture) => {
-        texture.name = "greyTransparentTexture";
-        texture.wrapS = THREE.RepeatWrapping;
-        texture.wrapT = THREE.RepeatWrapping;
-    });
+    if(zoneid >= data.zones.length || zoneid < 0) {
+        console.error("Invalid zone ID:", zoneid);
+        zoneid = 0; // Default to the first zone if invalid
+    }
 
     // Create objects for each location
     const locationList = document.getElementById('locationslist');
-    data.locations.forEach((location, index) => {
+    data.zones[zoneid].locations.forEach((location, index) => {
         var material = new THREE.MeshLambertMaterial({ color: colors[location.color] });
         if(location.type == "Cloud") {
             material = new THREE.MeshBasicMaterial({color: colors[location.color], transparent: true, opacity: 0.5, map: cloudTexture, alphaMap: cloudTexture, alphaTest: 0.1, side: THREE.DoubleSide});
@@ -170,10 +198,14 @@ function loadLocations() {
 
         // Add text to location
         const text = makeTextSprite(location.name, { fontsize: 32, textColor: { r:255, g:255, b:255, a:1.0 } });
-        text.position.set((location.x/1000), (location.z/1000) + 0.1, (location.y/1000));
+        var verticalOffset = 2;
+        if(location.type == "Dome") {
+            verticalOffset = 3;
+        }
+        text.position.set((location.x/1000), (location.z/1000) + verticalOffset, (location.y/1000));
         if(location.scale != undefined) {
             var bbox = new THREE.Box3().setFromObject(obj);
-            text.position.set((location.x/1000), bbox.max.y, (location.y/1000));
+            text.position.set((location.x/1000), bbox.max.y + verticalOffset, (location.y/1000));
         }
         // scene.add(text);
         const group = new THREE.Group();
@@ -187,7 +219,7 @@ function loadLocations() {
             location.children.forEach((child) => {
                 var material = new THREE.MeshLambertMaterial({ color: colors[child.color] });
                 if(child.transparent) {
-                    material = new THREE.MeshBasicMaterial({color: colors[child.color], transparent: true, opacity: 0.5, map: grey128Texture, alphaMap: grey128Texture, alphaTest: 0.1, side: THREE.DoubleSide});
+                    material = new THREE.MeshBasicMaterial({color: colors[child.color], transparent: true, opacity: 0.5, map: grey200Texture, alphaMap: grey200Texture, alphaTest: 0.1, side: THREE.DoubleSide});
                     material.needsUpdate = true;
                 }
                 var geo = box;
@@ -233,14 +265,30 @@ function loadLocations() {
     });
 }
 
-loadLocations();
+var zid = 0;
 
-function loadDeposits() {
+if(document.location.hash) {
+    const q = new URLSearchParams(document.location.hash.slice(2));
+    zid = parseInt(q.get('zid')) ?? 0;
+    if(isNaN(zid) || zid < 0 || zid >= data.zones.length) {
+        console.error("Invalid zone ID in URL hash:", zid);
+        zid = 0; // Default to the first zone if invalid
+    }
+    if(zid > 0 && zid < data.zones.length) {
+        document.getElementById('zonePicker').value = zid;
+    }
+}
+
+loadLocations(zid);
+
+window.zoneid = zid;
+
+function loadDeposits(zoneid = 0) {
     const geo = new THREE.IcosahedronGeometry(1, 0);
     const depositList = document.getElementById('depositslist');        
 
-    Object.keys(data.deposits).forEach((dcategory, cindex) => {
-        data.deposits[dcategory].forEach((deposit, index) => {
+    Object.keys(data.zones[zoneid].deposits).forEach((dcategory, cindex) => {
+        data.zones[zoneid].deposits[dcategory].forEach((deposit, index) => {
             // const obj = gltf.scene.clone();
             const obj = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: colors[dcategory] }));
             obj.position.set(deposit.x/1000, deposit.z/1000, deposit.y/1000); //y and z are swapped from game coordinates
@@ -258,7 +306,7 @@ function loadDeposits() {
 
             // scene.add( obj );
             var text = makeTextSprite(ucfirst(dcategory) + " Deposit", { fontsize: 24, textColor: { r:125, g:125, b:125, a:0.8 } });
-            text.position.set((obj.position.x), (obj.position.y) + 0.1, (obj.position.z));
+            text.position.set((obj.position.x), (obj.position.y) + 2, (obj.position.z));
             text.parent = obj;
             // scene.add(text);
             
@@ -271,15 +319,15 @@ function loadDeposits() {
 
         });
         const li = document.createElement('li');
-        li.innerHTML = `<a>${ucfirst(dcategory)} (${data.deposits[dcategory].length})</a>`;
+        li.innerHTML = `<a>${ucfirst(dcategory)} (${data.zones[zoneid].deposits[dcategory].length})</a>`;
         li.addEventListener('click', () => {
             var idx = 0;
             if(li.dataset.idx != undefined) {
                 idx = parseInt(li.dataset.idx);
             }
-            depositListItemClick(data.deposits[dcategory][idx]);
+            depositListItemClick(data.zones[zoneid].deposits[dcategory][idx]);
             idx+=1;
-            if(idx >= data.deposits[dcategory].length) {
+            if(idx >= data.zones[zoneid].deposits[dcategory].length) {
                 idx = 0;
             }
             li.dataset.idx = idx;
@@ -293,7 +341,7 @@ function loadDeposits() {
         btn.addEventListener('click', (event) => {
             event.stopPropagation();
             event.preventDefault();
-            data.deposits[dcategory].forEach((deposit) => {
+            data.zones[zoneid].deposits[dcategory].forEach((deposit) => {
                 toggleGroupVisibility(deposit.object);
             });
             btn.classList.toggle('eyeinverted');
@@ -302,7 +350,7 @@ function loadDeposits() {
     });
 }
 
-loadDeposits();
+loadDeposits(window.zoneid);
 
 if(document.location.hash) {
     const q = new URLSearchParams(document.location.hash.slice(2));
@@ -313,7 +361,8 @@ if(document.location.hash) {
     controls.target.set(parseFloat(q.get('tx')), parseFloat(q.get('ty')), parseFloat(q.get('tz')));
     camera.lookAt(controls.target);
 } else {
-    controls.target.set(data.locations[0].object.position.x, data.locations[0].object.position.y, data.locations[0].object.position.z);
+    var start = data.zones[zid].locations[0].object.position;
+    controls.target.set(start.x, start.y, start.z);
     camera.position.set(-268.46001541128123, 89.91119916230053, 8.49005248328114);
 }
 
@@ -325,6 +374,8 @@ window.camera = camera;
 window.controls = controls;
 window.scene = scene;
 
+loadMarkers();
+
 controls.addEventListener('change', debounce(() => onCameraMove(), 250));
 document.getElementById('locationTitle').addEventListener('click', () => {
     toggleHTMLVisibility(document.getElementById('locationslist'));
@@ -333,6 +384,15 @@ document.getElementById('locationTitle').addEventListener('click', () => {
 document.getElementById('depositsTitle').addEventListener('click', () => {
     toggleHTMLVisibility(document.getElementById('depositslist'));
     document.querySelector('#depositsTitle > .expander').style.transform = document.getElementById('depositslist').style.display != "none" ? "rotate(0deg)" : "rotate(180deg)";
+});
+document.getElementById('customMarkersTitle').addEventListener('click', () => {
+    toggleHTMLVisibility(document.getElementById('customMarkers'));
+    toggleHTMLVisibility(document.getElementById('customMarkersList'));
+    document.querySelector('#customMarkersTitle > .expander').style.transform = document.getElementById('customMarkers').style.display != "none" ? "rotate(0deg)" : "rotate(180deg)";
+});
+document.getElementById('coordinates').addEventListener('click', () => {
+    updateCoordinatesDisplay();
+    //copy to clipboard?
 });
 
 
@@ -357,28 +417,23 @@ function makeTextSprite( message, parameters )
         if ( parameters === undefined ) parameters = {};
         var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
         var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 18;
-        var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
+        var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 2;
         var borderColor = parameters.hasOwnProperty("borderColor") ?parameters["borderColor"] : { r:0, g:0, b:0, a:1.0 };
         var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?parameters["backgroundColor"] : { r:0, g:0, b:255, a:1.0 };
         var textColor = parameters.hasOwnProperty("textColor") ?parameters["textColor"] : { r:0, g:0, b:0, a:1.0 };
 
-        var canvas = document.createElement('canvas');
-        var context = canvas.getContext('2d');
-        context.font = "Bold " + fontsize + "px " + fontface;
-        var metrics = context.measureText( message );
-        var textWidth = metrics.width;
-
-        context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + 0 + ")";
-        context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
-        context.fillStyle = "rgba("+textColor.r+", "+textColor.g+", "+textColor.b+", 1.0)";
-        context.fillText( message, borderThickness, fontsize + borderThickness);
-
-        var texture = new THREE.Texture(canvas)
-        texture.needsUpdate = true;
-        var spriteMaterial = new THREE.SpriteMaterial( { map: texture, transparent: true, alphaMap: texture, alphaTest: 0.1 } );
-        spriteMaterial.needsUpdate = true;
-        var sprite = new THREE.Sprite( spriteMaterial );
-        sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
+        var sprite = new SpriteText(message,1);
+        sprite.material.depthWrite = false; //make sprite background transparent
+        sprite.color = "#"+ new THREE.Color(textColor.r, textColor.g, textColor.b).getHexString();
+        sprite.strokeColor = "#"+ new THREE.Color(borderColor.r, borderColor.g, borderColor.b).getHexString();
+        sprite.strokeWidth = borderThickness;
+        // sprite.borderThickness = borderThickness;
+        sprite.fontFace = fontface;
+        sprite.transparent = true;
+        sprite.backgroundColor = "rgba(220,220,220,0)";
+        // sprite.color.setRGB( textColor.r, textColor.g, textColor.b );
+        sprite.backgroundColor = false;
+        // sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
         return sprite;  
 }
 
@@ -396,6 +451,7 @@ function updateQueryString(camera, controls) {
     qparams.set('tx', Math.floor(controls.target.x));
     qparams.set('ty', Math.floor(controls.target.y));
     qparams.set('tz', Math.floor(controls.target.z));
+    qparams.set('zid', window.zoneid);
 
     window.history.replaceState({}, '', `${window.location.pathname}#\!${qparams.toString()}`);
 }
@@ -427,14 +483,18 @@ function locationListItemClick(location) {
     var diff = getVectorDifference(camera.position, controls.target);
     controls.enabled = false;
     var ease = "sine.inOut";
+    var objPosition = location.object.position;
+    if(location.object.type == "Group") {
+        objPosition = location.object.children[0].position;
+    }
     gsap.to( camera.position, 
         { 
-            x: location.object.position.x + diff.x, 
-            y: location.object.position.y + diff.y,
-            z: location.object.position.z + diff.z,
+            x: objPosition.x + diff.x, 
+            y: objPosition.y + diff.y,
+            z: objPosition.z + diff.z,
             ease: ease,
             onUpdate: () => {
-                camera.lookAt(location.object.position);
+                camera.lookAt(objPosition);
             },
             onComplete: () => {
 
@@ -443,9 +503,9 @@ function locationListItemClick(location) {
     );
     gsap.to( controls.target,
         {
-            x: location.object.position.x,
-            y: location.object.position.y,
-            z: location.object.position.z,
+            x: objPosition.x,
+            y: objPosition.y,
+            z: objPosition.z,
             ease: ease,
             onComplete: () => {
                 controls.enabled = true;
@@ -508,3 +568,240 @@ function toggleHTMLVisibility(element) {
 function toggleGroupVisibility(group) {
     group.visible = !group.visible;
 }
+
+function exportMarkers() {
+    const markerData = localStorage.getItem('markers');
+    document.getElementById('markerData').value = markerData;
+    document.getElementById('copyMarkerDataButton').click();
+}
+
+function importMarkers() {
+    const markerData = document.getElementById('markerData').value;
+    try {
+        var imported = JSON.parse(markerData);
+        markers.push(...imported);
+        // Add code to update the map with the new markers
+        console.log('Markers imported:', markers);
+        drawMarkers();
+        saveMarkers();
+    } catch (e) {
+        alert('Invalid marker data');
+    }
+}
+
+function saveMarkers() {
+    var toStore = markers.map((marker) => {
+        return {
+            id: marker.id,
+            x: marker.x,
+            y: marker.y,
+            z: marker.z,
+            label: marker.label,
+            color: marker.color
+        };
+    });
+    localStorage.setItem('markers', JSON.stringify(toStore));
+}
+
+function loadMarkers() {
+    const markerData = localStorage.getItem('markers');
+    if(markerData) {
+        try {
+            markers = JSON.parse(markerData);
+            if(markers[0] && markers[0].zid == undefined) {
+                // Migrate old marker data format to new format
+                markers = migrateMarkerData();
+            }
+            drawMarkers();
+        } catch (e) {
+            console.error('Error loading markers:', e);
+        }
+    }
+}
+
+function migrateMarkerData() {
+    // Check if the markers are stored in localStorage
+    const markerData = localStorage.getItem('markers');
+    if (markerData) {
+        try {
+            // Parse the existing marker data
+            const existingMarkers = JSON.parse(markerData);
+            // Migrate the markers to the new format
+            const migratedMarkers = existingMarkers.map(marker => ({
+                id: marker.id || Math.random().toString(36).substr(2, 9), // Generate a new ID if not present
+                zid: marker.zid || 0, // Default zone ID if not present
+                x: marker.x,
+                y: marker.y,
+                z: marker.z,
+                label: marker.label || 'Marker', // Default label if not present
+                color: marker.color || '#ff0000' // Default color if not present
+            }));
+            // Save the migrated markers back to localStorage
+            localStorage.setItem('markers', JSON.stringify(migratedMarkers));
+            return migratedMarkers;
+        } catch (e) {
+            console.error('Error migrating markers:', e);
+        }
+    }
+}
+
+document.getElementById('importMarkers').addEventListener('click', () => {
+    importMarkers();
+});
+
+document.getElementById('exportMarkers').addEventListener('click', () => {
+    exportMarkers();
+});
+
+document.getElementById('addMarkerButton').addEventListener('click', () => {
+    //round to 2 digits
+    const x = Math.round(controls.target.x * 100) / 100;
+    const y = Math.round(controls.target.y * 100) / 100;
+    const z = Math.round(controls.target.z * 100) / 100;
+    document.getElementById('createMarkerX').value = x;
+    document.getElementById('createMarkerY').value = y;
+    document.getElementById('createMarkerZ').value = z;
+
+    document.getElementById('createMarkerPopup').style.display = "block";
+});
+
+document.getElementById('createMarkerButton').addEventListener('click', () => {
+    const x = parseFloat(document.getElementById('createMarkerX').value);
+    const y = parseFloat(document.getElementById('createMarkerY').value);
+    const z = parseFloat(document.getElementById('createMarkerZ').value);
+    const label = document.getElementById('createMarkerName').value;
+    const color = document.getElementById('createMarkerColor').value;
+    document.getElementById('createMarkerPopup').style.display = "none";
+    addMarker(x, y, z, label, color);
+});
+
+// Example function to add a marker (to be expanded as needed)
+function addMarker(x, y, z, label, color) {
+    var id = Math.random().toString(36).substr(2, 9);
+    var zid = window.zoneid || 0; // Use the current zone ID
+    markers.push({ id, x, y, z, label, color, zid });
+    drawMarkers();
+    saveMarkers();
+}
+
+function drawMarkers() {
+    const extrudeSettings = {
+        steps: 2,
+        depth: 0.01,
+        bevelEnabled: true,
+        bevelThickness: 0.1,
+        bevelSize: 0.1,
+        bevelOffset: 0,
+        bevelSegments: 1
+    };
+    markers.forEach(marker => {
+        // Add code to visually place the marker on the map
+        if(marker.object == undefined && marker.zid == window.zoneid) {
+            var shape = new THREE.Shape();
+            shape.moveTo(-1, -0.5);
+            shape.bezierCurveTo(-1.75, -0.5, -1.75, 0.5, -1, 0.5);
+            // shape.lineTo(-1, 0.5);
+            shape.lineTo(0,0);
+            shape.lineTo(-1,-0.5);
+
+            const geo = new THREE.ExtrudeGeometry(shape,extrudeSettings);
+            geo.rotateZ((Math.PI/2)*3);
+            var color = colors.red;
+            if(marker.color != undefined) {
+                color = (new THREE.Color(marker.color))
+            }
+            // const obj = new THREE.Sprite(new THREE.SpriteMaterial({map: grey128Texture}));
+            // obj.geometry=new THREE.ShapeGeometry(shape);
+            // obj.geometry.rotateZ((Math.PI/2)*3);
+            
+            const obj = new THREE.Mesh(geo,new THREE.MeshLambertMaterial({color: color}));
+            obj.scale.set(0.5,0.5,0.5);
+
+            obj.position.set(marker.x, marker.y, marker.z); //y and z are swapped from game coordinates
+
+            // obj.scale.set(20,20,20);
+            //add text to marker
+            const text = makeTextSprite(marker.label, { fontsize: 24, textColor: { r:200, g:200, b:125, a:0.8 } });
+            text.position.set((obj.position.x), (obj.position.y) + 1.5, (obj.position.z));
+            var group = new THREE.Group();
+            group.name = marker.label;
+            group.add(obj);
+            group.add(text);
+            marker.object = group;
+            scene.add( group );
+        }
+        if(document.getElementById('marker-' + marker.id) == null && marker.zid == window.zoneid) {
+            // Add marker to the list
+            const li = document.createElement('li');
+            li.id = 'marker-' + marker.id;
+            li.innerHTML = `<a>${marker.label}</a>`;
+            li.addEventListener('click', () => {
+                locationListItemClick(marker);
+            });
+
+            const btn = document.createElement('img');
+            btn.classList.add('eye');
+            btn.src = "images/eye.png";
+            li.appendChild(btn);
+            document.getElementById('customMarkersList').appendChild(li);
+            btn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                toggleGroupVisibility(marker.object);
+                btn.classList.toggle('eyeinverted');
+            });
+        }
+    });
+}
+
+document.getElementById('copyMarkerDataButton').addEventListener('click', () => {
+    const markerDataInput = document.getElementById('markerData');
+    markerDataInput.select();
+    markerDataInput.setSelectionRange(0, 99999); // For mobile devices
+    navigator.clipboard.writeText(markerDataInput.value)
+        .then(() => {
+            const btn = document.getElementById('copyMarkerDataButton');
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1200);
+        })
+        .catch(err => {
+            alert('Failed to copy marker data');
+        });
+});
+
+document.getElementById('zonePicker').addEventListener('change', (event) => {
+    const selectedZoneId = parseInt(event.target.value);
+    if (selectedZoneId >= 0 && selectedZoneId < data.zones.length) {
+        window.zoneid = selectedZoneId;
+        scene.clear();
+        document.getElementById('locationslist').innerHTML = '';
+        document.getElementById('depositslist').innerHTML = '';
+        document.getElementById('customMarkersList').innerHTML = '';
+        
+        setupGlobalLights();
+        scene.add( axesHelper )
+        loadLocations(selectedZoneId);
+        loadDeposits(selectedZoneId);
+        loadMarkers();
+        
+        controls.target.set(0, 0, 0); // Reset target position
+        updateQueryString(camera, controls);
+        if(data.zones[selectedZoneId].notice != undefined) {
+            // Check if the notice has already been shown
+            const noticeShown = window.sessionStorage.getItem('noticeShown-' + selectedZoneId);
+            if (noticeShown) {
+                return; // Notice already shown, do not display again
+            }
+            document.getElementById('noticeContent').innerHTML = data.zones[selectedZoneId].notice;
+            document.getElementById('noticePopup').style.display = "block";
+            window.sessionStorage.setItem('noticeShown-'+selectedZoneId, 'true');
+        }
+    } else {
+        console.error("Invalid zone ID:", selectedZoneId);
+    }
+});
