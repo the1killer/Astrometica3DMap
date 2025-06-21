@@ -597,7 +597,8 @@ function saveMarkers() {
             y: marker.y,
             z: marker.z,
             label: marker.label,
-            color: marker.color
+            color: marker.color,
+            zid: marker.zid || window.zoneid, // Use the current zone ID if not set
         };
     });
     localStorage.setItem('markers', JSON.stringify(toStore));
