@@ -1,644 +1,710 @@
 {
     "zones": [
-    {   
-        "id": 0,
-        "name": "Theta-9 Asteroid Field", 
-        "locations": [
-            {
-                "name": "Escape Pod",
-                "type": "Pod",
-                "Signal": "",
-                "x": -268460,
-                "y": 8490,
-                "z": 35212,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "orange",
-                "shape": "box"
-            },
-            {
-                "name": "1st Pod",
-                "type": "Pod",
-                "Signal": "",
-                "x": -266074,
-                "y": -1349,
-                "z": 35807,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "gray",
-                "shape": "box"
-            },
-            {
-                "name": "Mox Island",
-                "type": "Dome",
-                "signal": "TRUE",
-                "x": -221807,
-                "y": -17320,
-                "z": 32750,
-                "scannables": "Circular Room, wall storage, desk, smelter, battery charger, habitat builder, upgrade station",
-                "logs": "Entry ID: 00831, Entry ID: 00832",
-                "crates": "Fabric, mineral",
-                "color": "blue",
-                "shape": "sphere"
-            },
-            {
-                "name": "Emergency Pod",
-                "type": "Pod",
-                "Signal": "TRUE",
-                "x": -246334,
-                "y": -25590,
-                "z": 30957,
-                "scannables": "Skipper, Vehicle Station",
-                "logs": "Entry ID: 00827",
-                "crates": "Electronic x2, Mineral x4",
-                "color": "gray",
-                "shape": "box"
-            },
-            {
-                "name": "Old Hub Station",
-                "type": "Habitat",
-                "Signal": "TRUE",
-                "x": -258905,
-                "y": -95098,
-                "z": 33870,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "cyan",
-                "shape": "cylinder",
-                "rotate": {
-                    "x": 2
-                }
-            },
-            {
-                "name": "Prologue Pod",
-                "type": "Pod",
-                "Signal": "FALSE",
-                "x": -244970,
-                "y": -97301,
-                "z": 38325,
-                "scannables": "",
-                "logs": "",
-                "crates": "Fabric x4",
-                "color": "gray",
-                "shape": "box"
-            },
-            {
-                "name": "Matthew Pod",
-                "type": "Pod",
-                "Signal": "FALSE",
-                "x": -292641,
-                "y": -107791,
-                "z": 42949,
-                "scannables": "Engineer Suit",
-                "logs": "",
-                "crates": "",
-                "color": "gray",
-                "shape": "box"
-            },
-            {
-                "name": "Theta-9 Station",
-                "type": "Habitat",
-                "Signal": "TRUE",
-                "x": -292933,
-                "y": -111186,
-                "z": 44956,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "cyan",
-                "shape": "cylinder",
-                "rotate": {
-                    "x": 2
+        {   
+            "id": 0,
+            "name": "Theta-9 Asteroid Field", 
+            "locations": [
+                {
+                    "name": "Escape Pod",
+                    "type": "Pod",
+                    "Signal": "",
+                    "x": -268460,
+                    "y": 8490,
+                    "z": 35212,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "orange",
+                    "shape": "box"
                 },
-                "children":[
-                    {
-                        "type": "Habitat",
-                        "shape":"cylinder",
-                        "color":"cyan",
-                        "x": -294000,
-                        "y": -112600,
-                        "z": 44956,
-                        "scale": {
-                            "x": 1,
-                            "y": 4,
-                            "z": 1
-                        },
-                        "rotate": {
-                            "x": 2,
-                            "z": 2
+                {
+                    "name": "1st Pod",
+                    "type": "Pod",
+                    "Signal": "",
+                    "x": -266074,
+                    "y": -1349,
+                    "z": 35807,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "gray",
+                    "shape": "box"
+                },
+                {
+                    "name": "Mox Island",
+                    "type": "Dome",
+                    "signal": "TRUE",
+                    "x": -221807,
+                    "y": -17320,
+                    "z": 32750,
+                    "scannables": "Circular Room, wall storage, desk, smelter, battery charger, habitat builder, upgrade station",
+                    "logs": "Entry ID: 00831, Entry ID: 00832",
+                    "crates": "Fabric, mineral",
+                    "color": "blue",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Emergency Pod",
+                    "type": "Pod",
+                    "Signal": "TRUE",
+                    "x": -246334,
+                    "y": -25590,
+                    "z": 30957,
+                    "scannables": "Skipper, Vehicle Station",
+                    "logs": "Entry ID: 00827",
+                    "crates": "Electronic x2, Mineral x4",
+                    "color": "gray",
+                    "shape": "box"
+                },
+                {
+                    "name": "Old Hub Station",
+                    "type": "Habitat",
+                    "Signal": "TRUE",
+                    "x": -258905,
+                    "y": -95098,
+                    "z": 33870,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "cyan",
+                    "shape": "cylinder",
+                    "rotate": {
+                        "x": 2
+                    }
+                },
+                {
+                    "name": "Prologue Pod",
+                    "type": "Pod",
+                    "Signal": "FALSE",
+                    "x": -244970,
+                    "y": -97301,
+                    "z": 38325,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "Fabric x4",
+                    "color": "gray",
+                    "shape": "box"
+                },
+                {
+                    "name": "Matthew Pod",
+                    "type": "Pod",
+                    "Signal": "FALSE",
+                    "x": -292641,
+                    "y": -107791,
+                    "z": 42949,
+                    "scannables": "Engineer Suit",
+                    "logs": "",
+                    "crates": "",
+                    "color": "gray",
+                    "shape": "box"
+                },
+                {
+                    "name": "Theta-9 Station",
+                    "type": "Habitat",
+                    "Signal": "TRUE",
+                    "x": -292933,
+                    "y": -111186,
+                    "z": 44956,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "cyan",
+                    "shape": "cylinder",
+                    "rotate": {
+                        "x": 2
+                    },
+                    "children":[
+                        {
+                            "type": "Habitat",
+                            "shape":"cylinder",
+                            "color":"cyan",
+                            "x": -294000,
+                            "y": -112600,
+                            "z": 44956,
+                            "scale": {
+                                "x": 1,
+                                "y": 4,
+                                "z": 1
+                            },
+                            "rotate": {
+                                "x": 2,
+                                "z": 2
+                            }
                         }
+                    ]
+                },
+                {
+                    "name": "Vehicle Manufacturer Cave",
+                    "type": "Cave",
+                    "Signal": "TRUE",
+                    "x": -260395,
+                    "y": -122283,
+                    "z": 34958,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "red",
+                    "shape": "cylinder",
+                    "rotate": {
+                        "x": 2
+                    },
+                    "children":[
+                        {
+                            "type": "Cave",
+                            "shape":"box",
+                            "color":"red",
+                            "x": -260395,
+                            "y": -127283,
+                            "z": 34958,
+                            "scale": {
+                                "x": 8,
+                                "y": 5,
+                                "z": 8
+                            },
+                            "transparent": true
+                        },
+                        {
+                            "type": "Cave",
+                            "shape":"box",
+                            "color":"red",
+                            "x": -262000,
+                            "y": -129000,
+                            "z": 28000,
+                            "scale": {
+                                "x": 3,
+                                "y": 3,
+                                "z": 5
+                            },
+                            "transparent": true
+                        },
+                        {
+                            "type": "Cave",
+                            "shape":"box",
+                            "color":"red",
+                            "x": -260395,
+                            "y": -135200,
+                            "z": 33000,
+                            "scale": {
+                                "x": 15,
+                                "y": 8,
+                                "z": 8
+                            },
+                            "transparent": true
+                        },
+                        {
+                            "type": "Cave",
+                            "shape":"box",
+                            "color":"red",
+                            "x": -270000,
+                            "y": -133000,
+                            "z": 33000,
+                            "scale": {
+                                "x": 5,
+                                "y": 3,
+                                "z": 3
+                            },
+                            "transparent": true
+                        },
+                        {
+                            "type": "Cave",
+                            "shape":"box",
+                            "color":"red",
+                            "x": -270000,
+                            "y": -137500,
+                            "z": 33000,
+                            "scale": {
+                                "x": 5,
+                                "y": 3,
+                                "z": 3
+                            },
+                            "transparent": true
+                        },
+                        {
+                            "type": "Cave",
+                            "shape":"box",
+                            "color":"red",
+                            "x": -279000,
+                            "y": -135200,
+                            "z": 33000,
+                            "scale": {
+                                "x": 13,
+                                "y": 8,
+                                "z": 8
+                            },
+                            "transparent": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Vehicle Docking Station",
+                    "type": "Derelict",
+                    "Signal": "FALSE",
+                    "x": -279239,
+                    "y": -136033,
+                    "z": 32471,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "red",
+                    "shape": "cylinder",
+                    "rotate": {
+                        "x": 2,
+                        "z": 2
+                    },
+                    "children":[
+                        {
+                            "type": "Derelict",
+                            "shape":"cylinder",
+                            "color":"red",
+                            "x": -280500,
+                            "y": -136000,
+                            "z": 32000,
+                            "rotate": {
+                                "x": 1,
+                                "z": 1
+                            }
+                        },
+                        {
+                            "type": "Derelict",
+                            "shape":"cylinder",
+                            "color":"red",
+                            "x": -280500,
+                            "y": -135000,
+                            "z": 30750,
+                            "rotate": {
+                                "x": 2,
+                                "z": 1
+                            },
+                            "scale": {
+                                "x": 1,
+                                "y": 1.5,
+                                "z": 1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Vertical Station",
+                    "type": "Derelict",
+                    "Signal": "TRUE",
+                    "x": -169869,
+                    "y": -17462,
+                    "z": 19942,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "red",
+                    "shape": "cylinder",
+                    "rotate": {
+                        "x": 90
+                    }
+                },
+                {
+                    "name": "Iridum Outpost",
+                    "type": "Derelict",
+                    "Signal": "FALSE",
+                    "x": -79516,
+                    "y": -117490,
+                    "z": 848,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "red",
+                    "shape": "cylinder",
+                    "rotate": {
+                        "x": 2
+                    },
+                    "children":[
+                        {
+                            "type": "Derelict",
+                            "shape":"cylinder",
+                            "color":"red",
+                            "x": -78000,
+                            "y": -119000,
+                            "z": 848,
+                            "rotate": {
+                                "x": 2,
+                                "z": 2
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Sulfur Dome",
+                    "type": "Dome",
+                    "signal": "FALSE",
+                    "x": 5092,
+                    "y": 7011,
+                    "z": 5724,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "yellow",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Theta-9 Gate",
+                    "type": "Gate",
+                    "signal": "FALSE",
+                    "x": -3914,
+                    "y": -242905,
+                    "z": -15610,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "cyan",
+                    "shape": "torus",
+                    "rotate": {
+                        "y": 1.75
+                    }
+                },
+                {
+                    "name": "Research Outpost",
+                    "type": "Dome",
+                    "signal": "TRUE",
+                    "x": -81901,
+                    "y": -225590,
+                    "z": -24229,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "blue",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Research Ruins",
+                    "type": "Dome",
+                    "signal": "FALSE",
+                    "x": -111502,
+                    "y": -206754,
+                    "z": -25053,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "blue",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Hydroponic Dome",
+                    "type": "Dome",
+                    "signal": "FALSE",
+                    "x": -209969,
+                    "y": -141534,
+                    "z": -412,
+                    "scannables": "hydroponic planter",
+                    "logs": "",
+                    "crates": "",
+                    "color": "blue",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Nickel Dome",
+                    "type": "Dome",
+                    "signal": "FALSE",
+                    "x": -290546,
+                    "y": -160639,
+                    "z": -39557,
+                    "scannables": "hydroponic planter",
+                    "logs": "",
+                    "crates": "",
+                    "color": "blue",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Cargo Container Dome",
+                    "type": "Dome",
+                    "signal": "FALSE",
+                    "x": -259789,
+                    "y": -142473,
+                    "z": 42324,
+                    "scannables": "hydroponic planter",
+                    "logs": "",
+                    "crates": "",
+                    "color": "blue",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Hook Tool Dome",
+                    "type": "Dome",
+                    "signal": "FALSE",
+                    "x": -154541,
+                    "y": 2372,
+                    "z": 22267,
+                    "scannables": "hook tool, smelter",
+                    "logs": "",
+                    "crates": "",
+                    "color": "blue",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Hook Tool Cargo Dome",
+                    "type": "Dome",
+                    "signal": "FALSE",
+                    "x": -161748,
+                    "y": 999,
+                    "z": 20470,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "blue",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Toxic Cloud",
+                    "type": "Cloud",
+                    "signal": "FALSE",
+                    "x": -72947,
+                    "y": -125135,
+                    "z": -10069,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "green",
+                    "shape": "capsule",
+                    "scale":{
+                        "x": 15,
+                        "y": 15,
+                        "z": 15
+                    }
+                },{
+                    "name": "Large Toxic Cloud",
+                    "type": "Cloud",
+                    "signal": "FALSE",
+                    "x": -202084,
+                    "y": 359294,
+                    "z": -16133,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "green",
+                    "shape": "capsule",
+                    "scale":{
+                        "x": 50,
+                        "y": 50,
+                        "z": 50
+                    }
+                },
+                {
+                    "name": "Green Planet",
+                    "type": "Planet",
+                    "signal": "FALSE",
+                    "x": 4206903,
+                    "y": 8358226,
+                    "z": 413425,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "green",
+                    "shape": "sphere",
+                    "scale":{
+                        "x": 50,
+                        "y": 50,
+                        "z": 50
+                    }
+                }
+            ],
+            "deposits": {
+                "iron":[
+                    {
+                        "id": "I1",
+                        "x": -265614,
+                        "y": -14161,
+                        "z": 34669
+                    },
+                    {
+                        "id": "I2",
+                        "x": -201526,
+                        "y": 10925,
+                        "z": 21574
+                    },
+                    {
+                        "id": "I3",
+                        "x": -205140,
+                        "y": -110055,
+                        "z": 8989
+                    },
+                    {
+                        "id": "I4",
+                        "x": -213412,
+                        "y": -131344,
+                        "z": 4228
+                    },
+                    {
+                        "id": "I5",
+                        "x": -218582,
+                        "y": -145180,
+                        "z": 5984
+                    },
+                    {
+                        "id": "I6",
+                        "x": -107081,
+                        "y": -224404,
+                        "z": -22231,
+                        "notes":"Unmineable"
+                    },
+                    {
+                        "id": "I7",
+                        "x": -228091,
+                        "y": -132840,
+                        "z": 21544
+                    },
+                    {
+                        "id": "I8",
+                        "x": -255200,
+                        "y": -94851,
+                        "z": 45343
+                    },
+                    {
+                        "id": "I9",
+                        "x": -260484,
+                        "y": -87925,
+                        "z": 44247
+                    },
+                    {
+                        "id": "I10",
+                        "x": -132345,
+                        "y": -98833,
+                        "z": 10725
+                    },
+                    {
+                        "id": "I11",
+                        "x": -127228,
+                        "y": -87047,
+                        "z": 9398
+                    }
+                ],
+                "copper":[
+                    {
+                        "id": "C1",
+                        "x": -167394,
+                        "y": -13228,
+                        "z": -20611
+                    },
+                    {
+                        "id": "C2",
+                        "x": -163040,
+                        "y": -88953,
+                        "z": 4185
+                    },
+                    {
+                        "id": "C3",
+                        "x": -234205,
+                        "y": -139011,
+                        "z": -14002
+                    },
+                    {
+                        "id": "C4",
+                        "x": -14692,
+                        "y": 9456,
+                        "z": 5678
+                    },
+                    {
+                        "id": "C5",
+                        "x": -195265,
+                        "y": -99151,
+                        "z": -25530
+                    }
+                ],
+                "gold":[
+                    {
+                        "id": "G1",
+                        "x": -141981,
+                        "y": -96472,
+                        "z": -944
+                    }
+                ],
+                "quartz":[
+                    {
+                        "id": "Q1",
+                        "x": -150634,
+                        "y": 13741,
+                        "z": 23315
+                    },
+                    {
+                        "id": "Q2",
+                        "x": -266689,
+                        "y": -82232,
+                        "z": 24447
+                    },
+                    {
+                        "id": "Q3",
+                        "x": -308071,
+                        "y": -158100,
+                        "z": 41094
+                    },
+                    {
+                        "id": "Q4",
+                        "x": -35817,
+                        "y": -160711,
+                        "z": -23278
                     }
                 ]
-            },
-            {
-                "name": "Vehicle Manufacturer Cave",
-                "type": "Cave",
-                "Signal": "TRUE",
-                "x": -260395,
-                "y": -122283,
-                "z": 34958,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "red",
-                "shape": "cylinder",
-                "rotate": {
-                    "x": 2
-                },
-                "children":[
-                    {
-                        "type": "Cave",
-                        "shape":"box",
-                        "color":"red",
-                        "x": -260395,
-                        "y": -127283,
-                        "z": 34958,
-                        "scale": {
-                            "x": 8,
-                            "y": 5,
-                            "z": 8
-                        },
-                        "transparent": true
-                    },
-                    {
-                        "type": "Cave",
-                        "shape":"box",
-                        "color":"red",
-                        "x": -262000,
-                        "y": -129000,
-                        "z": 28000,
-                        "scale": {
-                            "x": 3,
-                            "y": 3,
-                            "z": 5
-                        },
-                        "transparent": true
-                    },
-                    {
-                        "type": "Cave",
-                        "shape":"box",
-                        "color":"red",
-                        "x": -260395,
-                        "y": -135200,
-                        "z": 33000,
-                        "scale": {
-                            "x": 15,
-                            "y": 8,
-                            "z": 8
-                        },
-                        "transparent": true
-                    },
-                    {
-                        "type": "Cave",
-                        "shape":"box",
-                        "color":"red",
-                        "x": -270000,
-                        "y": -133000,
-                        "z": 33000,
-                        "scale": {
-                            "x": 5,
-                            "y": 3,
-                            "z": 3
-                        },
-                        "transparent": true
-                    },
-                    {
-                        "type": "Cave",
-                        "shape":"box",
-                        "color":"red",
-                        "x": -270000,
-                        "y": -137500,
-                        "z": 33000,
-                        "scale": {
-                            "x": 5,
-                            "y": 3,
-                            "z": 3
-                        },
-                        "transparent": true
-                    },
-                    {
-                        "type": "Cave",
-                        "shape":"box",
-                        "color":"red",
-                        "x": -279000,
-                        "y": -135200,
-                        "z": 33000,
-                        "scale": {
-                            "x": 13,
-                            "y": 8,
-                            "z": 8
-                        },
-                        "transparent": true
-                    }
-                ]
-            },
-            {
-                "name": "Vehicle Docking Station",
-                "type": "Derelict",
-                "Signal": "FALSE",
-                "x": -279239,
-                "y": -136033,
-                "z": 32471,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "red",
-                "shape": "cylinder",
-                "rotate": {
-                    "x": 2,
-                    "z": 2
-                },
-                "children":[
-                    {
-                        "type": "Derelict",
-                        "shape":"cylinder",
-                        "color":"red",
-                        "x": -280500,
-                        "y": -136000,
-                        "z": 32000,
-                        "rotate": {
-                            "x": 1,
-                            "z": 1
-                        }
-                    },
-                    {
-                        "type": "Derelict",
-                        "shape":"cylinder",
-                        "color":"red",
-                        "x": -280500,
-                        "y": -135000,
-                        "z": 30750,
-                        "rotate": {
-                            "x": 2,
-                            "z": 1
-                        },
-                        "scale": {
-                            "x": 1,
-                            "y": 1.5,
-                            "z": 1
-                        }
-                    }
-                ]
-            },
-            {
-                "name": "Vertical Station",
-                "type": "Derelict",
-                "Signal": "TRUE",
-                "x": -169869,
-                "y": -17462,
-                "z": 19942,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "red",
-                "shape": "cylinder",
-                "rotate": {
-                    "x": 90
-                }
-            },
-            {
-                "name": "Iridum Outpost",
-                "type": "Derelict",
-                "Signal": "FALSE",
-                "x": -79516,
-                "y": -117490,
-                "z": 848,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "red",
-                "shape": "cylinder",
-                "rotate": {
-                    "x": 2
-                },
-                "children":[
-                    {
-                        "type": "Derelict",
-                        "shape":"cylinder",
-                        "color":"red",
-                        "x": -78000,
-                        "y": -119000,
-                        "z": 848,
-                        "rotate": {
-                            "x": 2,
-                            "z": 2
-                        }
-                    }
-                ]
-            },
-            {
-                "name": "Sulfur Dome",
-                "type": "Dome",
-                "signal": "FALSE",
-                "x": 5092,
-                "y": 7011,
-                "z": 5724,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "yellow",
-                "shape": "sphere"
-            },
-            {
-                "name": "Theta-9 Gate",
-                "type": "Gate",
-                "signal": "FALSE",
-                "x": -3914,
-                "y": -242905,
-                "z": -15610,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "cyan",
-                "shape": "torus",
-                "rotate": {
-                    "y": 1.75
-                }
-            },
-            {
-                "name": "Research Outpost",
-                "type": "Dome",
-                "signal": "TRUE",
-                "x": -81901,
-                "y": -225590,
-                "z": -24229,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "blue",
-                "shape": "sphere"
-            },
-            {
-                "name": "Research Ruins",
-                "type": "Dome",
-                "signal": "FALSE",
-                "x": -111502,
-                "y": -206754,
-                "z": -25053,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "blue",
-                "shape": "sphere"
-            },
-            {
-                "name": "Hydroponic Dome",
-                "type": "Dome",
-                "signal": "FALSE",
-                "x": -209969,
-                "y": -141534,
-                "z": -412,
-                "scannables": "hydroponic planter",
-                "logs": "",
-                "crates": "",
-                "color": "blue",
-                "shape": "sphere"
-            },
-            {
-                "name": "Nickel Dome",
-                "type": "Dome",
-                "signal": "FALSE",
-                "x": -290546,
-                "y": -160639,
-                "z": -39557,
-                "scannables": "hydroponic planter",
-                "logs": "",
-                "crates": "",
-                "color": "blue",
-                "shape": "sphere"
-            },
-            {
-                "name": "Cargo Container Dome",
-                "type": "Dome",
-                "signal": "FALSE",
-                "x": -259789,
-                "y": -142473,
-                "z": 42324,
-                "scannables": "hydroponic planter",
-                "logs": "",
-                "crates": "",
-                "color": "blue",
-                "shape": "sphere"
-            },
-            {
-                "name": "Hook Tool Dome",
-                "type": "Dome",
-                "signal": "FALSE",
-                "x": -154541,
-                "y": 2372,
-                "z": 22267,
-                "scannables": "hook tool, smelter",
-                "logs": "",
-                "crates": "",
-                "color": "blue",
-                "shape": "sphere"
-            },
-            {
-                "name": "Hook Tool Cargo Dome",
-                "type": "Dome",
-                "signal": "FALSE",
-                "x": -161748,
-                "y": 999,
-                "z": 20470,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "blue",
-                "shape": "sphere"
-            },
-            {
-                "name": "Toxic Cloud",
-                "type": "Cloud",
-                "signal": "FALSE",
-                "x": -72947,
-                "y": -125135,
-                "z": -10069,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "green",
-                "shape": "capsule",
-                "scale":{
-                    "x": 15,
-                    "y": 15,
-                    "z": 15
-                }
-            },{
-                "name": "Large Toxic Cloud",
-                "type": "Cloud",
-                "signal": "FALSE",
-                "x": -202084,
-                "y": 359294,
-                "z": -16133,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "green",
-                "shape": "capsule",
-                "scale":{
-                    "x": 50,
-                    "y": 50,
-                    "z": 50
-                }
-            },
-            {
-                "name": "Green Planet",
-                "type": "Planet",
-                "signal": "FALSE",
-                "x": 4206903,
-                "y": 8358226,
-                "z": 413425,
-                "scannables": "",
-                "logs": "",
-                "crates": "",
-                "color": "green",
-                "shape": "sphere",
-                "scale":{
-                    "x": 50,
-                    "y": 50,
-                    "z": 50
-                }
             }
-        ],
-        "deposits": {
-            "iron":[
+        },
+        {
+            "id": "1",
+            "name": "Theta-12 Asteroid Field",
+            "notice": "This zone is incomplete.",
+            "locations": [
                 {
-                    "id": "I1",
-                    "x": -265614,
-                    "y": -14161,
-                    "z": 34669
-                },
-                {
-                    "id": "I2",
-                    "x": -201526,
-                    "y": 10925,
-                    "z": 21574
-                },
-                {
-                    "id": "I3",
-                    "x": -205140,
-                    "y": -110055,
-                    "z": 8989
-                },
-                {
-                    "id": "I4",
-                    "x": -213412,
-                    "y": -131344,
-                    "z": 4228
-                },
-                {
-                    "id": "I5",
-                    "x": -218582,
-                    "y": -145180,
-                    "z": 5984
-                },
-                {
-                    "id": "I6",
-                    "x": -107081,
-                    "y": -224404,
-                    "z": -22231,
-                    "notes":"Unmineable"
-                },
-                {
-                    "id": "I7",
-                    "x": -228091,
-                    "y": -132840,
-                    "z": 21544
-                },
-                {
-                    "id": "I8",
-                    "x": -255200,
-                    "y": -94851,
-                    "z": 45343
-                },
-                {
-                    "id": "I9",
-                    "x": -260484,
-                    "y": -87925,
-                    "z": 44247
-                },
-                {
-                    "id": "I10",
-                    "x": -132345,
-                    "y": -98833,
-                    "z": 10725
-                },
-                {
-                    "id": "I11",
-                    "x": -127228,
-                    "y": -87047,
-                    "z": 9398
+                    "name": "Theta-12 Gate",
+                    "type": "Gate",
+                    "signal": "FALSE",
+                    "x": -11020.874,
+                    "y": 6495.284,
+                    "z": 802.248,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "cyan",
+                    "shape": "torus",
+                    "rotate": {
+                        "y": 1.75
+                    }
                 }
             ],
-            "copper":[
+            "deposits": {
+                    "blue crystal": [
+                        {
+                            "id": "BC1",
+                            "x": -60812.028,
+                            "y": -73408.155,
+                            "z": 5078.181
+                        }
+                    ],
+                    "quartz": [
+                        {
+                            "id": "Q1",
+                            "x": -161111.789, 
+                            "y": -219707.732,
+                            "z": -29252.746
+                        }
+                    ]
+                }
+        },
+        {
+            "id": "2",
+            "name": "Theta-145 Asteroid Field",
+            "notice": "This zone is incomplete.",
+            "locations": [
                 {
-                    "id": "C1",
-                    "x": -167394,
-                    "y": -13228,
-                    "z": -20611
-                },
-                {
-                    "id": "C2",
-                    "x": -163040,
-                    "y": -88953,
-                    "z": 4185
-                },
-                {
-                    "id": "C3",
-                    "x": -234205,
-                    "y": -139011,
-                    "z": -14002
-                },
-                {
-                    "id": "C4",
-                    "x": -14692,
-                    "y": 9456,
-                    "z": 5678
-                },
-                {
-                    "id": "C5",
-                    "x": -195265,
-                    "y": -99151,
-                    "z": -25530
+                    "name": "Theta-145 Gate",
+                    "type": "Gate",
+                    "signal": "FALSE",
+                    "x": -11020.874,
+                    "y": 6495.284,
+                    "z": 802.248,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "color": "cyan",
+                    "shape": "torus",
+                    "rotate": {
+                        "y": 1.75
+                    }
                 }
             ],
-            "gold":[
-                {
-                    "id": "G1",
-                    "x": -141981,
-                    "y": -96472,
-                    "z": -944
-                }
-            ],
-            "quartz":[
-                {
-                    "id": "Q1",
-                    "x": -150634,
-                    "y": 13741,
-                    "z": 23315
-                },
-                {
-                    "id": "Q2",
-                    "x": -266689,
-                    "y": -82232,
-                    "z": 24447
-                },
-                {
-                    "id": "Q3",
-                    "x": -308071,
-                    "y": -158100,
-                    "z": 41094
-                },
-                {
-                    "id": "Q4",
-                    "x": -35817,
-                    "y": -160711,
-                    "z": -23278
-                }
-            ]
-        }}
+            "deposits" : {}
+        }
     ]
 }

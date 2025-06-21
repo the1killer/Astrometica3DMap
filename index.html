@@ -48,6 +48,11 @@
             rel="noopener">The1Killer</a></div>
     <div id="leftpanel" class="noselect, astro-panel">
         <div id="leftpanelContent">
+            <select id="zonePicker">
+                <option value="0">Theta-9</option>
+                <option value="1">Theta-12</option>
+                <option value="2">Theta-145</option>
+            </select>
             <div id="locationTitle">Locations <div class="expander">&#9660;</div>
             </div>
             <ul id="locationslist"></ul>
@@ -120,6 +125,16 @@
             </div>
         </div>
     </div>
+    <div id="noticePopup" class="popupContainer" style="display: none;">
+        <div class="astro-panel">
+            <div id="noticeClose" class="popupClose"
+                onclick="document.getElementById('noticePopup').style.display='none';">X</div>
+            <div id="noticeTitle"><strong>Notice</strong></div>
+            <div id="noticeContent" style="padding: 10px;">
+                <!-- <p>Markers are saved in your browser's local storage. If you clear your browser's local storage, the
+                    markers will be lost.</p> -->
+            </div>
+        </div>
     <script type="module" src="main.js"></script>
 </body>
 

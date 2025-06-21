@@ -158,7 +158,20 @@ a {
 #createMarkerTable>tbody>tr>td:first-child {
     text-align: right;
 }
-/* end region normal CSS */
+#zonePicker {
+    float:right;
+    margin-top: 1px;
+}
+#zonePicker:focus {
+    
+}
+
+input, select {
+    background-color: black;
+    border: 1px solid var(--astro-content-border-color);
+    color: var(--astro-primary);
+    padding: 2px;
+}
 
 /*//////////////////////////////////////////
 Astro Border

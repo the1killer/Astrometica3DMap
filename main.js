@@ -22,6 +22,7 @@ controls.mouseButtons = {
     MIDDLE: THREE.MOUSE.DOLLY,
     RIGHT: THREE.MOUSE.ROTATE
 };
+
 const axesHelper = new THREE.AxesHelper( 1.5 );
 scene.add( axesHelper )
 // const controls = new FirstPersonControls( camera, renderer.domElement );
@@ -68,17 +69,29 @@ const colors = {
 
 scene.background = new THREE.Color(0x101010);
 
-const light = new THREE.DirectionalLight( colors.white, 4 );
-    light.position.set( 450, 300, -100 ).normalize();
-    scene.add( light );
+function setupGlobalLights() {
+    const ambientLight = new THREE.AmbientLight( colors.white, 0.5 );
+    scene.add( ambientLight );
 
-const light2 = new THREE.DirectionalLight( colors.white, 1 );
-light2.position.set( -2000, -100, -2000 ).normalize();
-scene.add( light2 );
+    const directionalLight = new THREE.DirectionalLight( colors.white, 1 );
+    directionalLight.position.set( 0, 1, 0 ).normalize();
+    scene.add( directionalLight );
 
-const light3 = new THREE.DirectionalLight( colors.white, 1 );
-light2.position.set( -200, 0, 150 ).normalize();
-scene.add( light2 );
+    const hemisphereLight = new THREE.HemisphereLight( colors.white, colors.black, 0.5 );
+    scene.add( hemisphereLight );
+}
+setupGlobalLights();
+// const light = new THREE.DirectionalLight( colors.white, 4 );
+//     light.position.set( 450, 300, -100 ).normalize();
+//     scene.add( light );
+
+// const light2 = new THREE.DirectionalLight( colors.white, 1 );
+// light2.position.set( -2000, -100, -2000 ).normalize();
+// scene.add( light2 );
+
+// const light3 = new THREE.DirectionalLight( colors.white, 1 );
+// light2.position.set( -200, 0, 150 ).normalize();
+// scene.add( light2 );
 
 
 const cloudTexture = new THREE.TextureLoader().load('textures/toxiccloud.png', (texture) => {
@@ -261,18 +274,21 @@ if(document.location.hash) {
         console.error("Invalid zone ID in URL hash:", zid);
         zid = 0; // Default to the first zone if invalid
     }
+    if(zid > 0 && zid < data.zones.length) {
+        document.getElementById('zonePicker').value = zid;
+    }
 }
 
 loadLocations(zid);
 
 window.zoneid = zid;
 
-function loadDeposits() {
+function loadDeposits(zoneid = 0) {
     const geo = new THREE.IcosahedronGeometry(1, 0);
     const depositList = document.getElementById('depositslist');        
 
-    Object.keys(data.zones[zid].deposits).forEach((dcategory, cindex) => {
-        data.zones[zid].deposits[dcategory].forEach((deposit, index) => {
+    Object.keys(data.zones[zoneid].deposits).forEach((dcategory, cindex) => {
+        data.zones[zoneid].deposits[dcategory].forEach((deposit, index) => {
             // const obj = gltf.scene.clone();
             const obj = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: colors[dcategory] }));
             obj.position.set(deposit.x/1000, deposit.z/1000, deposit.y/1000); //y and z are swapped from game coordinates
@@ -303,15 +319,15 @@ function loadDeposits() {
 
         });
         const li = document.createElement('li');
-        li.innerHTML = `<a>${ucfirst(dcategory)} (${data.zones[zid].deposits[dcategory].length})</a>`;
+        li.innerHTML = `<a>${ucfirst(dcategory)} (${data.zones[zoneid].deposits[dcategory].length})</a>`;
         li.addEventListener('click', () => {
             var idx = 0;
             if(li.dataset.idx != undefined) {
                 idx = parseInt(li.dataset.idx);
             }
-            depositListItemClick(data.zones[zid].deposits[dcategory][idx]);
+            depositListItemClick(data.zones[zoneid].deposits[dcategory][idx]);
             idx+=1;
-            if(idx >= data.zones[zid].deposits[dcategory].length) {
+            if(idx >= data.zones[zoneid].deposits[dcategory].length) {
                 idx = 0;
             }
             li.dataset.idx = idx;
@@ -325,7 +341,7 @@ function loadDeposits() {
         btn.addEventListener('click', (event) => {
             event.stopPropagation();
             event.preventDefault();
-            data.zones[zid].deposits[dcategory].forEach((deposit) => {
+            data.zones[zoneid].deposits[dcategory].forEach((deposit) => {
                 toggleGroupVisibility(deposit.object);
             });
             btn.classList.toggle('eyeinverted');
@@ -334,7 +350,7 @@ function loadDeposits() {
     });
 }
 
-loadDeposits();
+loadDeposits(window.zoneid);
 
 if(document.location.hash) {
     const q = new URLSearchParams(document.location.hash.slice(2));
@@ -435,6 +451,7 @@ function updateQueryString(camera, controls) {
     qparams.set('tx', Math.floor(controls.target.x));
     qparams.set('ty', Math.floor(controls.target.y));
     qparams.set('tz', Math.floor(controls.target.z));
+    qparams.set('zid', window.zoneid);
 
     window.history.replaceState({}, '', `${window.location.pathname}#\!${qparams.toString()}`);
 }
@@ -755,4 +772,36 @@ document.getElementById('copyMarkerDataButton').addEventListener('click', () => 
         .catch(err => {
             alert('Failed to copy marker data');
         });
+});
+
+document.getElementById('zonePicker').addEventListener('change', (event) => {
+    const selectedZoneId = parseInt(event.target.value);
+    if (selectedZoneId >= 0 && selectedZoneId < data.zones.length) {
+        window.zoneid = selectedZoneId;
+        scene.clear();
+        document.getElementById('locationslist').innerHTML = '';
+        document.getElementById('depositslist').innerHTML = '';
+        document.getElementById('customMarkersList').innerHTML = '';
+        
+        setupGlobalLights();
+        scene.add( axesHelper )
+        loadLocations(selectedZoneId);
+        loadDeposits(selectedZoneId);
+        loadMarkers();
+        
+        controls.target.set(0, 0, 0); // Reset target position
+        updateQueryString(camera, controls);
+        if(data.zones[selectedZoneId].notice != undefined) {
+            // Check if the notice has already been shown
+            const noticeShown = window.sessionStorage.getItem('noticeShown-' + selectedZoneId);
+            if (noticeShown) {
+                return; // Notice already shown, do not display again
+            }
+            document.getElementById('noticeContent').innerHTML = data.zones[selectedZoneId].notice;
+            document.getElementById('noticePopup').style.display = "block";
+            window.sessionStorage.setItem('noticeShown-'+selectedZoneId, 'true');
+        }
+    } else {
+        console.error("Invalid zone ID:", selectedZoneId);
+    }
 });
