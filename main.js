@@ -789,8 +789,12 @@ document.getElementById('zonePicker').addEventListener('change', (event) => {
         loadLocations(selectedZoneId);
         loadDeposits(selectedZoneId);
         loadMarkers();
-        
-        controls.target.set(0, 0, 0); // Reset target position
+
+        // var start = data.zones[selectedZoneId].locations[0].object.position;
+        // controls.target.set(start.x, start.y, start.z);
+        // controls.update();
+        locationListItemClick(data.zones[selectedZoneId].locations[0]);
+
         updateQueryString(camera, controls);
         if(data.zones[selectedZoneId].notice != undefined) {
             // Check if the notice has already been shown
