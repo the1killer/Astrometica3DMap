@@ -515,6 +515,20 @@
                     "shape": "cylinder"
                 },
                 {
+                    "name": "Furniture Fab Derelict",
+                    "type": "Derelict",
+                    "signal": "FALSE",
+                    "x": -22867.561,
+                    "y": -168187.538,
+                    "z": -24097.771,
+                    "scannables": "Furniture Fabricator, Recycle Machine, Big Habitat Battery, Smelter, Research Station T2, Vehicle Module Fabricator, Vehicle Repair Station",
+                    "logs": "",
+                    "hostiles": "Squid Alien",
+                    "crates": "Blueprint Box T1 x2, Oxygen Tanks Package",
+                    "color": "grey",
+                    "shape": "cylinder"
+                },
+                {
                     "name": "Nickle Roid Cluster",
                     "type": "Asteroid",
                     "signal": "FALSE",
@@ -797,6 +811,51 @@
                     "shape": "sphere"
                 },
                 {
+                    "name": "Pyrolite Dome 3",
+                    "type": "Dome",
+                    "signal": "",
+                    "x": -437694.321,
+                    "y": -10851.172,
+                    "z": -125986.370,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "mineables": "Pyrolite x4",
+                    "notes": "No gravity, no oxygen",
+                    "color": "red",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Red Celestite Cluster",
+                    "type": "Asteroid",
+                    "signal": "",
+                    "x": -336149.041,
+                    "y": -123270.210,
+                    "z": -53094.956,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "mineables": "Red Celestite",
+                    "notes": "",
+                    "color": "red",
+                    "shape": "box"
+                },
+                {
+                    "name": "Blue Crystal Cluster",
+                    "type": "Asteroid",
+                    "signal": "",
+                    "x": -186682.250,
+                    "y": -168943.828,
+                    "z": -39349.907,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "mineables": "Blue Crystal",
+                    "notes": "",
+                    "color": "blue",
+                    "shape": "box"
+                },
+                {
                     "name": "Garagol Dome",
                     "type": "Dome",
                     "signal": "",
@@ -976,6 +1035,25 @@
                     }
                 },
                 {
+                    "name": "Alpha Miner Outpost",
+                    "type": "Derelict",
+                    "signal": "TRUE",
+                    "x": -486089.789,
+                    "y": -7829.190,
+                    "z": -53830.292,
+                    "scannables": "Global Storage Device, Teleport Station, Wall Shelf 2",
+                    "hostiles": "Green Drone x6? (outside), 2x Red Explosion Drones (inside)",
+                    "logs": "Personal Log - Entry #118 Nina Clark, Personal Log - Tina Ross, Private Log - Power Lift (hidden above ceiling panel)",
+                    "crates": "Data Box, Blueprint Box T2, Blueprint Box T3, Pyrolite, repair toolkit, orbitron toy, Battery Saver T4, Cubo toy",
+                    "color": "red",
+                    "shape": "cylinder",
+                    "scale": {
+                        "x": 2,
+                        "y": 1,
+                        "z": 2
+                    }
+                },
+                {
                     "name": "Ceta Control Center",
                     "type": "Habitat",
                     "signal": "TRUE",
@@ -983,8 +1061,8 @@
                     "y": -60535.630,
                     "z": 55057.024,
                     "scannables": "Data Box - Volthium Spiral",
-                    "logs": "Elara Kintar, Zane Tarris Entry #035, Cafeteria Log - Audio Snippet #231, Cafeteria Log - Audio Snippet #472, Encrypted Local Chat #001",
-                    "crates": "Mox Credit x15",
+                    "logs": "Elara Kintar, Zane Tarris Entry #035, Cafeteria Log - Audio Snippet #231, Cafeteria Log - Audio Snippet #472, Encrypted Local Chat #001, Encrypted Local Chat #002, Log #027 - Cameron Fox",
+                    "crates": "Mox Credit x23",
                     "color": "cyan",
                     "shape": "box",
                     "scale": {
@@ -997,14 +1075,29 @@
                     "name": "Unknown Outpost",
                     "type": "Derelict",
                     "signal": "TRUE",
-                    "x": -206752.031,
-                    "y": 116806.331,
-                    "z": 46707.066,
+                    "x": -220011.668,
+                    "y": 113773.136,
+                    "z": 46572.711,
                     "scannables": "Skipper Laser Weapons, Research Station T3, Global Teleportation Device, Nanite Battery Fragment, Vehicle Module Fabricator Fragment x2, Jetpack T4, Data Box - Nanite Injector, Nanite Powercell, Lab Desk, Lab Desk",
-                    "logs": "Log Transcript - Terminal #22,Log Transcript - Terminal #23",
+                    "logs": "Log Transcript - Terminal #21, Log Transcript - Terminal #22,Log Transcript - Terminal #23",
                     "crates": "Mox Credit x20",
                     "color": "gray",
                     "shape": "cylinder"
+                },
+                {
+                    "name": "Luminite Roid Cluster",
+                    "type": "Asteroid",
+                    "signal": "",
+                    "x": 39566.459,
+                    "y": -165086.350,
+                    "z": -420375.788,
+                    "scannables": "",
+                    "logs": "",
+                    "crates": "",
+                    "mineables": "Luminite",
+                    "notes": "",
+                    "color": "white",
+                    "shape": "box"
                 }
                 
             ],
