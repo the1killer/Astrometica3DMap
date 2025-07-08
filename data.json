@@ -856,21 +856,6 @@
                     "shape": "sphere"
                 },
                 {
-                    "name": "Celestite Dome",
-                    "type": "Dome",
-                    "signal": "",
-                    "x": -336149.041,
-                    "y": -123270.210,
-                    "z": -53094.956,
-                    "scannables": "",
-                    "logs": "",
-                    "loot": "",
-                    "mineables": "Red Celestite, Pyrolite",
-                    "notes": "",
-                    "color": "red",
-                    "shape": "sphere"
-                },
-                {
                     "name": "Garagol Dome",
                     "type": "Dome",
                     "signal": "",
@@ -883,21 +868,6 @@
                     "mineables": "Garagol Tree, Blue Crystal",
                     "notes": "",
                     "color": "blue",
-                    "shape": "sphere"
-                },
-                {
-                    "name": "Red Celestite Dome",
-                    "type": "Dome",
-                    "signal": "",
-                    "x": -336149.041,
-                    "y": -123270.210,
-                    "z": -53094.956,
-                    "scannables": "",
-                    "logs": "",
-                    "loot": "",
-                    "mineables": "Red Celestite, Pyrolite",
-                    "notes": "",
-                    "color": "red",
                     "shape": "sphere"
                 },
                 {
