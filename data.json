@@ -13,7 +13,7 @@
                     "z": 35212,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "orange",
                     "shape": "box"
                 },
@@ -26,7 +26,7 @@
                     "z": 35807,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "gray",
                     "shape": "box"
                 },
@@ -39,7 +39,7 @@
                     "z": 32750,
                     "scannables": "Circular Room, wall storage, desk, smelter, battery charger, habitat builder, upgrade station",
                     "logs": "Entry ID: 00831, Entry ID: 00832",
-                    "crates": "Fabric, mineral",
+                    "loot": "Fabric, mineral",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -52,7 +52,7 @@
                     "z": 30957,
                     "scannables": "Skipper, Vehicle Station",
                     "logs": "Entry ID: 00827",
-                    "crates": "Electronic x2, Mineral x4",
+                    "loot": "Electronic x2, Mineral x4",
                     "color": "gray",
                     "shape": "box"
                 },
@@ -65,7 +65,7 @@
                     "z": 33870,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "cyan",
                     "shape": "cylinder",
                     "rotate": {
@@ -81,7 +81,7 @@
                     "z": 38325,
                     "scannables": "",
                     "logs": "",
-                    "crates": "Fabric x4",
+                    "loot": "Fabric x4",
                     "color": "gray",
                     "shape": "box"
                 },
@@ -94,7 +94,7 @@
                     "z": 42949,
                     "scannables": "Engineer Suit",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "gray",
                     "shape": "box"
                 },
@@ -107,7 +107,7 @@
                     "z": 44956,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "cyan",
                     "shape": "cylinder",
                     "rotate": {
@@ -142,7 +142,7 @@
                     "z": 34958,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "red",
                     "shape": "cylinder",
                     "rotate": {
@@ -244,7 +244,7 @@
                     "z": 32471,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "red",
                     "shape": "cylinder",
                     "rotate": {
@@ -292,7 +292,7 @@
                     "z": 19942,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "red",
                     "shape": "cylinder",
                     "rotate": {
@@ -308,7 +308,7 @@
                     "z": 848,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "red",
                     "shape": "cylinder",
                     "rotate": {
@@ -338,7 +338,7 @@
                     "z": 5724,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "yellow",
                     "shape": "sphere"
                 },
@@ -351,7 +351,7 @@
                     "z": -15677.866,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "cyan",
                     "shape": "torus",
                     "rotate": {
@@ -365,22 +365,23 @@
                     "x": -81901,
                     "y": -225590,
                     "z": -24229,
-                    "scannables": "",
-                    "logs": "",
-                    "crates": "",
+                    "scannables": "Large Habitat Room, Solar Panel Extension, Work Desk, Lab Chair (Orange), Bed (Orange), Medium Storage, Warp Module Blueprint, Teleport Station",
+                    "logs": "Reese Callahan - Day 1, Reese Callahan - Month 6 Day 184, Reese Callahan - Day 28, Reese Callahan - Hey Alex, Reese Callahan - The Experiment",
+                    "loot": "Fengu, Fertilizer Package x2, Smelted Mineral Package, Fertilizer x2, Earth Palm Tree, Blueprint Box T1 x2, Zero-G Regulator, Warp Coordinates (Theta-12), Statue, Beautiful Island Poster, Carbon Mine Package",
                     "color": "blue",
                     "shape": "sphere"
                 },
                 {
-                    "name": "Research Ruins",
+                    "name": "Ancient Gate Dome",
                     "type": "Dome",
                     "signal": "FALSE",
                     "x": -111502,
                     "y": -206754,
                     "z": -25053,
-                    "scannables": "",
-                    "logs": "",
-                    "crates": "",
+                    "scannables": "Seeker",
+                    "notes": "Ancient Gate ||(Ice)||",
+                    "logs": "Reese Callahan Day 80",
+                    "loot": "Blueprint Box T1 (respawns), Fengu",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -393,7 +394,7 @@
                     "z": -412,
                     "scannables": "hydroponic planter",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -406,7 +407,7 @@
                     "z": 39557,
                     "scannables": "hydroponic planter",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -419,7 +420,7 @@
                     "z": 42324,
                     "scannables": "hydroponic planter",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -432,7 +433,7 @@
                     "z": 22267,
                     "scannables": "hook tool, smelter",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -445,7 +446,7 @@
                     "z": 20470,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -458,7 +459,7 @@
                     "z": 37199,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -471,7 +472,7 @@
                     "z": 35742,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "cyan",
                     "shape": "cylinder"
                 },
@@ -484,7 +485,7 @@
                     "z": -22363,
                     "scannables": "Research Station T2, Koala Poster",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -495,9 +496,9 @@
                     "x": -81842,
                     "y": -62312,
                     "z": 8572,
-                    "scannables": "",
-                    "logs": "",
-                    "crates": "",
+                    "scannables": "Normal Vertical Corridor",
+                    "logs": "Travis Marshal and Alex Turner",
+                    "loot": "Locked Storage ||6969||, Habitat Circle Room, Medium Storage, Hydroponic Planter",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -510,7 +511,7 @@
                     "z": -1835,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "cyan",
                     "shape": "cylinder"
                 },
@@ -524,7 +525,7 @@
                     "scannables": "Furniture Fabricator, Recycle Machine, Big Habitat Battery, Smelter, Research Station T2, Vehicle Module Fabricator, Vehicle Repair Station",
                     "logs": "",
                     "hostiles": "Squid Alien",
-                    "crates": "Blueprint Box T1 x2, Oxygen Tanks Package",
+                    "loot": "Blueprint Box T1 x2, Oxygen Tanks Package",
                     "color": "grey",
                     "shape": "cylinder"
                 },
@@ -537,7 +538,7 @@
                     "z": 2854,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "gray",
                     "shape": "sphere"
                 },
@@ -550,7 +551,7 @@
                     "z": -10069,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "green",
                     "shape": "capsule",
                     "scale":{
@@ -568,7 +569,7 @@
                     "z": 413425,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "green",
                     "shape": "sphere",
                     "scale":{
@@ -730,7 +731,7 @@
                     "z": -34778.797,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "cyan",
                     "shape": "torus",
                     "rotate": {
@@ -744,11 +745,25 @@
                     "x": -418470.893,
                     "y": -238050.355,
                     "z": -59668.819,
-                    "scannables": "Wall Shelf 3, Research Station T2 x2, Grab Tool Fragment",
+                    "scannables": "Wall Shelf 3, Research Station T2 x2, Grab Tool Fragment, Coffee Table (cave behind in dome)",
                     "logs": "Personal Log - Ciara, Log Entry - Alyx (Maintenance Supervisor)",
-                    "crates": "Blueprint Box T2, Space Cat Poster, Mox Credits x10",
+                    "loot": "Blueprint Box T1, Blueprint Box T2 x2, Space Cat Poster, Mox Credits x10",
                     "color": "blue",
                     "shape": "sphere"
+                },
+                {
+                    "name": "Derelict Outpost Cave",
+                    "type": "Cave",
+                    "signal": "TRUE",
+                    "x": -417445.465,
+                    "y": -214944.730,
+                    "z": -74565.231,
+                    "scannables": "Large Habitat Battery, Research Station T3, Teleport Station, Recycle Machine, Furniture Fabricator, Corridor Asteroid Miner T2",
+                    "logs": "",
+                    "loot": "Blueprint Box T2 x2, Mineral Package, Fertilizer Package,",
+                    "mineables": "Quartz, Silver",
+                    "color": "gray",
+                    "shape": "box"
                 },
                 {
                     "name": "Trading Station",
@@ -759,7 +774,7 @@
                     "z": -57736.849,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -770,10 +785,10 @@
                     "x": -290566.455,
                     "y": -290002.773,
                     "z": -63710.013,
-                    "scannables": "",
+                    "scannables": "Teleport Station, Advanced Fabricator, Corridor Asteroid Miner T2, Power Cell Charger, Research Station T3",
                     "logs": "",
-                    "crates": "",
-                    "mineables": "Pyrolite, Blue Crystal, Garagol Tree",
+                    "loot": "Blueprint Box T2, Moxora Efficiency Poster, Mox Credit x10, Repair Toolkit, Battery, Unlocked Storage, Celestite Deposit Seed (in Storage), Trungul Fruit (in Storage), Mox Credit x10 (in hidden room), Blueprint Box T3 (in hidden room), (Blueprint Box T1 (in hidden room)",
+                    "mineables": "Pyrolite x4, Blue Crystal, Garagol Tree, Celestite x2",
                     "color": "cyan",
                     "shape": "cylinder",
                     "rotate": {
@@ -789,7 +804,7 @@
                     "z": -62758.777,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "mineables": "Pyrolite, Red Celestite",
                     "notes": "No gravity, no oxygen",
                     "color": "red",
@@ -804,7 +819,7 @@
                     "z": -43109.544,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "mineables": "Pyrolite, Red Celestite",
                     "notes": "No gravity, no oxygen",
                     "color": "red",
@@ -819,41 +834,41 @@
                     "z": -125986.370,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "mineables": "Pyrolite x4",
                     "notes": "No gravity, no oxygen",
                     "color": "red",
                     "shape": "sphere"
                 },
                 {
-                    "name": "Red Celestite Cluster",
-                    "type": "Asteroid",
+                    "name": "Pyrolite Dome 4",
+                    "type": "Dome",
+                    "signal": "",
+                    "x": -206497.377,
+                    "y": 10444.440,
+                    "z": 25907.561,
+                    "scannables": "",
+                    "logs": "",
+                    "loot": "",
+                    "mineables": "Pyrolite x3, red celestite",
+                    "notes": "No gravity, no oxygen",
+                    "color": "red",
+                    "shape": "sphere"
+                },
+                {
+                    "name": "Celestite Dome",
+                    "type": "Dome",
                     "signal": "",
                     "x": -336149.041,
                     "y": -123270.210,
                     "z": -53094.956,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
-                    "mineables": "Red Celestite",
+                    "loot": "",
+                    "mineables": "Red Celestite, Pyrolite",
                     "notes": "",
                     "color": "red",
-                    "shape": "box"
-                },
-                {
-                    "name": "Blue Crystal Cluster",
-                    "type": "Asteroid",
-                    "signal": "",
-                    "x": -186682.250,
-                    "y": -168943.828,
-                    "z": -39349.907,
-                    "scannables": "",
-                    "logs": "",
-                    "crates": "",
-                    "mineables": "Blue Crystal",
-                    "notes": "",
-                    "color": "blue",
-                    "shape": "box"
+                    "shape": "sphere"
                 },
                 {
                     "name": "Garagol Dome",
@@ -864,7 +879,7 @@
                     "z": -39349.907,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "mineables": "Garagol Tree, Blue Crystal",
                     "notes": "",
                     "color": "blue",
@@ -879,7 +894,7 @@
                     "z": -53094.956,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "mineables": "Red Celestite, Pyrolite",
                     "notes": "",
                     "color": "red",
@@ -894,7 +909,7 @@
                     "z": -53094.956,
                     "scannables": "",
                     "logs": "",
-                    "crates": "Blueprint Box T1, Fabric Package x2",
+                    "loot": "Blueprint Box T1, Fabric Package x2",
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
@@ -909,7 +924,7 @@
                     "z": 32522.605,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
@@ -924,7 +939,7 @@
                     "z": -55499.241,
                     "scannables": "power cell charger",
                     "logs": "",
-                    "crates": "power cell, repair toolkit, frozen island warp coordinate, 1L water",
+                    "loot": "power cell, repair toolkit, frozen island warp coordinate, 1L water",
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
@@ -938,8 +953,8 @@
                     "y": -48418.428,
                     "z": -57300.370,
                     "scannables": "Storage Satellite",
-                    "logs": "Comm Channel: Alyx & Ciara",
-                    "crates": "Repair Toolkit, Fertilizer Package, Fabric Package",
+                    "logs": "Log Transcript - Comm Channel: Alyx & Ciara (||Passcode for Exile Outpost||)",
+                    "loot": "Repair Toolkit, Fertilizer Package, Fabric Package, Blueprint Box T2",
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
@@ -954,7 +969,8 @@
                     "z": -20649.484,
                     "scannables": "Lab Chair, Lab Desk, Oxygen Tank T4",
                     "logs": "Zoe Carter Personal Log #012, Zoe Carter Personal Log #024",
-                    "crates": "Mox Credit x18, Mineral Analyzer, Data Box, Photo Frame, Heater, Small Coffee Machine, Coffee Cup",
+                    "loot": "Mox Credit x18, Mineral Analyzer, Data Box, Photo Frame, Heater, Small Coffee Machine, Coffee Cup",
+                    "hostiles": "Small Turret",
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
@@ -967,13 +983,29 @@
                     "x": -288043.449,
                     "y": -91374.876,
                     "z": 2446.878,
-                    "scannables": "Global Storage Device x2, Corridor Miner T2, Vehicle Modification Fabricator, Habitat Room Wall 3, Hydroponic Planter, Global Teleportation Device",
+                    "scannables": "Global Storage Device x2, Corridor Miner T2, Vehicle Modification Fabricator, Vehicle Charging Station, Habitat Room Wall 3, Hydroponic Planter, Global Teleportation Device",
                     "logs": "Elara Kintar, Elara Kintar",
-                    "crates": "Fertilizer Package x2, Blueprint Box T2, Pre-Mine Package",
-                    "mineables": "",
+                    "loot": "Fertilizer Package x2, Blueprint Box T2, Pre-Mine Package",
+                    "hostiles": "Green Drone x4 (outside), Red Explosion Drone (inside)",
+                    "mineables": "Carbon",
                     "notes": "",
                     "color": "gray",
                     "shape": "cylinder"
+                },
+                {
+                    "name": "Yunadel Emergency Pod",
+                    "type": "Pod",
+                    "signal": "",
+                    "x": -270764.300,
+                    "y": 8616.732,
+                    "z": 35092.399,
+                    "scannables": "Seeker Laser Weapon x2 (||nearby in white area||)",
+                    "logs": "",
+                    "loot": "organic",
+                    "mineables": "",
+                    "notes": "Fabricator and 2x small storage",
+                    "color": "orange",
+                    "shape": "box"
                 },
                 {
                     "name": "Volthium Roid Cluster",
@@ -984,10 +1016,10 @@
                     "z": -22725.985,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "mineables": "Volthium",
                     "notes": "",
-                    "color": "purple",
+                    "color": "magenta",
                     "shape": "box"
                 },
                 {
@@ -998,8 +1030,9 @@
                     "y": 153088.851,
                     "z": -18283.804,
                     "scannables": "Zoe Carter - Personal Log #012, Databox - Unusable",
+                    "hostiles": "Large Turret x2",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -1011,8 +1044,10 @@
                     "y": -16645.379,
                     "z": -7098.793,
                     "scannables": "",
-                    "logs": "",
-                    "crates": "",
+                    "logs": "Cafeteria Log — Audio Snippet #423, Cafeteria Log — Audio Snippet #472",
+                    "loot": "0.6L Water x4, Organic Package x2",
+                    "mineables": "Blue Crystal (outside)",
+                    "notes": "landing pad",
                     "color": "blue",
                     "shape": "sphere"
                 },
@@ -1025,7 +1060,7 @@
                     "z": -23995.633,
                     "scannables": "Skipper Laser Weapons x2",
                     "logs": "Log Transcript - Terminal #27, Log Transcript - Terminal #28",
-                    "crates": "",
+                    "loot": "",
                     "color": "red",
                     "shape": "box",
                     "scale": {
@@ -1042,9 +1077,9 @@
                     "y": -7829.190,
                     "z": -53830.292,
                     "scannables": "Global Storage Device, Teleport Station, Wall Shelf 2",
-                    "hostiles": "Green Drone x6? (outside), 2x Red Explosion Drones (inside)",
+                    "hostiles": "Green Drone x10 (outside), 2x Red Explosion Drones (inside)",
                     "logs": "Personal Log - Entry #118 Nina Clark, Personal Log - Tina Ross, Private Log - Power Lift (hidden above ceiling panel)",
-                    "crates": "Data Box, Blueprint Box T2, Blueprint Box T3, Pyrolite, repair toolkit, orbitron toy, Battery Saver T4, Cubo toy",
+                    "loot": "Data Box, Blueprint Box T2, Blueprint Box T3, Pyrolite, repair toolkit, orbitron toy, Battery Saver T4, Cubo toy",
                     "color": "red",
                     "shape": "cylinder",
                     "scale": {
@@ -1060,9 +1095,11 @@
                     "x": -224999.739,
                     "y": -60535.630,
                     "z": 55057.024,
-                    "scannables": "Data Box - Volthium Spiral",
-                    "logs": "Elara Kintar, Zane Tarris Entry #035, Cafeteria Log - Audio Snippet #231, Cafeteria Log - Audio Snippet #472, Encrypted Local Chat #001, Encrypted Local Chat #002, Log #027 - Cameron Fox",
-                    "crates": "Mox Credit x23",
+                    "scannables": "Data Box - Volthium Spiral (In Left Control Center), Oxygen Tank T4 (In Left Control Center), Seeker Laser Weapon x3 (Out Front DANGER TURRETS)",
+                    "logs": "Elara Kintar (Outside Left Control Center), Zane Tarris Entry #035 (In Left Control Center), Cafeteria Log - Audio Snippet #231, Cafeteria Log - Audio Snippet #472, Encrypted Local Chat #001, Encrypted Local Chat #002 (In Basement), Log #027 - Cameron Fox (In Basement)",
+                    "loot": "Mox Credit x23, Locked Storage (Repair Kit x3), Blueprint Box T1 x2 (in locked storage), Blueprint Box T1 x2 (in locked storage), Nanite Battery (in locked storage), Unlocked Storage (Below Elevator), Mox Credits x8 (Below Elevator), Mox Credits x8 (In Basement), Unlocked Storage (On top of Left Control Center), Mox Credits x15 (In Left Control Center), Puffbit Toy (Outside Underneath)",
+                    "hostiles": "Large Turret x2",
+                    "notes": "Landing Pad, Locked Storage (Repair Kit x3), Unlocked Storage (Below Elevator), Trading Station",
                     "color": "cyan",
                     "shape": "box",
                     "scale": {
@@ -1078,14 +1115,83 @@
                     "x": -220011.668,
                     "y": 113773.136,
                     "z": 46572.711,
-                    "scannables": "Skipper Laser Weapons, Research Station T3, Global Teleportation Device, Nanite Battery Fragment, Vehicle Module Fabricator Fragment x2, Jetpack T4, Data Box - Nanite Injector, Nanite Powercell, Lab Desk, Lab Desk",
+                    "scannables": "Skipper Laser Weapons, Research Station T3, Global Teleportation Device, Nanite Battery Fragment, Vehicle Module Fabricator Fragment x2, Jetpack T4, Data Box - Nanite Injector, Nanite Powercell, Lab Desk, Lab Desk, Vehicle Charge Station, Corridor Asteroid Miner T2",
                     "logs": "Log Transcript - Terminal #21, Log Transcript - Terminal #22,Log Transcript - Terminal #23",
-                    "crates": "Mox Credit x20",
+                    "hostiles": "Green Drone x4",
+                    "mineables": "Nanite",
+                    "loot": "Mox Credit x20, Pulmer, Lab 3D Printer, Mineral Analyzer, Nanite, Fertilizer Package x2, Pre-Mine Package x2, Blueprint Box T3 x2 (in Storage), Blueprint Box T2 (in Storage), Table Lamp",
                     "color": "gray",
-                    "shape": "cylinder"
+                    "shape": "cylinder",
+                    "scale": {
+                        "x": 2,
+                        "y": 0.5,
+                        "z": 2
+                    }
+                },
+                {
+                    "name": "Cargo Pad",
+                    "type": "Derelict",
+                    "signal": "",
+                    "x": -442899.334,
+                    "y": -255839.065,
+                    "z": -63907.024,
+                    "scannables": "",
+                    "logs": "",
+                    "loot": "Earth Palm Tree, Blueprint Box T1 x2, Blueprint Box T2, Fabric Package",
+                    "mineables": "",
+                    "hostiles": "Red Explosion Drone x1 (In Red Shipping Container)",
+                    "notes": "",
+                    "color": "gray",
+                    "shape": "box",
+                    "scale": {
+                        "x": 2,
+                        "y": 1,
+                        "z": 2
+                    }
                 },
                 {
                     "name": "Luminite Roid Cluster",
+                    "type": "Asteroid",
+                    "signal": "",
+                    "x": -583566.953,
+                    "y": 74126.889,
+                    "z": -48315.252,
+                    "scannables": "",
+                    "logs": "",
+                    "loot": "",
+                    "hostiles": "Alien Crystal Entity",
+                    "mineables": "Luminite",
+                    "notes": "",
+                    "color": "white",
+                    "shape": "box",
+                    "scale": {
+                        "x": 2,
+                        "y": 2,
+                        "z": 2
+                    }
+                },
+                {
+                    "name": "Luminite Roid Cluster 2",
+                    "type": "Asteroid",
+                    "signal": "",
+                    "x": -621081.237,
+                    "y": 19236.977,
+                    "z": 145738.656,
+                    "scannables": "",
+                    "logs": "",
+                    "loot": "",
+                    "mineables": "Luminite",
+                    "notes": "",
+                    "color": "white",
+                    "shape": "box",
+                    "scale": {
+                        "x": 2,
+                        "y": 2,
+                        "z": 2
+                    }
+                },
+                {
+                    "name": "Luminite Roid Cluster 3",
                     "type": "Asteroid",
                     "signal": "",
                     "x": 39566.459,
@@ -1093,16 +1199,91 @@
                     "z": -420375.788,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "mineables": "Luminite",
                     "notes": "",
                     "color": "white",
-                    "shape": "box"
+                    "shape": "box",
+                    "scale": {
+                        "x": 2,
+                        "y": 2,
+                        "z": 2
+                    }
+                },
+                {
+                    "name": "Pink Cloud",
+                    "type": "Cloud",
+                    "signal": "",
+                    "x": -45883.592,
+                    "y": -136878.040,
+                    "z": -257050.840,
+                    "scannables": "",
+                    "logs": "",
+                    "loot": "",
+                    "mineables": "",
+                    "notes": "",
+                    "color": "magenta",
+                    "shape": "capsule",
+                    "scale":{
+                        "x": 15,
+                        "y": 10,
+                        "z": 15
+                    }
                 }
                 
             ],
             "deposits": {
-                }
+                "Copper":[
+                    {
+                        "id": "Cu1",
+                        "x": -183649.389,
+                        "y": 110744.150,
+                        "z": 45400.224
+                    },
+                    {
+                        "id": "Cu2",
+                        "x": -333234.051,
+                        "y": -31547.069,
+                        "z": -61101.914
+                    } 
+                ],
+                "Iron":[
+                    {
+                        "id": "I1",
+                        "x": -363826.260,
+                        "y": -251020.892,
+                        "z": -54369.474
+                    },
+                    {
+                        "id": "I2",
+                        "x": -366416.441,
+                        "y": -52631.935,
+                        "z": -117095.946
+                    },
+                    {
+                        "id": "I3",
+                        "x": -253928.600,
+                        "y": -45716.852,
+                        "z": 29652.501
+                    }
+                ],
+                "Carbon":[
+                    {
+                        "id": "C1",
+                        "x": -362291.705,
+                        "y": -221983.042,
+                        "z": -58303.701
+                    }
+                ],
+                "Quartz":[
+                    {
+                        "id": "Q1",
+                        "x": -405839.314,
+                        "y": -214074.162,
+                        "z": -64945.150
+                    }
+                ]
+            }
         },
         {
             "id": "2",
@@ -1118,7 +1299,7 @@
                     "z": 802.248,
                     "scannables": "",
                     "logs": "",
-                    "crates": "",
+                    "loot": "",
                     "color": "cyan",
                     "shape": "torus",
                     "rotate": {
