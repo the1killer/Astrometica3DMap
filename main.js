@@ -842,6 +842,18 @@ function showInfoBox(marker) {
     if(marker.notes != undefined && marker.notes.length > 0) {
         content.innerHTML += `<p class="infobox-subtitle"><strong>Notes:</strong><div class="notes">${marker.notes}</div></p>`;
     }
+    
+    content.innerHTML = content.innerHTML.replace(/[()]/g, '<strong>$&</strong>');
+
+    //block out spoilers surrounded by ||
+    content.innerHTML = content.innerHTML.replace(/\|\|([^|]+)\|\|/g, '<span class="spoiler">$1</span>');
+    // Add click event to toggle spoiler visibility
+    const spoilers = content.querySelectorAll('.spoiler');
+    spoilers.forEach(spoiler => {
+        spoiler.addEventListener('click', () => {
+            spoiler.classList.toggle('revealed');
+        });
+    });
 
     container.style.display = 'block';
 }
