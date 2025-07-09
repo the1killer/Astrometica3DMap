@@ -134,6 +134,22 @@
                     ]
                 },
                 {
+                    "name": "Theta-9 Gate",
+                    "type": "Gate",
+                    "signal": "FALSE",
+                    "x": 7475.516,
+                    "y": -250419.517,
+                    "z": -15677.866,
+                    "scannables": "",
+                    "logs": "",
+                    "loot": "",
+                    "color": "cyan",
+                    "shape": "torus",
+                    "rotate": {
+                        "y": 1.75
+                    }
+                },
+                {
                     "name": "Vehicle Manufacturer Cave",
                     "type": "Cave",
                     "Signal": "TRUE",
@@ -346,22 +362,6 @@
                     "shape": "sphere"
                 },
                 {
-                    "name": "Theta-9 Gate",
-                    "type": "Gate",
-                    "signal": "FALSE",
-                    "x": 7475.516,
-                    "y": -250419.517,
-                    "z": -15677.866,
-                    "scannables": "",
-                    "logs": "",
-                    "loot": "",
-                    "color": "cyan",
-                    "shape": "torus",
-                    "rotate": {
-                        "y": 1.75
-                    }
-                },
-                {
                     "name": "Research Outpost",
                     "type": "Dome",
                     "signal": "TRUE",
@@ -521,8 +521,12 @@
                     "mineables": "Celestite (inside)",
                     "notes": "No gravity, no oxygen, Locked Storage (Battery, inside)",
                     "hostiles": "Space Mines (outside), Space Mines (inside), Alien Squid (inside)",
-                    "color": "cyan",
-                    "shape": "cylinder"
+                    "color": "gray",
+                    "shape": "cylinder",
+                    "rotate": {
+                        "x": 2,
+                        "z": 2
+                    }
                 },
                 {
                     "name": "Alpha Mining Cave",
@@ -538,20 +542,11 @@
                     "hostiles": "Space Mines (outside), Blue Drone x3 (inside)",
                     "notes": "No gravity, no oxygen",
                     "color": "gray",
-                    "shape": "box"
-                },
-                {
-                    "name": "Beta-23 Asteroid Field",
-                    "type": "Asteroid",
-                    "signal": "FALSE",
-                    "x": 0,
-                    "y": -100000,
-                    "z": 0,
-                    "scannables": "",
-                    "logs": "",
-                    "loot": "",
-                    "color": "gray",
-                    "shape": "sphere"
+                    "shape": "cylinder",
+                    "rotate": {
+                        "x": 2,
+                        "z": 2
+                    }
                 },
                 {
                     "name": "Furniture Fab Derelict",
@@ -590,8 +585,8 @@
                     "scannables": "",
                     "logs": "",
                     "loot": "",
-                    "color": "gray",
-                    "shape": "sphere"
+                    "color": "copper",
+                    "shape": "box"
                 },
                 {
                     "name": "Toxic Cloud",

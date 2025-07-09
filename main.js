@@ -512,6 +512,8 @@ function locationListItemClick(location) {
             }
         }
     );
+
+    showInfoBox(location);
 }
 
 function depositListItemClick(deposit) {
@@ -810,3 +812,36 @@ document.getElementById('zonePicker').addEventListener('change', (event) => {
         console.error("Invalid zone ID:", selectedZoneId);
     }
 });
+
+function showInfoBox(marker) {
+    // Show a popup with marker information
+    const container = document.getElementById('infoBoxContainer');
+    const title = document.getElementById('infoBoxTitle');
+    const content = document.getElementById('infoBoxContent');
+
+    title.innerHTML = `<strong>${marker.name}</strong>`;
+    content.innerHTML = `
+        <p class="infobox-subtitle"><strong>Coordinates:</strong> <small>X:${Math.floor(marker.x)},<br/>Y:${Math.floor(marker.y)},<br/>Z:${Math.floor(marker.z)}</small></p>
+    `;
+    if(marker.scannables != undefined && marker.scannables.length > 0) {
+        const scanableList = marker.scannables.split(',').map(scanable => `<li>${scanable}</li>`).join('');
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Scanables:</strong><ul id="scannable-list" class="infobox-list">${scanableList}</ul></p>`;
+    }
+    if(marker.loot != undefined && marker.loot.length > 0) {
+        const lootList = marker.loot.split(',').map(loot => `<li>${loot}</li>`).join('');
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Loot:</strong><ul id="loot-list" class="infobox-list">${lootList}</ul></p>`;
+    }
+    if(marker.mineables != undefined && marker.mineables.length > 0) {
+        const mineableList = marker.mineables.split(',').map(mineable => `<li>${mineable}</li>`).join('');
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Mineables:</strong><ul id="mineable-list" class="infobox-list">${mineableList}</ul></p>`;
+    }
+    if(marker.hostiles != undefined && marker.hostiles.length > 0) {
+        const hostileList = marker.hostiles.split(',').map(hostile => `<li>${hostile}</li>`).join('');
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Hostiles:</strong><ul id="hostile-list" class="infobox-list">${hostileList}</ul></p>`;
+    }
+    if(marker.notes != undefined && marker.notes.length > 0) {
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Notes:</strong><div class="notes">${marker.notes}</div></p>`;
+    }
+
+    container.style.display = 'block';
+}

@@ -24,7 +24,7 @@ body {
     padding: 10px;
     box-sizing: border-box;
     text-align: center;
-    z-index: 100;
+    z-index: 75;
     color: white;
 }
 #attribution {
@@ -71,6 +71,41 @@ body {
     color: white;
     padding: 10px;
     border-radius: 15px;
+}
+.infoBoxContainer {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    width: 200px;
+    z-index: 95;
+}
+.infobox {
+    /* background-color: rgba(0, 0, 0, 0.9); */
+    /* border: 1px solid rgba(255, 255, 255, 0.2); */
+    /* color: white; */
+    padding: 10px;
+    border-radius: 15px;
+    margin-left: -10px;
+    margin-right: -14px;
+
+    max-height: 75vh;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--astro-content-border-color) var(--astro-bg-secondary);
+    scroll-padding: 10px;
+    scrollbar-gutter: stable both-edges;
+
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.infobox > p:first-child {
+    margin-top: 0;
+}
+.infobox-subtitle {
+    font-family: 'Orbitron', Arial, Helvetica, sans-serif;
+    margin-bottom: 5px;
+}
+.infobox > .notes {
+    font-size: 0.75em;
 }
 #helptext {
     text-align: left;
@@ -127,6 +162,11 @@ a {
 }
 #locationslist li::marker, #depositslist li::marker, #customMarkersList li::marker {
     color: hsl(from var(--astro-content-border-color) h s calc(l + 19));
+}
+.infobox-list {
+    margin-block: 0;
+    padding-inline: 10px;
+    font-size: 0.73em;
 }
 .expander {
     display: inline-block;
