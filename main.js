@@ -353,17 +353,47 @@ function loadDeposits(zoneid = 0) {
 loadDeposits(window.zoneid);
 
 if(document.location.hash) {
-    const q = new URLSearchParams(document.location.hash.slice(2));
-    //wrap each q.get in parseFloat() to convert string to number
-    
-    camera.position.set(parseFloat(q.get('px')), parseFloat(q.get('py')), parseFloat(q.get('pz')));
-    camera.rotation.set(parseFloat(q.get('rx')), parseFloat(q.get('ry')), parseFloat(q.get('rz')));
-    controls.target.set(parseFloat(q.get('tx')), parseFloat(q.get('ty')), parseFloat(q.get('tz')));
-    camera.lookAt(controls.target);
+    if (window.currentLocationId) {
+        const location = data.zones[zid].locations.find(loc => loc.id === window.currentLocationId);
+        if (location) {
+            controls.target.set(location.object.position.x, location.object.position.y, location.object.position.z);
+            camera.position.set(location.object.position.x - 20, location.object.position.y + 50, location.object.position.z + 10);
+        } else {
+            console.warn("Location ID not found in zone:", window.currentLocationId);
+        }
+    }
+    updateMapFromHash();
 } else {
     var start = data.zones[zid].locations[0].object.position;
     controls.target.set(start.x, start.y, start.z);
     camera.position.set(-268.46001541128123, 89.91119916230053, 8.49005248328114);
+}
+
+function updateMapFromHash() {
+    const q = new URLSearchParams(document.location.hash.slice(2));
+    //wrap each q.get in parseFloat() to convert string to number
+
+    if(q.has('px')) camera.position.set(parseFloat(q.get('px')), parseFloat(q.get('py')), parseFloat(q.get('pz')));
+    if(q.has('rx')) camera.rotation.set(parseFloat(q.get('rx')), parseFloat(q.get('ry')), parseFloat(q.get('rz')));
+    if(q.has('tx')) controls.target.set(parseFloat(q.get('tx')), parseFloat(q.get('ty')), parseFloat(q.get('tz')));
+    camera.lookAt(controls.target);
+    
+    // Handle location ID from URL hash
+    const locationId = q.get('lid');
+    if (locationId) {
+        window.currentLocationId = locationId;
+        // Find and show the location
+        const location = data.zones[zid].locations.find(loc => loc.id === locationId);
+        if (location) {
+            if(q.has('tx') == false) {
+                controls.target.set(location.object.position.x, location.object.position.y, location.object.position.z);
+            }
+            if( q.has('px') == false) {
+                camera.position.set(location.object.position.x - 20, location.object.position.y + 50, location.object.position.z + 10);
+            }
+            showInfoBox(location);
+        }
+    }
 }
 
 controls.update();
@@ -377,6 +407,12 @@ window.scene = scene;
 loadMarkers();
 
 controls.addEventListener('change', debounce(() => onCameraMove(), 250));
+
+// Listen for hash changes to update the map
+window.addEventListener('hashchange', () => {
+    updateMapFromHash();
+});
+
 document.getElementById('locationTitle').addEventListener('click', () => {
     toggleHTMLVisibility(document.getElementById('locationslist'));
     document.querySelector('#locationTitle > .expander').style.transform = document.getElementById('locationslist').style.display != "none" ? "rotate(0deg)" : "rotate(180deg)";
@@ -452,6 +488,13 @@ function updateQueryString(camera, controls) {
     qparams.set('ty', Math.floor(controls.target.y));
     qparams.set('tz', Math.floor(controls.target.z));
     qparams.set('zid', window.zoneid);
+    
+    // Add location ID if available, otherwise remove it
+    if (window.currentLocationId) {
+        qparams.set('lid', window.currentLocationId);
+    } else {
+        qparams.delete('lid');
+    }
 
     window.history.replaceState({}, '', `${window.location.pathname}#\!${qparams.toString()}`);
 }
@@ -487,6 +530,10 @@ function locationListItemClick(location) {
     if(location.object.type == "Group") {
         objPosition = location.object.children[0].position;
     }
+    
+    // Set the current location ID for URL hash
+    window.currentLocationId = location.id;
+    
     gsap.to( camera.position, 
         { 
             x: objPosition.x + diff.x, 
@@ -497,7 +544,8 @@ function locationListItemClick(location) {
                 camera.lookAt(objPosition);
             },
             onComplete: () => {
-
+                // Update URL hash with location ID
+                updateQueryString(camera, controls);
             }
         }
     );
@@ -520,6 +568,10 @@ function depositListItemClick(deposit) {
     var diff = getVectorDifference(camera.position, controls.target);
     controls.enabled = false;
     var ease = "sine.inOut";
+    
+    // Clear current location ID when selecting a deposit
+    window.currentLocationId = null;
+    
     gsap.to( camera.position, 
         { 
             x: deposit.object.children[0].position.x + diff.x, 
@@ -530,7 +582,8 @@ function depositListItemClick(deposit) {
                 camera.lookAt(deposit.object.children[0].position);
             },
             onComplete: () => {
-
+                // Update URL hash without location ID
+                updateQueryString(camera, controls);
             }
         }
     );

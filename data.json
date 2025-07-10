@@ -1,10 +1,11 @@
 {
     "zones": [
-        {   
+        {
             "id": 0,
-            "name": "Theta-9 Asteroid Field", 
+            "name": "Theta-9 Asteroid Field",
             "locations": [
                 {
+                    "id": "T9L01",
                     "name": "Escape Pod",
                     "type": "Pod",
                     "Signal": "",
@@ -18,6 +19,7 @@
                     "shape": "box"
                 },
                 {
+                    "id": "T9L02",
                     "name": "1st Pod",
                     "type": "Pod",
                     "Signal": "",
@@ -31,6 +33,7 @@
                     "shape": "box"
                 },
                 {
+                    "id": "T9L03",
                     "name": "Mox Island",
                     "type": "Dome",
                     "signal": "TRUE",
@@ -44,6 +47,7 @@
                     "shape": "sphere"
                 },
                 {
+                    "id": "T9L04",
                     "name": "Emergency Pod",
                     "type": "Pod",
                     "Signal": "TRUE",
@@ -57,6 +61,7 @@
                     "shape": "box"
                 },
                 {
+                    "id": "T9L05",
                     "name": "Old Hub Station",
                     "type": "Habitat",
                     "Signal": "TRUE",
@@ -73,6 +78,7 @@
                     }
                 },
                 {
+                    "id": "T9L06",
                     "name": "Prologue Pod",
                     "type": "Pod",
                     "Signal": "FALSE",
@@ -86,6 +92,7 @@
                     "shape": "box"
                 },
                 {
+                    "id": "T9L07",
                     "name": "Matthew Pod",
                     "type": "Pod",
                     "Signal": "FALSE",
@@ -107,17 +114,17 @@
                     "z": 44956,
                     "scannables": "",
                     "logs": "",
-                    "loot": "",
+                    "loot": "cubo toy (||Ethan Carter's Room||)",
                     "color": "cyan",
                     "shape": "cylinder",
                     "rotate": {
                         "x": 2
                     },
-                    "children":[
+                    "children": [
                         {
                             "type": "Habitat",
-                            "shape":"cylinder",
-                            "color":"cyan",
+                            "shape": "cylinder",
+                            "color": "cyan",
                             "x": -294000,
                             "y": -112600,
                             "z": 44956,
@@ -131,7 +138,8 @@
                                 "z": 2
                             }
                         }
-                    ]
+                    ],
+                    "id": "T9L08"
                 },
                 {
                     "name": "Theta-9 Gate",
@@ -147,7 +155,8 @@
                     "shape": "torus",
                     "rotate": {
                         "y": 1.75
-                    }
+                    },
+                    "id": "T9L09"
                 },
                 {
                     "name": "Vehicle Manufacturer Cave",
@@ -164,11 +173,11 @@
                     "rotate": {
                         "x": 2
                     },
-                    "children":[
+                    "children": [
                         {
                             "type": "Cave",
-                            "shape":"box",
-                            "color":"red",
+                            "shape": "box",
+                            "color": "red",
                             "x": -260395,
                             "y": -127283,
                             "z": 34958,
@@ -181,8 +190,8 @@
                         },
                         {
                             "type": "Cave",
-                            "shape":"box",
-                            "color":"red",
+                            "shape": "box",
+                            "color": "red",
                             "x": -262000,
                             "y": -129000,
                             "z": 28000,
@@ -195,8 +204,8 @@
                         },
                         {
                             "type": "Cave",
-                            "shape":"box",
-                            "color":"red",
+                            "shape": "box",
+                            "color": "red",
                             "x": -260395,
                             "y": -135200,
                             "z": 33000,
@@ -209,8 +218,8 @@
                         },
                         {
                             "type": "Cave",
-                            "shape":"box",
-                            "color":"red",
+                            "shape": "box",
+                            "color": "red",
                             "x": -270000,
                             "y": -133000,
                             "z": 33000,
@@ -223,8 +232,8 @@
                         },
                         {
                             "type": "Cave",
-                            "shape":"box",
-                            "color":"red",
+                            "shape": "box",
+                            "color": "red",
                             "x": -270000,
                             "y": -137500,
                             "z": 33000,
@@ -237,8 +246,8 @@
                         },
                         {
                             "type": "Cave",
-                            "shape":"box",
-                            "color":"red",
+                            "shape": "box",
+                            "color": "red",
                             "x": -279000,
                             "y": -135200,
                             "z": 33000,
@@ -249,7 +258,8 @@
                             },
                             "transparent": true
                         }
-                    ]
+                    ],
+                    "id": "T9L10"
                 },
                 {
                     "name": "Vehicle Docking Station",
@@ -267,11 +277,11 @@
                         "x": 2,
                         "z": 2
                     },
-                    "children":[
+                    "children": [
                         {
                             "type": "Derelict",
-                            "shape":"cylinder",
-                            "color":"red",
+                            "shape": "cylinder",
+                            "color": "red",
                             "x": -280500,
                             "y": -136000,
                             "z": 32000,
@@ -282,8 +292,8 @@
                         },
                         {
                             "type": "Derelict",
-                            "shape":"cylinder",
-                            "color":"red",
+                            "shape": "cylinder",
+                            "color": "red",
                             "x": -280500,
                             "y": -135000,
                             "z": 30750,
@@ -297,7 +307,8 @@
                                 "z": 1
                             }
                         }
-                    ]
+                    ],
+                    "id": "T9L11"
                 },
                 {
                     "name": "Vertical Station",
@@ -313,7 +324,8 @@
                     "shape": "cylinder",
                     "rotate": {
                         "x": 90
-                    }
+                    },
+                    "id": "T9L12"
                 },
                 {
                     "name": "Iridum Outpost",
@@ -332,11 +344,11 @@
                     "rotate": {
                         "x": 2
                     },
-                    "children":[
+                    "children": [
                         {
                             "type": "Derelict",
-                            "shape":"cylinder",
-                            "color":"red",
+                            "shape": "cylinder",
+                            "color": "red",
                             "x": -78000,
                             "y": -119000,
                             "z": 848,
@@ -345,7 +357,8 @@
                                 "z": 2
                             }
                         }
-                    ]
+                    ],
+                    "id": "T9L13"
                 },
                 {
                     "name": "Sulfur Dome",
@@ -359,7 +372,8 @@
                     "mineables": "Celestite",
                     "loot": "Blueprint Box T1 x3, High Capacity Package x3 (Sulfur)",
                     "color": "yellow",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L14"
                 },
                 {
                     "name": "Research Outpost",
@@ -372,7 +386,8 @@
                     "logs": "Reese Callahan - Day 1, Reese Callahan - Month 6 Day 184, Reese Callahan - Day 28, Reese Callahan - Hey Alex, Reese Callahan - The Experiment",
                     "loot": "Fengu, Fertilizer Package x2, Smelted Mineral Package, Fertilizer x2, Earth Palm Tree, Blueprint Box T1 x2, Zero-G Regulator x3, Warp Coordinates (Theta-12), Statue, Beautiful Island Poster, Carbon Mine Package, Reese Callahan Keycard",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L15"
                 },
                 {
                     "name": "Ancient Gate Dome",
@@ -386,7 +401,8 @@
                     "logs": "Reese Callahan Day 80",
                     "loot": "Blueprint Box T1 (respawns), Fengu",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L16"
                 },
                 {
                     "name": "Hydroponic Dome",
@@ -399,7 +415,8 @@
                     "logs": "Alex Turner",
                     "loot": "Fengu x4, Locked Storage (battery), Iridium (in locked storage), Nanite (in locked storage)",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L17"
                 },
                 {
                     "name": "Ethan Carter Dome",
@@ -414,7 +431,8 @@
                     "loot": "Fiber, Scrapper, Keycard - Depot Room, Crystal Package, Blueprint Box T1, Compacted Carbon x2, 0.2L Water x8, Fabric Package x2, Ethan Carter Keycard, Electronic Package x3",
                     "notes": "Ethan Carter Keycard (under smelted mineral package)",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L18"
                 },
                 {
                     "name": "Cargo Container Dome",
@@ -427,7 +445,8 @@
                     "logs": "",
                     "loot": "",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L19"
                 },
                 {
                     "name": "Hook Tool Dome",
@@ -440,7 +459,8 @@
                     "logs": "Moxora Cargo Delivery Log",
                     "loot": "Fengu, Fiber, Pre-Mine Package x2, Skipper Poster, Fertilizer Package, Iron Bar x4, Blueprint Box T1",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L20"
                 },
                 {
                     "name": "Hook Tool Cargo Dome",
@@ -453,7 +473,8 @@
                     "logs": "",
                     "loot": "Compacted Carbon, Earth Palm Tree, Smelted Mineral Package x2",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L21"
                 },
                 {
                     "name": "Skipper Dome",
@@ -466,9 +487,10 @@
                     "logs": "",
                     "loot": "",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L22"
                 },
-                {                    
+                {
                     "name": "Space Cat Derelict Hab",
                     "type": "Derelict",
                     "signal": "FALSE",
@@ -479,7 +501,8 @@
                     "logs": "",
                     "loot": "",
                     "color": "cyan",
-                    "shape": "cylinder"
+                    "shape": "cylinder",
+                    "id": "T9L23"
                 },
                 {
                     "name": "Derelict Disruptor Dome",
@@ -492,7 +515,8 @@
                     "logs": "",
                     "loot": "",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L24"
                 },
                 {
                     "name": "Landing Pad Dome",
@@ -503,10 +527,11 @@
                     "z": 8572,
                     "scannables": "Normal Vertical Corridor, Advanced Fabricator, Hydroponic Planter, Medium Storage, Power Cell Charger",
                     "logs": "Travis Marshal and Alex Turner",
-                    "loot": "Locked Storage (||6969||), Habitat Circle Room, Medium Storage, Hydroponic Planter",
+                    "loot": "Locked Storage (||6969||), Habitat Circle Room, Medium Storage, Hydroponic Planter, cubo toy (||On top of battery||)",
                     "notes": "Landing Pad",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T9L25"
                 },
                 {
                     "name": "Beta-23 Mining Station",
@@ -526,7 +551,8 @@
                     "rotate": {
                         "x": 2,
                         "z": 2
-                    }
+                    },
+                    "id": "T9L26"
                 },
                 {
                     "name": "Alpha Mining Cave",
@@ -546,7 +572,8 @@
                     "rotate": {
                         "x": 2,
                         "z": 2
-                    }
+                    },
+                    "id": "T9L27"
                 },
                 {
                     "name": "Furniture Fab Derelict",
@@ -560,7 +587,8 @@
                     "hostiles": "Squid Alien",
                     "loot": "Blueprint Box T1 x2, Oxygen Tanks Package",
                     "color": "grey",
-                    "shape": "cylinder"
+                    "shape": "cylinder",
+                    "id": "T9L28"
                 },
                 {
                     "name": "Alex Turner Shipping Crate",
@@ -573,7 +601,8 @@
                     "logs": "",
                     "loot": "Alex Turner Keycard, Repair Toolkit x2",
                     "color": "gray",
-                    "shape": "box"
+                    "shape": "box",
+                    "id": "T9L29"
                 },
                 {
                     "name": "Nickle Roid Cluster",
@@ -586,7 +615,8 @@
                     "logs": "",
                     "loot": "",
                     "color": "copper",
-                    "shape": "box"
+                    "shape": "box",
+                    "id": "T9L30"
                 },
                 {
                     "name": "Toxic Cloud",
@@ -600,11 +630,12 @@
                     "loot": "",
                     "color": "green",
                     "shape": "capsule",
-                    "scale":{
+                    "scale": {
                         "x": 15,
                         "y": 15,
                         "z": 15
-                    }
+                    },
+                    "id": "T9L31"
                 },
                 {
                     "name": "Green Planet",
@@ -618,15 +649,16 @@
                     "loot": "",
                     "color": "green",
                     "shape": "sphere",
-                    "scale":{
+                    "scale": {
                         "x": 50,
                         "y": 50,
                         "z": 50
-                    }
+                    },
+                    "id": "T9L32"
                 }
             ],
             "deposits": {
-                "iron":[
+                "iron": [
                     {
                         "id": "I1",
                         "x": -265614,
@@ -662,7 +694,7 @@
                         "x": -107081,
                         "y": -224404,
                         "z": -22231,
-                        "notes":"Unmineable"
+                        "notes": "Unmineable"
                     },
                     {
                         "id": "I7",
@@ -695,7 +727,7 @@
                         "z": 9398
                     }
                 ],
-                "copper":[
+                "copper": [
                     {
                         "id": "C1",
                         "x": -167394,
@@ -727,7 +759,7 @@
                         "z": -25530
                     }
                 ],
-                "gold":[
+                "gold": [
                     {
                         "id": "G1",
                         "x": -141981,
@@ -735,7 +767,7 @@
                         "z": -944
                     }
                 ],
-                "quartz":[
+                "quartz": [
                     {
                         "id": "Q1",
                         "x": -150634,
@@ -782,7 +814,8 @@
                     "shape": "torus",
                     "rotate": {
                         "y": 0
-                    }
+                    },
+                    "id": "T12L01"
                 },
                 {
                     "name": "Exile Outpost",
@@ -793,23 +826,25 @@
                     "z": -59668.819,
                     "scannables": "Wall Shelf 3, Research Station T2 x2, Grab Tool Fragment, Coffee Table (cave behind in dome)",
                     "logs": "Personal Log - Ciara, Log Entry - Alyx (Maintenance Supervisor)",
-                    "loot": "Blueprint Box T1, Blueprint Box T2 x2, Space Cat Poster, Mox Credits x10",
+                    "loot": "Blueprint Box T1, Blueprint Box T2 x2, Space Cat Poster, Mox Credits x10, cubo toy (||On top of overturned building||)",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L02"
                 },
                 {
                     "name": "Derelict Outpost Cave",
                     "type": "Cave",
                     "signal": "TRUE",
                     "x": -417445.465,
-                    "y": -214944.730,
+                    "y": -214944.73,
                     "z": -74565.231,
                     "scannables": "Large Habitat Battery, Research Station T3, Teleport Station, Recycle Machine, Furniture Fabricator, Corridor Asteroid Miner T2",
                     "logs": "",
                     "loot": "Blueprint Box T2 x2, Mineral Package, Fertilizer Package,",
                     "mineables": "Quartz, Silver",
                     "color": "gray",
-                    "shape": "box"
+                    "shape": "box",
+                    "id": "T12L03"
                 },
                 {
                     "name": "Trading Station",
@@ -820,9 +855,10 @@
                     "z": -57736.849,
                     "scannables": "",
                     "logs": "",
-                    "loot": "",
+                    "loot": "cubo toy (||Above on antenna||)",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L04"
                 },
                 {
                     "name": "Cluster Mining Cave",
@@ -833,13 +869,14 @@
                     "z": -63710.013,
                     "scannables": "Teleport Station, Advanced Fabricator, Corridor Asteroid Miner T2, Power Cell Charger, Research Station T3",
                     "logs": "",
-                    "loot": "Blueprint Box T2, Moxora Efficiency Poster, Mox Credit x10, Repair Toolkit, Battery, Unlocked Storage, Celestite Deposit Seed (in Storage), Trungul Fruit (in Storage), Mox Credit x10 (in hidden room), Blueprint Box T3 (in hidden room), (Blueprint Box T1 (in hidden room)",
+                    "loot": "Blueprint Box T2, Moxora Efficiency Poster, Mox Credit x10, Repair Toolkit, Battery, Unlocked Storage, Celestite Deposit Seed (in Storage), Trungul Fruit (in Storage), Mox Credit x10 (in hidden room), Blueprint Box T3 (in hidden room), Blueprint Box T1 (in hidden room)",
                     "mineables": "Pyrolite x4, Blue Crystal, Garagol Tree, Celestite x2",
                     "color": "cyan",
                     "shape": "cylinder",
                     "rotate": {
                         "x": 2
-                    }
+                    },
+                    "id": "T12L05"
                 },
                 {
                     "name": "Pyrolite Dome",
@@ -854,14 +891,15 @@
                     "mineables": "Pyrolite, Red Celestite",
                     "notes": "No gravity, no oxygen",
                     "color": "red",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L06"
                 },
                 {
                     "name": "Pyrolite Dome 2",
                     "type": "Dome",
                     "signal": "",
                     "x": -211007.655,
-                    "y": -190404.530,
+                    "y": -190404.53,
                     "z": -43109.544,
                     "scannables": "",
                     "logs": "",
@@ -869,7 +907,8 @@
                     "mineables": "Pyrolite, Red Celestite",
                     "notes": "No gravity, no oxygen",
                     "color": "red",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L07"
                 },
                 {
                     "name": "Pyrolite Dome 3",
@@ -877,21 +916,22 @@
                     "signal": "",
                     "x": -437694.321,
                     "y": -10851.172,
-                    "z": -125986.370,
+                    "z": -125986.37,
                     "scannables": "",
                     "logs": "",
                     "loot": "",
                     "mineables": "Pyrolite x4",
                     "notes": "No gravity, no oxygen",
                     "color": "red",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L08"
                 },
                 {
                     "name": "Pyrolite Dome 4",
                     "type": "Dome",
                     "signal": "",
                     "x": -206497.377,
-                    "y": 10444.440,
+                    "y": 10444.44,
                     "z": 25907.561,
                     "scannables": "",
                     "logs": "",
@@ -899,13 +939,14 @@
                     "mineables": "Pyrolite x3, red celestite",
                     "notes": "No gravity, no oxygen",
                     "color": "red",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L09"
                 },
                 {
                     "name": "Garagol Dome",
                     "type": "Dome",
                     "signal": "",
-                    "x": -186682.250,
+                    "x": -186682.25,
                     "y": -168943.828,
                     "z": -39349.907,
                     "scannables": "",
@@ -914,22 +955,24 @@
                     "mineables": "Garagol Tree, Blue Crystal",
                     "notes": "",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L10"
                 },
                 {
                     "name": "Cargo Container Dome",
                     "type": "Dome",
                     "signal": "",
                     "x": -336149.041,
-                    "y": -123270.210,
+                    "y": -123270.21,
                     "z": -53094.956,
                     "scannables": "",
                     "logs": "",
-                    "loot": "Blueprint Box T1, Fabric Package x2",
+                    "loot": "Blueprint Box T1, Fabric Package x2, Cubo Toy (||Back side of Enclosure||)",
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L11"
                 },
                 {
                     "name": "Cargo Container Dome 2",
@@ -944,7 +987,8 @@
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L12"
                 },
                 {
                     "name": "Pyramid Habitat Dome",
@@ -959,7 +1003,8 @@
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L13"
                 },
                 {
                     "name": "Planter Outpost",
@@ -967,21 +1012,22 @@
                     "signal": "",
                     "x": -318183.234,
                     "y": -48418.428,
-                    "z": -57300.370,
+                    "z": -57300.37,
                     "scannables": "Storage Satellite",
                     "logs": "Log Transcript - Comm Channel: Alyx & Ciara (||Passcode for Exile Outpost||)",
                     "loot": "Repair Toolkit, Fertilizer Package, Fabric Package, Blueprint Box T2",
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L14"
                 },
                 {
                     "name": "Logistic Island",
                     "type": "Dome",
                     "signal": "",
                     "x": -241102.051,
-                    "y": -146125.540,
+                    "y": -146125.54,
                     "z": -20649.484,
                     "scannables": "Lab Chair, Lab Desk, Oxygen Tank T4",
                     "logs": "Zoe Carter Personal Log #012, Zoe Carter Personal Log #024",
@@ -990,7 +1036,8 @@
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L15"
                 },
                 {
                     "name": "Yunadel Survivors",
@@ -1006,13 +1053,14 @@
                     "mineables": "Carbon",
                     "notes": "",
                     "color": "gray",
-                    "shape": "cylinder"
+                    "shape": "cylinder",
+                    "id": "T12L16"
                 },
                 {
                     "name": "Yunadel Emergency Pod",
                     "type": "Pod",
                     "signal": "",
-                    "x": -270764.300,
+                    "x": -270764.3,
                     "y": 8616.732,
                     "z": 35092.399,
                     "scannables": "Seeker Laser Weapon x2 (||nearby in white area||)",
@@ -1021,7 +1069,8 @@
                     "mineables": "",
                     "notes": "Fabricator and 2x small storage",
                     "color": "orange",
-                    "shape": "box"
+                    "shape": "box",
+                    "id": "T12L17"
                 },
                 {
                     "name": "Volthium Roid Cluster",
@@ -1036,7 +1085,8 @@
                     "mineables": "Volthium",
                     "notes": "",
                     "color": "magenta",
-                    "shape": "box"
+                    "shape": "box",
+                    "id": "T12L18"
                 },
                 {
                     "name": "Turreted Outpost",
@@ -1050,7 +1100,8 @@
                     "logs": "",
                     "loot": "",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L19"
                 },
                 {
                     "name": "Cafeteria Dome",
@@ -1065,7 +1116,8 @@
                     "mineables": "Blue Crystal (outside)",
                     "notes": "landing pad",
                     "color": "blue",
-                    "shape": "sphere"
+                    "shape": "sphere",
+                    "id": "T12L20"
                 },
                 {
                     "name": "Alpha Control Center",
@@ -1083,33 +1135,35 @@
                         "x": 2,
                         "y": 1,
                         "z": 2
-                    }
+                    },
+                    "id": "T12L21"
                 },
                 {
                     "name": "Alpha Miner Outpost",
                     "type": "Derelict",
                     "signal": "TRUE",
                     "x": -486089.789,
-                    "y": -7829.190,
+                    "y": -7829.19,
                     "z": -53830.292,
                     "scannables": "Global Storage Device, Teleport Station, Wall Shelf 2",
                     "hostiles": "Green Drone x10 (outside), 2x Red Explosion Drones (inside)",
                     "logs": "Personal Log - Entry #118 Nina Clark, Personal Log - Tina Ross, Private Log - Power Lift (hidden above ceiling panel)",
-                    "loot": "Data Box, Blueprint Box T2, Blueprint Box T3, Pyrolite, repair toolkit, orbitron toy, Battery Saver T4, Cubo toy",
+                    "loot": "Data Box, Blueprint Box T2, Blueprint Box T3, Pyrolite, repair toolkit, orbitron toy, Battery Saver T4, Cubo toy (||At end of tunnel||)",
                     "color": "red",
                     "shape": "cylinder",
                     "scale": {
                         "x": 2,
                         "y": 1,
                         "z": 2
-                    }
+                    },
+                    "id": "T12L22"
                 },
                 {
                     "name": "Ceta Control Center",
                     "type": "Habitat",
                     "signal": "TRUE",
                     "x": -224999.739,
-                    "y": -60535.630,
+                    "y": -60535.63,
                     "z": 55057.024,
                     "scannables": "Data Box - Volthium Spiral (In Left Control Center), Oxygen Tank T4 (In Left Control Center), Seeker Laser Weapon x3 (Out Front DANGER TURRETS)",
                     "logs": "Elara Kintar (Outside Left Control Center), Zane Tarris Entry #035 (In Left Control Center), Cafeteria Log - Audio Snippet #231, Cafeteria Log - Audio Snippet #472, Encrypted Local Chat #001, Encrypted Local Chat #002 (In Basement), Log #027 - Cameron Fox (In Basement)",
@@ -1122,7 +1176,8 @@
                         "x": 2,
                         "y": 1,
                         "z": 2
-                    }
+                    },
+                    "id": "T12L23"
                 },
                 {
                     "name": "Unknown Outpost",
@@ -1142,7 +1197,8 @@
                         "x": 2,
                         "y": 0.5,
                         "z": 2
-                    }
+                    },
+                    "id": "T12L24"
                 },
                 {
                     "name": "Cargo Pad",
@@ -1163,7 +1219,8 @@
                         "x": 2,
                         "y": 1,
                         "z": 2
-                    }
+                    },
+                    "id": "T12L25"
                 },
                 {
                     "name": "Luminite Roid Cluster",
@@ -1184,7 +1241,8 @@
                         "x": 2,
                         "y": 2,
                         "z": 2
-                    }
+                    },
+                    "id": "T12L26"
                 },
                 {
                     "name": "Luminite Roid Cluster 2",
@@ -1204,14 +1262,15 @@
                         "x": 2,
                         "y": 2,
                         "z": 2
-                    }
+                    },
+                    "id": "T12L27"
                 },
                 {
                     "name": "Luminite Roid Cluster 3",
                     "type": "Asteroid",
                     "signal": "",
                     "x": 39566.459,
-                    "y": -165086.350,
+                    "y": -165086.35,
                     "z": -420375.788,
                     "scannables": "",
                     "logs": "",
@@ -1224,15 +1283,16 @@
                         "x": 2,
                         "y": 2,
                         "z": 2
-                    }
+                    },
+                    "id": "T12L28"
                 },
                 {
                     "name": "Pink Cloud",
                     "type": "Cloud",
                     "signal": "",
                     "x": -45883.592,
-                    "y": -136878.040,
-                    "z": -257050.840,
+                    "y": -136878.04,
+                    "z": -257050.84,
                     "scannables": "",
                     "logs": "",
                     "loot": "",
@@ -1240,20 +1300,20 @@
                     "notes": "",
                     "color": "magenta",
                     "shape": "capsule",
-                    "scale":{
+                    "scale": {
                         "x": 15,
                         "y": 10,
                         "z": 15
-                    }
+                    },
+                    "id": "T12L29"
                 }
-                
             ],
             "deposits": {
-                "Copper":[
+                "Copper": [
                     {
                         "id": "Cu1",
                         "x": -183649.389,
-                        "y": 110744.150,
+                        "y": 110744.15,
                         "z": 45400.224
                     },
                     {
@@ -1261,12 +1321,12 @@
                         "x": -333234.051,
                         "y": -31547.069,
                         "z": -61101.914
-                    } 
+                    }
                 ],
-                "Iron":[
+                "Iron": [
                     {
                         "id": "I1",
-                        "x": -363826.260,
+                        "x": -363826.26,
                         "y": -251020.892,
                         "z": -54369.474
                     },
@@ -1278,12 +1338,12 @@
                     },
                     {
                         "id": "I3",
-                        "x": -253928.600,
+                        "x": -253928.6,
                         "y": -45716.852,
                         "z": 29652.501
                     }
                 ],
-                "Carbon":[
+                "Carbon": [
                     {
                         "id": "C1",
                         "x": -362291.705,
@@ -1291,12 +1351,12 @@
                         "z": -58303.701
                     }
                 ],
-                "Quartz":[
+                "Quartz": [
                     {
                         "id": "Q1",
                         "x": -405839.314,
                         "y": -214074.162,
-                        "z": -64945.150
+                        "z": -64945.15
                     }
                 ]
             }
@@ -1320,10 +1380,11 @@
                     "shape": "torus",
                     "rotate": {
                         "y": 1.75
-                    }
+                    },
+                    "id": "T145L01"
                 }
             ],
-            "deposits" : {}
+            "deposits": {}
         }
     ]
 }
