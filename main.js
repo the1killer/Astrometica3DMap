@@ -571,7 +571,12 @@ function depositListItemClick(deposit) {
     
     // Clear current location ID when selecting a deposit
     window.currentLocationId = null;
-    
+    //close infobox if open
+    const infoBox = document.getElementById('infobox');
+    if (infoBox) {
+        infoBox.style.display = 'none';
+    }
+
     gsap.to( camera.position, 
         { 
             x: deposit.object.children[0].position.x + diff.x, 
@@ -793,6 +798,14 @@ function drawMarkers() {
             li.innerHTML = `<a>${marker.label}</a>`;
             li.addEventListener('click', () => {
                 locationListItemClick(marker);
+
+                // Clear current location ID when selecting a deposit
+                window.currentLocationId = null;
+                //close infobox if open
+                const infoBox = document.getElementById('infobox');
+                if (infoBox) {
+                    infoBox.style.display = 'none';
+                }
             });
 
             const btn = document.createElement('img');
@@ -879,6 +892,10 @@ function showInfoBox(marker) {
     if(marker.scannables != undefined && marker.scannables.length > 0) {
         const scanableList = marker.scannables.split(',').map(scanable => `<li>${scanable}</li>`).join('');
         content.innerHTML += `<p class="infobox-subtitle"><strong>Scanables:</strong><ul id="scannable-list" class="infobox-list">${scanableList}</ul></p>`;
+    }
+    if(marker.logs != undefined && marker.logs.length > 0) {
+        const logList = marker.logs.split(',').map(log => `<li>${log}</li>`).join('');
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Logs:</strong><ul id="log-list" class="infobox-list">${logList}</ul></p>`;
     }
     if(marker.loot != undefined && marker.loot.length > 0) {
         const lootList = marker.loot.split(',').map(loot => `<li>${loot}</li>`).join('');
