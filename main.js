@@ -353,17 +353,47 @@ function loadDeposits(zoneid = 0) {
 loadDeposits(window.zoneid);
 
 if(document.location.hash) {
-    const q = new URLSearchParams(document.location.hash.slice(2));
-    //wrap each q.get in parseFloat() to convert string to number
-    
-    camera.position.set(parseFloat(q.get('px')), parseFloat(q.get('py')), parseFloat(q.get('pz')));
-    camera.rotation.set(parseFloat(q.get('rx')), parseFloat(q.get('ry')), parseFloat(q.get('rz')));
-    controls.target.set(parseFloat(q.get('tx')), parseFloat(q.get('ty')), parseFloat(q.get('tz')));
-    camera.lookAt(controls.target);
+    if (window.currentLocationId) {
+        const location = data.zones[zid].locations.find(loc => loc.id === window.currentLocationId);
+        if (location) {
+            controls.target.set(location.object.position.x, location.object.position.y, location.object.position.z);
+            camera.position.set(location.object.position.x - 20, location.object.position.y + 50, location.object.position.z + 10);
+        } else {
+            console.warn("Location ID not found in zone:", window.currentLocationId);
+        }
+    }
+    updateMapFromHash();
 } else {
     var start = data.zones[zid].locations[0].object.position;
     controls.target.set(start.x, start.y, start.z);
     camera.position.set(-268.46001541128123, 89.91119916230053, 8.49005248328114);
+}
+
+function updateMapFromHash() {
+    const q = new URLSearchParams(document.location.hash.slice(2));
+    //wrap each q.get in parseFloat() to convert string to number
+
+    if(q.has('px')) camera.position.set(parseFloat(q.get('px')), parseFloat(q.get('py')), parseFloat(q.get('pz')));
+    if(q.has('rx')) camera.rotation.set(parseFloat(q.get('rx')), parseFloat(q.get('ry')), parseFloat(q.get('rz')));
+    if(q.has('tx')) controls.target.set(parseFloat(q.get('tx')), parseFloat(q.get('ty')), parseFloat(q.get('tz')));
+    camera.lookAt(controls.target);
+    
+    // Handle location ID from URL hash
+    const locationId = q.get('lid');
+    if (locationId) {
+        window.currentLocationId = locationId;
+        // Find and show the location
+        const location = data.zones[zid].locations.find(loc => loc.id === locationId);
+        if (location) {
+            if(q.has('tx') == false) {
+                controls.target.set(location.object.position.x, location.object.position.y, location.object.position.z);
+            }
+            if( q.has('px') == false) {
+                camera.position.set(location.object.position.x - 20, location.object.position.y + 50, location.object.position.z + 10);
+            }
+            showInfoBox(location);
+        }
+    }
 }
 
 controls.update();
@@ -377,6 +407,12 @@ window.scene = scene;
 loadMarkers();
 
 controls.addEventListener('change', debounce(() => onCameraMove(), 250));
+
+// Listen for hash changes to update the map
+window.addEventListener('hashchange', () => {
+    updateMapFromHash();
+});
+
 document.getElementById('locationTitle').addEventListener('click', () => {
     toggleHTMLVisibility(document.getElementById('locationslist'));
     document.querySelector('#locationTitle > .expander').style.transform = document.getElementById('locationslist').style.display != "none" ? "rotate(0deg)" : "rotate(180deg)";
@@ -452,6 +488,13 @@ function updateQueryString(camera, controls) {
     qparams.set('ty', Math.floor(controls.target.y));
     qparams.set('tz', Math.floor(controls.target.z));
     qparams.set('zid', window.zoneid);
+    
+    // Add location ID if available, otherwise remove it
+    if (window.currentLocationId) {
+        qparams.set('lid', window.currentLocationId);
+    } else {
+        qparams.delete('lid');
+    }
 
     window.history.replaceState({}, '', `${window.location.pathname}#\!${qparams.toString()}`);
 }
@@ -487,6 +530,10 @@ function locationListItemClick(location) {
     if(location.object.type == "Group") {
         objPosition = location.object.children[0].position;
     }
+    
+    // Set the current location ID for URL hash
+    window.currentLocationId = location.id;
+    
     gsap.to( camera.position, 
         { 
             x: objPosition.x + diff.x, 
@@ -497,7 +544,8 @@ function locationListItemClick(location) {
                 camera.lookAt(objPosition);
             },
             onComplete: () => {
-
+                // Update URL hash with location ID
+                updateQueryString(camera, controls);
             }
         }
     );
@@ -512,12 +560,18 @@ function locationListItemClick(location) {
             }
         }
     );
+
+    showInfoBox(location);
 }
 
 function depositListItemClick(deposit) {
     var diff = getVectorDifference(camera.position, controls.target);
     controls.enabled = false;
     var ease = "sine.inOut";
+    
+    // Clear current location ID when selecting a deposit
+    window.currentLocationId = null;
+    
     gsap.to( camera.position, 
         { 
             x: deposit.object.children[0].position.x + diff.x, 
@@ -528,7 +582,8 @@ function depositListItemClick(deposit) {
                 camera.lookAt(deposit.object.children[0].position);
             },
             onComplete: () => {
-
+                // Update URL hash without location ID
+                updateQueryString(camera, controls);
             }
         }
     );
@@ -810,3 +865,48 @@ document.getElementById('zonePicker').addEventListener('change', (event) => {
         console.error("Invalid zone ID:", selectedZoneId);
     }
 });
+
+function showInfoBox(marker) {
+    // Show a popup with marker information
+    const container = document.getElementById('infoBoxContainer');
+    const title = document.getElementById('infoBoxTitle');
+    const content = document.getElementById('infoBoxContent');
+
+    title.innerHTML = `<strong>${marker.name}</strong>`;
+    content.innerHTML = `
+        <p class="infobox-subtitle"><strong>Coordinates:</strong> <small>X:${Math.floor(marker.x)},<br/>Y:${Math.floor(marker.y)},<br/>Z:${Math.floor(marker.z)}</small></p>
+    `;
+    if(marker.scannables != undefined && marker.scannables.length > 0) {
+        const scanableList = marker.scannables.split(',').map(scanable => `<li>${scanable}</li>`).join('');
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Scanables:</strong><ul id="scannable-list" class="infobox-list">${scanableList}</ul></p>`;
+    }
+    if(marker.loot != undefined && marker.loot.length > 0) {
+        const lootList = marker.loot.split(',').map(loot => `<li>${loot}</li>`).join('');
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Loot:</strong><ul id="loot-list" class="infobox-list">${lootList}</ul></p>`;
+    }
+    if(marker.mineables != undefined && marker.mineables.length > 0) {
+        const mineableList = marker.mineables.split(',').map(mineable => `<li>${mineable}</li>`).join('');
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Mineables:</strong><ul id="mineable-list" class="infobox-list">${mineableList}</ul></p>`;
+    }
+    if(marker.hostiles != undefined && marker.hostiles.length > 0) {
+        const hostileList = marker.hostiles.split(',').map(hostile => `<li>${hostile}</li>`).join('');
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Hostiles:</strong><ul id="hostile-list" class="infobox-list">${hostileList}</ul></p>`;
+    }
+    if(marker.notes != undefined && marker.notes.length > 0) {
+        content.innerHTML += `<p class="infobox-subtitle"><strong>Notes:</strong><div class="notes">${marker.notes}</div></p>`;
+    }
+    
+    content.innerHTML = content.innerHTML.replace(/[()]/g, '<strong>$&</strong>');
+
+    //block out spoilers surrounded by ||
+    content.innerHTML = content.innerHTML.replace(/\|\|([^|]+)\|\|/g, '<span class="spoiler">$1</span>');
+    // Add click event to toggle spoiler visibility
+    const spoilers = content.querySelectorAll('.spoiler');
+    spoilers.forEach(spoiler => {
+        spoiler.addEventListener('click', () => {
+            spoiler.classList.toggle('revealed');
+        });
+    });
+
+    container.style.display = 'block';
+}
