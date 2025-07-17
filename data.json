@@ -115,7 +115,7 @@
                     "z": 44956,
                     "scannables": "Jetpack T3 (||Jake Tanner's Room||), Warp Coordinate (||Alex Turner's Room||), Moxora Statue (||Alex Turner's Room||), Backpack T3 (||Reese Callahan's Room||), Bed (||Marcus Tanner's Room||), Power Cell Charger (||Theta-9 Depot||), Power Cell Charger (Mine)",
                     "logs": "Jacob \"Jake\" Tanner, Alex Turner - Warp Coordinates, Reese Callahan - Cramped Room, Marcus O Tanner - What Day Is it?",
-                    "loot": "Cubo Toy (||Jake Tanner's Room||), cubo toy (||Ethan Carter's Room||), Toxic Zone Suit (||Ethan Carter's Room||), Blueprint Box T1 x2 (||Reese Callahan's Room||), Iridium x5 (||Reese Callahan's Room Storage||), Compacted Coal x3 (||Reese Callahan's Room Storage||), Battery (||Reese Callahan's Room||), Power Cell x2 (||Reese Callahan's Room||), Fertilizer Package (||Marcus Tanner's Room||), Keycard - Theta-9 Depot (||Use Vent to get in||),",
+                    "loot": "Gubbo Toy (||Jake Tanner's Room||), Cubo Toy (||Ethan Carter's Room||), Toxic Zone Suit (||Ethan Carter's Room||), Blueprint Box T1 x2 (||Reese Callahan's Room||), Iridium x5 (||Reese Callahan's Room Storage||), Compacted Coal x3 (||Reese Callahan's Room Storage||), Battery (||Reese Callahan's Room||), Power Cell x2 (||Reese Callahan's Room||), Fertilizer Package (||Marcus Tanner's Room||), Keycard - Theta-9 Depot (||Use Vent to get in||),",
                     "notes": "||Deep Cut Reference \"Fish\" in vent across from Marcus Danner's Room||",
                     "color": "cyan",
                     "shape": "cylinder",
@@ -550,7 +550,7 @@
                     "z": 8572,
                     "scannables": "Normal Vertical Corridor, Advanced Fabricator, Hydroponic Planter, Medium Storage, Power Cell Charger",
                     "logs": "Travis Marshal and Alex Turner",
-                    "loot": "Locked Storage (||6969||), Habitat Circle Room, Repair Toolkit x5 (in locked storage), Blueprint Box T1 x2 (in locked storage), Saving Private Chicken Poster (in locked storage), cubo toy (||On top of battery||)",
+                    "loot": "Locked Storage (||6969||), Habitat Circle Room, Repair Toolkit x5 (in locked storage), Blueprint Box T1 x2 (in locked storage), Saving Private Chicken Poster (in locked storage), Cubo Toy (||On top of battery||)",
                     "notes": "Landing Pad",
                     "color": "blue",
                     "shape": "sphere",
@@ -865,7 +865,7 @@
                     "z": -59668.819,
                     "scannables": "Wall Shelf 3, Research Station T2 x2, Grab Tool Fragment, Coffee Table (cave behind in dome)",
                     "logs": "Personal Log - Ciara, Log Entry - Alyx (Maintenance Supervisor)",
-                    "loot": "Blueprint Box T1, Blueprint Box T2 x2, Space Cat Poster, Mox Credits x10, cubo toy (||On top of overturned building||)",
+                    "loot": "Blueprint Box T1, Blueprint Box T2 x2, Space Cat Poster, Mox Credits x10, Cubo Toy (||On top of overturned building||)",
                     "color": "blue",
                     "shape": "sphere",
                     "id": "T12L02"
@@ -894,7 +894,7 @@
                     "z": -57736.849,
                     "scannables": "",
                     "logs": "",
-                    "loot": "cubo toy (||Above on antenna||)",
+                    "loot": "Cubo Toy (||Above on antenna||)",
                     "color": "blue",
                     "shape": "sphere",
                     "id": "T12L04"
@@ -942,8 +942,9 @@
                     "z": -43109.544,
                     "scannables": "",
                     "logs": "",
-                    "loot": "",
-                    "mineables": "Pyrolite, Red Celestite",
+                    "loot": "Iridium Package x3, Celestite Package x2, Red Celestite Package x1",
+                    "mineables": "Pyrolite x3",
+                    "hostiles": "Red Explosion Drone x3",
                     "notes": "No gravity, no oxygen",
                     "color": "red",
                     "shape": "sphere",
@@ -980,6 +981,39 @@
                     "color": "red",
                     "shape": "sphere",
                     "id": "T12L09"
+                },
+                {
+                    "name": "Pyrolite Dome 5",
+                    "type": "Dome",
+                    "signal": "",
+                    "x": -206160.109,
+                    "y": 10458.409,
+                    "z": 26108.538,
+                    "scannables": "",
+                    "logs": "",
+                    "loot": "",
+                    "mineables": "Pyrolite x3, red celestite",
+                    "hostiles": "Red Explosion Drone x3",
+                    "notes": "No gravity, no oxygen",
+                    "color": "red",
+                    "shape": "sphere",
+                    "id": "T12L30"
+                },
+                {
+                    "name": "Pyrolite Dome 6",
+                    "type": "Dome",
+                    "signal": "",
+                    "x": -115586.828,
+                    "y": 147964.599,
+                    "z": -6648.788,
+                    "scannables": "",
+                    "logs": "",
+                    "loot": "",
+                    "mineables": "Pyrolite x4",
+                    "notes": "No gravity, no oxygen",
+                    "color": "red",
+                    "shape": "sphere",
+                    "id": "T12L31"
                 },
                 {
                     "name": "Garagol Dome",
@@ -1022,7 +1056,7 @@
                     "z": 32522.605,
                     "scannables": "",
                     "logs": "",
-                    "loot": "",
+                    "loot": "Fabric Package",
                     "mineables": "",
                     "notes": "",
                     "color": "blue",
@@ -1105,7 +1139,7 @@
                     "scannables": "Seeker Laser Weapon x3 (||nearby in white area||)",
                     "logs": "",
                     "loot": "organic",
-                    "mineables": "",
+                    "mineables": "Blue Crystal (opposite side of white area), Carbon (middle of white area)",
                     "notes": "Fabricator and 2x small storage",
                     "color": "orange",
                     "shape": "box",
@@ -1190,7 +1224,7 @@
                     "scannables": "Global Storage Device, Teleport Station, Wall Shelf 2",
                     "hostiles": "Green Drone x10 (outside), 2x Red Explosion Drones (inside)",
                     "logs": "Personal Log - Entry #118 Nina Clark, Personal Log - Tina Ross, Private Log - Power Lift (hidden above ceiling panel)",
-                    "loot": "Data Box, Blueprint Box T2, Blueprint Box T3, Pyrolite, repair toolkit, orbitron toy, Battery Saver T4, Cubo toy (||At end of tunnel||)",
+                    "loot": "Data Box, Blueprint Box T2, Blueprint Box T3, Pyrolite, repair toolkit, orbitron toy (||in storage||), Battery Saver T4, Cubo toy (||At end of tunnel||)",
                     "notes": "Reccomend do not approach without seeker laser weapons, no oxygen, no gravity",
                     "color": "red",
                     "shape": "cylinder",
@@ -1210,7 +1244,7 @@
                     "z": 55057.024,
                     "scannables": "Data Box - Volthium Spiral (In Left Control Center), Oxygen Tank T4 (In Left Control Center), Seeker Laser Weapon x3 (Out Front DANGER TURRETS)",
                     "logs": "Elara Kintar (Outside Left Control Center), Zane Tarris Entry #035 (In Left Control Center), Cafeteria Log - Audio Snippet #231, Cafeteria Log - Audio Snippet #472, Encrypted Local Chat #001, Encrypted Local Chat #002 (In Basement), Log #027 - Cameron Fox (In Basement)",
-                    "loot": "Mox Credit x23, Locked Storage (Repair Kit x3), Blueprint Box T1 x2 (in locked storage), Blueprint Box T1 x2 (in locked storage), Nanite Battery (in locked storage), Unlocked Storage (Below Elevator), Mox Credits x8 (Below Elevator), Mox Credits x8 (In Basement), Unlocked Storage (On top of Left Control Center), Mox Credits x15 (In Left Control Center), Puffbit Toy (||Outside Underneath||), Gubbo Toy (||On top of rectangular building in back||)",
+                    "loot": "Mox Credit x23, Locked Storage (Repair Kit x3), Blueprint Box T1 x2 (in locked storage), Blueprint Box T1 x2 (in locked storage), Nanite Battery (in locked storage), Unlocked Storage (Below Elevator), Mox Credits x8 (Below Elevator), Mox Credits x8 (In Basement), Unlocked Storage (On top of Left Control Center), Mox Credits x15 (In Left Control Center), Puffbit Toy (||Outside Underneath||), Gubbo Toy (||On top of rectangular building in back||), Rock x6 (||On top of rectangular building in back||)",
                     "hostiles": "Large Turret x2",
                     "notes": "Landing Pad, Locked Storage (Repair Kit x3), Unlocked Storage (Below Elevator), Trading Station",
                     "color": "cyan",
@@ -1233,7 +1267,7 @@
                     "logs": "Log Transcript - Terminal #21, Log Transcript - Terminal #22,Log Transcript - Terminal #23",
                     "hostiles": "Green Drone x4",
                     "mineables": "Nanite",
-                    "loot": "Mox Credit x20, Pulmer, Lab 3D Printer, Mineral Analyzer, Nanite, Fertilizer Package x2, Pre-Mine Package x2, Blueprint Box T3 x2 (in Storage), Blueprint Box T2 (in Storage), Table Lamp",
+                    "loot": "Mox Credit x20, Pulmer, Lab 3D Printer, Mineral Analyzer, Nanite, Fertilizer Package x2, Pre-Mine Package x2, Blueprint Box T3 x2 (in Storage), Blueprint Box T2 (in Storage), Table Lamp, Locked Storage (||in back of large hab, in rocks||), Blueprint Box T2 x2 (||in locked storage||)",
                     "color": "gray",
                     "shape": "cylinder",
                     "scale": {
@@ -1364,7 +1398,13 @@
                         "x": -333234.051,
                         "y": -31547.069,
                         "z": -61101.914
-                    }
+                    },
+                    {
+                        "id": "Cu3",
+                        "x": -185734.902,
+                        "y": 108922.562,
+                        "z": 47320.967
+                    }                    
                 ],
                 "Iron": [
                     {
@@ -1400,6 +1440,20 @@
                         "x": -405839.314,
                         "y": -214074.162,
                         "z": -64945.15
+                    },
+                    {
+                        "id": "Q2",
+                        "x": -274948.488,
+                        "y": -290272.371,
+                        "z": -47786.065
+                    }
+                ],
+                "Gold": [
+                    {
+                        "id": "G1",
+                        "x": -239292.508,
+                        "y": -305940.326,
+                        "z": -54894.238
                     }
                 ]
             }
