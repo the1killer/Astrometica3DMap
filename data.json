@@ -1016,22 +1016,6 @@
                     "id": "T12L31"
                 },
                 {
-                    "name": "Garagol Dome",
-                    "type": "Dome",
-                    "signal": "",
-                    "x": -186682.25,
-                    "y": -168943.828,
-                    "z": -39349.907,
-                    "scannables": "",
-                    "logs": "",
-                    "loot": "",
-                    "mineables": "Garagol Tree, Blue Crystal",
-                    "notes": "",
-                    "color": "blue",
-                    "shape": "sphere",
-                    "id": "T12L10"
-                },
-                {
                     "name": "Cargo Container Dome",
                     "type": "Dome",
                     "signal": "",
