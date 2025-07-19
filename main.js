@@ -305,7 +305,11 @@ function loadDeposits(zoneid = 0) {
             });
 
             // scene.add( obj );
-            var text = makeTextSprite(ucfirst(dcategory) + " Deposit", { fontsize: 24, textColor: { r:125, g:125, b:125, a:0.8 } });
+            var depositName = deposit.name || `${ucfirst(dcategory)} Deposit`;
+            if(dcategory == "Whales") {
+                depositName = "Whales";
+            }
+            var text = makeTextSprite(depositName, { fontsize: 24, textColor: { r:125, g:125, b:125, a:0.8 } });
             text.position.set((obj.position.x), (obj.position.y) + 2, (obj.position.z));
             text.parent = obj;
             // scene.add(text);
