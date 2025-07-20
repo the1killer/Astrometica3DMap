@@ -837,7 +837,6 @@
         {
             "id": "1",
             "name": "Theta-12 Asteroid Field",
-            "notice": "This zone is incomplete.",
             "locations": [
                 {
                     "name": "Theta-12 Gate",
@@ -978,6 +977,7 @@
                     "loot": "",
                     "mineables": "Pyrolite x3, red celestite",
                     "notes": "No gravity, no oxygen",
+                    "hostiles": "Red Explosion Drone x3",
                     "color": "red",
                     "shape": "sphere",
                     "id": "T12L09"
@@ -986,9 +986,9 @@
                     "name": "Pyrolite Dome 5",
                     "type": "Dome",
                     "signal": "",
-                    "x": -206160.109,
-                    "y": 10458.409,
-                    "z": 26108.538,
+                    "x": -277013.306,
+                    "y": 53737.592,
+                    "z": 26682.126,
                     "scannables": "",
                     "logs": "",
                     "loot": "",
@@ -1014,6 +1014,23 @@
                     "color": "red",
                     "shape": "sphere",
                     "id": "T12L31"
+                },
+                {
+                    "name": "Pyrolite Dome 7",
+                    "type": "Dome",
+                    "signal": "",
+                    "x": -14166.613,
+                    "y": -80458.75,
+                    "z": -54756.848,
+                    "scannables": "",
+                    "logs": "",
+                    "loot": "",
+                    "mineables": "Pyrolite x4, red celestite",
+                    "notes": "No gravity, no oxygen",
+                    "hostiles": "Red Explosion Drone x3",
+                    "color": "red",
+                    "shape": "sphere",
+                    "id": "T12L32"
                 },
                 {
                     "name": "Cargo Container Dome",
@@ -1386,7 +1403,14 @@
                         "x": -253928.6,
                         "y": -45716.852,
                         "z": 29652.501
+                    },
+                    {
+                        "id": "I4",
+                        "x": -369256.557,
+                        "y": -112105.858,
+                        "z": -47752.707
                     }
+                    
                 ],
                 "Carbon": [
                     {
@@ -1416,6 +1440,12 @@
                         "x": -239292.508,
                         "y": -305940.326,
                         "z": -54894.238
+                    },
+                    {
+                        "id": "G2",
+                        "x": -67572.213,
+                        "y": 93721.362,
+                        "z": -30597.362
                     }
                 ],
                 "Whales" : [
