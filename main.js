@@ -749,6 +749,56 @@ function addMarker(x, y, z, label, color) {
     saveMarkers();
 }
 
+document.getElementById('gameCoordinates').addEventListener('paste', (event) => {
+    // Small delay to ensure the pasted content is available
+    setTimeout(() => {
+        parseGameCoordinates();
+    }, 10);
+});
+
+function parseGameCoordinates() {
+    const gameCoordInput = document.getElementById('gameCoordinates');
+    const coordString = gameCoordInput.value.trim();
+    
+    // Parse coordinates in format (X=-73580.767951,Y=-227393.836086,Z=-25201.855589)
+    const coordRegex = /X=([+-]?\d*\.?\d+),Y=([+-]?\d*\.?\d+),Z=([+-]?\d*\.?\d+)/;
+    const match = coordString.match(coordRegex);
+    
+    if (match) {
+        // Extract game coordinates
+        const gameX = parseFloat(match[1]);
+        const gameY = parseFloat(match[2]);
+        const gameZ = parseFloat(match[3]);
+        
+        // Convert game coordinates to map coordinates
+        // Game coordinates are divided by 1000, and Y/Z are swapped
+        const mapX = gameX / 1000;
+        const mapY = gameZ / 1000;  // Game Z becomes map Y
+        const mapZ = gameY / 1000;  // Game Y becomes map Z
+        
+        // Update the coordinate input fields with converted values
+        document.getElementById('createMarkerX').value = Math.round(mapX * 100) / 100;
+        document.getElementById('createMarkerY').value = Math.round(mapY * 100) / 100;
+        document.getElementById('createMarkerZ').value = Math.round(mapZ * 100) / 100;
+        
+        // Clear the game coordinates input
+        gameCoordInput.value = '';
+        
+        // Provide visual feedback by briefly highlighting the input fields
+        const inputs = ['createMarkerX', 'createMarkerY', 'createMarkerZ'];
+        inputs.forEach(inputId => {
+            const input = document.getElementById(inputId);
+            const originalStyle = input.style.backgroundColor;
+            input.style.backgroundColor = '#4CAF50';
+            setTimeout(() => {
+                input.style.backgroundColor = originalStyle;
+            }, 800);
+        });
+    } else {
+        alert('Invalid coordinate format. Please use format: (X=-73580.767951,Y=-227393.836086,Z=-25201.855589)');
+    }
+}
+
 function drawMarkers() {
     const extrudeSettings = {
         steps: 2,

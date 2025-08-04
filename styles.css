@@ -208,11 +208,18 @@ a {
     
 }
 
-input, select {
+input, select, textarea {
     background-color: black;
     border: 1px solid var(--astro-content-border-color);
     color: var(--astro-primary);
     padding: 2px;
+}
+
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    resize: vertical;
+    height: 60px;
 }
 
 /*//////////////////////////////////////////
