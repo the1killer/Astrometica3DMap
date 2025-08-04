@@ -886,7 +886,7 @@
                 },
                 {
                     "name": "Trading Station",
-                    "type": "Station",
+                    "type": "Dome",
                     "signal": "TRUE",
                     "x": -179225.154,
                     "y": -317138.012,
@@ -974,7 +974,7 @@
                     "z": 25907.561,
                     "scannables": "",
                     "logs": "",
-                    "loot": "",
+                    "loot": "Iridium Package, Celestite Package x2, Red Celestite Package x1",
                     "mineables": "Pyrolite x3, red celestite",
                     "notes": "No gravity, no oxygen",
                     "hostiles": "Red Explosion Drone x3",
@@ -991,7 +991,7 @@
                     "z": 26682.126,
                     "scannables": "",
                     "logs": "",
-                    "loot": "",
+                    "loot": "Iridium Package, Celestite Package x2, Red Celestite Package x1",
                     "mineables": "Pyrolite x3, red celestite",
                     "hostiles": "Red Explosion Drone x3",
                     "notes": "No gravity, no oxygen",
@@ -1383,7 +1383,13 @@
                         "x": -333234.051,
                         "y": -31547.069,
                         "z": -61101.914
-                    }                    
+                    },
+                    {
+                        "id": "Cu3",
+                        "x": -240420.483,
+                        "y": -330466.847,
+                        "z": -44571.394
+                    }
                 ],
                 "Iron": [
                     {
