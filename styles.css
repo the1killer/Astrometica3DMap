@@ -348,3 +348,39 @@ END Astro Border
 .spoiler.revealed:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
+#customMarkersList {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+/* #customMarkersList li::before {
+    content: '\2022'; 
+    color: hsl(from var(--astro-content-border-color) h s calc(l + 19));
+    font-size: 1.2em;
+    position: absolute;
+    left: -18px;
+    top: 0.1em;
+} */
+
+#customMarkersList li {
+    /* keep for future marker-specific styling */
+}
+/* Custom marker controls styling */
+.custom-marker-controls {
+    float: right;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.custom-marker-delete {
+    cursor: pointer;
+    font-size: 1.3em;
+    color: #999;
+    font-weight: bold;
+    line-height: 1;
+    margin-top: -1px;
+    margin-right: 1px;
+    transition: color 0.15s;
+}
+.custom-marker-delete:hover {
+    color: #ff2a00;
+}

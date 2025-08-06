@@ -42,7 +42,7 @@ function animate() {
     // requestAnimationFrame( animate );
     controls.update();
     updateAxesHelperPosition();
-	renderer.render( scene, camera );
+    renderer.render( scene, camera );
 }
 
 // Import locations data
@@ -526,7 +526,7 @@ function debounce(func, wait) {
     };
 }
 
-function locationListItemClick(location) {
+function locationListItemClick(location, isMarker = false) {
     var diff = getVectorDifference(camera.position, controls.target);
     controls.enabled = false;
     var ease = "sine.inOut";
@@ -565,7 +565,7 @@ function locationListItemClick(location) {
         }
     );
 
-    showInfoBox(location);
+    showInfoBox(location, isMarker);
 }
 
 function depositListItemClick(deposit) {
@@ -761,7 +761,7 @@ function parseGameCoordinates() {
     const coordString = gameCoordInput.value.trim();
     
     // Parse coordinates in format (X=-73580.767951,Y=-227393.836086,Z=-25201.855589)
-    const coordRegex = /X=([+-]?\d*\.?\d+),Y=([+-]?\d*\.?\d+),Z=([+-]?\d*\.?\d+)/;
+    const coordRegex = /X=([+-]?\d*\.?\d+)[\s,]Y=([+-]?\d*\.?\d+)[\s,]Z=([+-]?\d*\.?\d+)/;
     const match = coordString.match(coordRegex);
     
     if (match) {
@@ -849,30 +849,58 @@ function drawMarkers() {
             // Add marker to the list
             const li = document.createElement('li');
             li.id = 'marker-' + marker.id;
-            li.innerHTML = `<a>${marker.label}</a>`;
-            li.addEventListener('click', () => {
-                locationListItemClick(marker);
+            // Remove flexbox styling, use default UL/LI
+            li.style.minHeight = '1.5em';
+            li.style.listStyleType = 'disc';
 
-                // Clear current location ID when selecting a deposit
+            // Marker label (clickable)
+            const labelSpan = document.createElement('a');
+            labelSpan.innerHTML = `${marker.label}`;
+            labelSpan.style.cursor = 'pointer';
+            labelSpan.addEventListener('click', () => {
+                locationListItemClick(marker, true);
                 window.currentLocationId = null;
-                //close infobox if open
                 const infoBox = document.getElementById('infobox');
-                if (infoBox) {
-                    infoBox.style.display = 'none';
-                }
+                if (infoBox) infoBox.style.display = 'none';
             });
+            li.appendChild(labelSpan);
 
+
+            // Right-aligned controls: delete and eye icon
+            // Use a wrapper span with float:right to right-align
+            const controlsSpan = document.createElement('span');
+            controlsSpan.className = 'custom-marker-controls';
+
+            // Delete button
+            const delBtn = document.createElement('span');
+            delBtn.innerHTML = '&times;'; // Red X
+            delBtn.title = 'Delete marker';
+            delBtn.className = 'custom-marker-delete';
+            delBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                markers = markers.filter(m => m.id !== marker.id);
+                li.remove();
+                if (marker.object) scene.remove(marker.object);
+                saveMarkers();
+            });
+            controlsSpan.appendChild(delBtn);
+
+            // Hide/show icon
             const btn = document.createElement('img');
             btn.classList.add('eye');
             btn.src = "images/eye.png";
-            li.appendChild(btn);
-            document.getElementById('customMarkersList').appendChild(li);
+            btn.style.cursor = 'pointer';
             btn.addEventListener('click', (event) => {
                 event.stopPropagation();
                 event.preventDefault();
                 toggleGroupVisibility(marker.object);
                 btn.classList.toggle('eyeinverted');
             });
+            controlsSpan.appendChild(btn);
+
+            li.appendChild(controlsSpan);
+            document.getElementById('customMarkersList').appendChild(li);
         }
     });
 }
@@ -933,15 +961,20 @@ document.getElementById('zonePicker').addEventListener('change', (event) => {
     }
 });
 
-function showInfoBox(marker) {
+function showInfoBox(marker, isMarker = false) {
     // Show a popup with marker information
     const container = document.getElementById('infoBoxContainer');
     const title = document.getElementById('infoBoxTitle');
     const content = document.getElementById('infoBoxContent');
 
     title.innerHTML = `<strong>${marker.name}</strong>`;
+    var modifier = 1;
+    if(isMarker) {
+        title.innerHTML = `<strong>${marker.label}</strong>`;
+        modifier = 1000; // Adjust xyz for markers
+    }
     content.innerHTML = `
-        <p class="infobox-subtitle"><strong>Coordinates:</strong> <small>X:${Math.floor(marker.x)},<br/>Y:${Math.floor(marker.y)},<br/>Z:${Math.floor(marker.z)}</small></p>
+        <p class="infobox-subtitle"><strong>Coordinates:</strong> <small>X:${Math.floor(marker.x * modifier)},<br/>Y:${Math.floor(marker.y * modifier)},<br/>Z:${Math.floor(marker.z * modifier)}</small></p>
     `;
     if(marker.scannables != undefined && marker.scannables.length > 0) {
         const scanableList = marker.scannables.split(',').map(scanable => `<li>${scanable}</li>`).join('');
