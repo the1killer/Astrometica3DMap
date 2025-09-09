@@ -934,6 +934,10 @@ document.getElementById('zonePicker').addEventListener('change', (event) => {
         document.getElementById('depositslist').innerHTML = '';
         document.getElementById('customMarkersList').innerHTML = '';
         
+        // Clear search results and input when changing zones
+        document.getElementById('searchInput').value = '';
+        hideSearchResults();
+        
         setupGlobalLights();
         scene.add( axesHelper )
         loadLocations(selectedZoneId);
@@ -960,6 +964,159 @@ document.getElementById('zonePicker').addEventListener('change', (event) => {
         console.error("Invalid zone ID:", selectedZoneId);
     }
 });
+
+// Search functionality
+let activeFilters = ['scannables', 'logs', 'loot', 'notes'];
+let searchTimeout;
+
+// Initialize search functionality
+function initializeSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const searchResultsList = document.getElementById('searchResultsList');
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const searchTitle = document.getElementById('searchTitle');
+    const searchContainer = document.getElementById('searchContainer');
+
+    // Toggle search section
+    searchTitle.addEventListener('click', () => {
+        const isExpanded = searchContainer.style.display !== 'none';
+        searchContainer.style.display = isExpanded ? 'none' : 'block';
+        searchTitle.querySelector('.expander').style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+
+    // Filter pill toggles
+    filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            const filter = pill.dataset.filter;
+            if (activeFilters.includes(filter)) {
+                activeFilters = activeFilters.filter(f => f !== filter);
+                pill.classList.remove('active');
+            } else {
+                activeFilters.push(filter);
+                pill.classList.add('active');
+            }
+            
+            // Re-search if there's text
+            if (searchInput.value.trim()) {
+                performSearch(searchInput.value.trim());
+            }
+        });
+    });
+
+    // Search input handler
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        const query = e.target.value.trim();
+        
+        if (query.length === 0) {
+            hideSearchResults();
+            return;
+        }
+
+        searchTimeout = setTimeout(() => {
+            performSearch(query);
+        }, 300);
+    });
+
+    // Close search results when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!searchResults.contains(e.target) && !searchInput.contains(e.target)) {
+            hideSearchResults();
+        }
+    });
+}
+
+function performSearch(query) {
+    const searchResults = document.getElementById('searchResults');
+    const searchResultsList = document.getElementById('searchResultsList');
+    const currentZoneId = parseInt(document.getElementById('zonePicker').value);
+    
+    if (currentZoneId < 0 || currentZoneId >= data.zones.length) {
+        return;
+    }
+
+    const results = [];
+    const locations = data.zones[currentZoneId].locations;
+
+    locations.forEach(location => {
+        const matches = findMatches(location, query);
+        if (matches.length > 0) {
+            results.push({
+                location: location,
+                matches: matches
+            });
+        }
+    });
+
+    displaySearchResults(results);
+}
+
+function findMatches(location, query) {
+    const matches = [];
+    const queryLower = query.toLowerCase();
+
+    activeFilters.forEach(filter => {
+        const fieldValue = location[filter];
+        if (fieldValue && typeof fieldValue === 'string' && fieldValue.toLowerCase().includes(queryLower)) {
+            // Find the exact match position for highlighting
+            const index = fieldValue.toLowerCase().indexOf(queryLower);
+            const beforeMatch = fieldValue.substring(0, index);
+            const match = fieldValue.substring(index, index + query.length);
+            const afterMatch = fieldValue.substring(index + query.length);
+            
+            matches.push({
+                field: filter,
+                text: fieldValue,
+                highlighted: beforeMatch + '<span class="search-result-highlight">' + match + '</span>' + afterMatch
+            });
+        }
+    });
+
+    return matches;
+}
+
+function displaySearchResults(results) {
+    const searchResults = document.getElementById('searchResults');
+    const searchResultsList = document.getElementById('searchResultsList');
+    
+    searchResultsList.innerHTML = '';
+
+    if (results.length === 0) {
+        searchResultsList.innerHTML = '<li style="padding: 15px; text-align: center; color: #888;">No results found</li>';
+    } else {
+        results.forEach(result => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="search-result-name">${result.location.name || 'Unnamed Location'}</div>
+                <div class="search-result-type">${result.location.type || 'Unknown'}</div>
+                <div class="search-result-match">${result.matches[0].field}: ${result.matches[0].highlighted}</div>
+            `;
+            
+            li.addEventListener('click', () => {
+                locationListItemClick(result.location);
+                hideSearchResults();
+                // Clear search input
+                document.getElementById('searchInput').value = '';
+            });
+            
+            searchResultsList.appendChild(li);
+        });
+    }
+
+    searchResults.style.display = 'block';
+}
+
+function hideSearchResults() {
+    document.getElementById('searchResults').style.display = 'none';
+}
+
+// Initialize search when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSearch);
+} else {
+    initializeSearch();
+}
 
 function showInfoBox(marker, isMarker = false) {
     // Show a popup with marker information

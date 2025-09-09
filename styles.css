@@ -384,3 +384,133 @@ END Astro Border
 .custom-marker-delete:hover {
     color: #ff2a00;
 }
+
+/* Search functionality styles */
+#searchSection {
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--astro-content-border-color);
+    padding-bottom: 10px;
+}
+
+#searchTitle {
+    background-color: var(--astro-bg-secondary);
+    padding: 8px;
+    margin: 5px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 3px;
+    font-weight: bold;
+    color: var(--astro-primary);
+    border: 1px solid var(--astro-content-border-color);
+}
+
+#searchTitle:hover {
+    background-color: var(--astro-content-border-color);
+}
+
+#searchContainer {
+    padding: 5px 0;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: var(--astro-bg-secondary);
+    border: 1px solid var(--astro-content-border-color);
+    color: var(--astro-primary);
+    border-radius: 3px;
+    font-family: "Orbitron", Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--astro-panel-color);
+    box-shadow: 0 0 5px rgba(44, 196, 246, 0.3);
+}
+
+#searchFilters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.filter-pill {
+    background-color: var(--astro-bg-secondary);
+    border: 1px solid var(--astro-content-border-color);
+    color: var(--astro-primary);
+    padding: 4px 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.filter-pill:hover {
+    background-color: var(--astro-content-border-color);
+}
+
+.filter-pill.active {
+    background-color: var(--astro-panel-color);
+    color: #000;
+    border-color: var(--astro-panel-color);
+}
+
+#searchResults {
+    max-height: 300px;
+    max-width: 300px;
+    overflow-y: auto;
+    background-color: var(--astro-bg-secondary);
+    border: 1px solid var(--astro-content-border-color);
+    border-radius: 3px;
+}
+
+#searchResultsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#searchResultsList li {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(1, 122, 130, 0.3);
+    transition: background-color 0.2s;
+}
+
+#searchResultsList li:hover {
+    background-color: var(--astro-content-border-color);
+}
+
+#searchResultsList li:last-child {
+    border-bottom: none;
+}
+
+.search-result-name {
+    font-weight: bold;
+    color: var(--astro-primary);
+    margin-bottom: 2px;
+}
+
+.search-result-type {
+    font-size: 0.8em;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.search-result-match {
+    font-size: 0.75em;
+    color: #aaa;
+    font-style: italic;
+}
+
+.search-result-highlight {
+    background-color: rgba(255, 255, 0, 0.3);
+    padding: 1px 2px;
+    border-radius: 2px;
+}
