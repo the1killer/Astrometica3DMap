@@ -201,11 +201,23 @@ a {
     text-align: right;
 }
 #zonePicker {
-    float:right;
-    margin-top: 1px;
+    background-color: var(--astro-bg-secondary);
+    padding: 6px;
+    margin: 5px 0;
+    border-radius: 3px;
+    font-weight: bold;
+    color: var(--astro-primary);
+    border: 1px solid var(--astro-content-border-color);
+    float: right;
+    font-family: "Orbitron", Arial, sans-serif;
 }
 #zonePicker:focus {
-    
+    outline: none;
+    border-color: var(--astro-panel-color);
+    box-shadow: 0 0 5px rgba(44, 196, 246, 0.3);
+}
+#zonePicker:hover {
+    background-color: var(--astro-content-border-color);
 }
 
 input, select, textarea {
@@ -387,6 +399,7 @@ END Astro Border
 
 /* Search functionality styles */
 #searchSection {
+    max-width: 275px;
     margin-bottom: 15px;
     border-bottom: 1px solid var(--astro-content-border-color);
     padding-bottom: 10px;
@@ -394,8 +407,9 @@ END Astro Border
 
 #searchTitle {
     background-color: var(--astro-bg-secondary);
-    padding: 8px;
+    padding: 5px;
     margin: 5px 0;
+    margin-right: 5px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -415,7 +429,7 @@ END Astro Border
 }
 
 #searchInput {
-    width: 100%;
+    width: 95%;
     padding: 8px;
     margin-bottom: 10px;
     background-color: var(--astro-bg-secondary);
@@ -433,9 +447,10 @@ END Astro Border
 }
 
 #searchFilters {
+    max-width: 97%;
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 4px;
     margin-bottom: 10px;
 }
 
@@ -443,10 +458,10 @@ END Astro Border
     background-color: var(--astro-bg-secondary);
     border: 1px solid var(--astro-content-border-color);
     color: var(--astro-primary);
-    padding: 4px 8px;
-    border-radius: 12px;
+    padding: 4px 6px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 0.75em;
     transition: all 0.2s;
     user-select: none;
 }
@@ -463,7 +478,7 @@ END Astro Border
 
 #searchResults {
     max-height: 300px;
-    max-width: 300px;
+    max-width: 275px;
     overflow-y: auto;
     background-color: var(--astro-bg-secondary);
     border: 1px solid var(--astro-content-border-color);

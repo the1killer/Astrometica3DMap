@@ -966,7 +966,7 @@ document.getElementById('zonePicker').addEventListener('change', (event) => {
 });
 
 // Search functionality
-let activeFilters = ['scannables', 'logs', 'loot', 'notes'];
+let activeFilters = ['scannables', 'logs', 'loot', 'mineables', 'notes'];
 let searchTimeout;
 
 // Initialize search functionality
@@ -1089,8 +1089,8 @@ function displaySearchResults(results) {
             const li = document.createElement('li');
             li.innerHTML = `
                 <div class="search-result-name">${result.location.name || 'Unnamed Location'}</div>
-                <div class="search-result-type">${result.location.type || 'Unknown'}</div>
-                <div class="search-result-match">${result.matches[0].field}: ${result.matches[0].highlighted}</div>
+                <!--<div class="search-result-type">${result.location.type || 'Unknown'}</div>-->
+                <div class="search-result-match">${ucfirst(result.matches[0].field)}: ${result.matches[0].highlighted}</div>
             `;
             
             li.addEventListener('click', () => {
