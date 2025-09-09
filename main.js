@@ -997,9 +997,10 @@ function initializeSearch() {
                 pill.classList.add('active');
             }
             
-            // Re-search if there's text
-            if (searchInput.value.trim()) {
-                performSearch(searchInput.value.trim());
+            // Re-search if there's text in the search input
+            const query = searchInput.value.trim();
+            if (query) {
+                performSearch(query);
             }
         });
     });
@@ -1021,7 +1022,7 @@ function initializeSearch() {
 
     // Close search results when clicking outside
     document.addEventListener('click', (e) => {
-        if (!searchResults.contains(e.target) && !searchInput.contains(e.target)) {
+        if (!searchResults.contains(e.target) && !searchInput.contains(e.target) && !filterPills.contains(e.target)) {
             hideSearchResults();
         }
     });
@@ -1095,9 +1096,8 @@ function displaySearchResults(results) {
             
             li.addEventListener('click', () => {
                 locationListItemClick(result.location);
-                hideSearchResults();
-                // Clear search input
-                document.getElementById('searchInput').value = '';
+                // hideSearchResults();
+                // Don't clear search input - keep the search term for filter toggling
             });
             
             searchResultsList.appendChild(li);
