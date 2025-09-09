@@ -1088,11 +1088,25 @@ function displaySearchResults(results) {
     } else {
         results.forEach(result => {
             const li = document.createElement('li');
+            let matchText = result.matches[0].highlighted;
+            
+            // Process spoilers in search results
+            matchText = matchText.replace(/\|\|([^|]+)\|\|/g, '<span class="spoiler">$1</span>');
+            
             li.innerHTML = `
                 <div class="search-result-name">${result.location.name || 'Unnamed Location'}</div>
                 <!--<div class="search-result-type">${result.location.type || 'Unknown'}</div>-->
-                <div class="search-result-match">${ucfirst(result.matches[0].field)}: ${result.matches[0].highlighted}</div>
+                <div class="search-result-match">${ucfirst(result.matches[0].field)}: ${matchText}</div>
             `;
+            
+            // Add click event to toggle spoiler visibility within this search result
+            const spoilers = li.querySelectorAll('.spoiler');
+            spoilers.forEach(spoiler => {
+                spoiler.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent triggering the location click
+                    spoiler.classList.toggle('revealed');
+                });
+            });
             
             li.addEventListener('click', () => {
                 locationListItemClick(result.location);
