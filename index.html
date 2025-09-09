@@ -14,8 +14,8 @@
 				}
 			}
 		</script>
-  <script type="module" crossorigin src="./assets/index-BekgrbH9.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Bz8VUuim.css">
+  <script type="module" crossorigin src="./assets/index-BncwlzCc.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BecsJegO.css">
 </head>
 
 <body>
@@ -55,6 +55,22 @@
                 <option value="1">Theta-12</option>
                 <option value="2">Theta-145</option>
             </select>
+            <div id="searchSection">
+                <div id="searchTitle">Search <div class="expander">&#9660;</div></div>
+                <div id="searchContainer">
+                    <input id="searchInput" type="text" placeholder="Search locations..." />
+                    <div id="searchFilters">
+                        <span class="filter-pill active" data-filter="scannables">Scannables</span>
+                        <span class="filter-pill active" data-filter="logs">Logs</span>
+                        <span class="filter-pill active" data-filter="loot">Loot</span>
+                        <span class="filter-pill active" data-filter="mineables">Mineables</span>
+                        <span class="filter-pill active" data-filter="notes">Notes</span>
+                    </div>
+                    <div id="searchResults" style="display: none;">
+                        <ul id="searchResultsList"></ul>
+                    </div>
+                </div>
+            </div>
             <div id="locationTitle">Locations <div class="expander">&#9660;</div>
             </div>
             <ul id="locationslist"></ul>
